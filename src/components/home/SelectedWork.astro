@@ -1,0 +1,141 @@
+---
+/** Home "Selected work" (#work). Cards come from the work collection (homeCard order). */
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import SectionHeading from '../ui/SectionHeading.astro';
+import ProjectCard from './ProjectCard.astro';
+import PrSyncDiagram from '../work/shared/PrSyncDiagram.astro';
+import rateSheetP1 from '../../assets/work/freight/freight-rate-sheet-p1.png';
+import gridbloomDashboard from '../../assets/work/gridbloom/gridbloom-dashboard-pjm.jpg';
+import { selectedWork } from '../../data/home';
+
+const projects = (await getCollection('work'))
+  .filter((p) => p.data.homeCard !== null)
+  .sort((a, b) => (a.data.homeCard ?? 0) - (b.data.homeCard ?? 0));
+
+const cardSizes = '(min-width: 1232px) 384px, (min-width: 768px) 45vw, calc(100vw - 32px)';
+---
+
+<section
+  id="work"
+  class="section section--home section--paper section--ruled"
+  aria-labelledby="work-h"
+>
+  <div class="container">
+    <div class="work__head">
+      <SectionHeading id="work-h" eyebrow={selectedWork.eyebrow} focusTarget>
+        {selectedWork.h2}
+      </SectionHeading>
+      <a class="arrow-link work__all bp-desktop" href={selectedWork.allLink.href}>
+        {selectedWork.allLink.label} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <ul class="work__grid" role="list">
+      {projects.map((p) => {
+        const extra = selectedWork.cards[p.data.slug] ?? {};
+        return (
+          <li>
+            <ProjectCard
+              href={`/work/${p.data.slug}/`}
+              title={p.data.homeCardTitle ?? p.data.title}
+              tag={p.data.tags[0] ?? ''}
+              tagMobile={extra.tagMobile}
+              own={p.data.ownProject}
+              summary={p.data.cardSummary ?? ''}
+              summaryMobile={extra.summaryMobile}
+              linkLine={selectedWork.cardLinkLine}
+              mediaMobile={p.data.homeCard === 1}
+            >
+              {p.data.slug === 'freight-rate-sheet-generator' && (
+                <Picture
+                  slot="media"
+                  src={rateSheetP1}
+                  alt={extra.alt ?? ''}
+                  class="is-top"
+                  formats={['avif', 'webp']}
+                  widths={[384, 640, 768]}
+                  sizes={cardSizes}
+                  loading="lazy"
+                />
+              )}
+              {p.data.slug === 'pr-pipeline-sync' && <PrSyncDiagram slot="media" />}
+              {p.data.slug === 'gridbloom' && (
+                <Picture
+                  slot="media"
+                  src={gridbloomDashboard}
+                  alt={extra.alt ?? ''}
+                  formats={['avif', 'webp']}
+                  widths={[384, 640, 768]}
+                  sizes={cardSizes}
+                  loading="lazy"
+                />
+              )}
+            </ProjectCard>
+          </li>
+        );
+      })}
+    </ul>
+
+    <a class="arrow-link work__all-mobile bp-mobile" href={selectedWork.allLink.href}>
+      {selectedWork.allLink.label} <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .work__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4) var(--space-8);
+  }
+
+  .work__head :global(.section-heading) {
+    max-width: 640px;
+  }
+
+  .work__all {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .work__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  .work__grid > li {
+    display: flex;
+  }
+
+  .work__grid > li > :global(*) {
+    flex: 1;
+  }
+
+  @media (max-width: 1119px) {
+    .work__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .work__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+      margin-top: var(--space-6);
+    }
+
+    .work__all-mobile {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      margin-top: var(--space-4);
+    }
+  }
+</style>

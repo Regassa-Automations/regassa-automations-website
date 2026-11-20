@@ -1,0 +1,224 @@
+---
+/**
+ * GridBloom "Weekly report" (id="report"): two equal columns (stacked under 900 px). Left: copy and
+ * the phone thumbnail (opens dialog item 6); right: the tall email thumbnail (opens item 5).
+ * Phone: one paragraph and the phone email figure only. Cycle steps follow.
+ */
+import { Picture } from 'astro:assets';
+import CycleSteps from '../shared/CycleSteps.astro';
+import email from '../../../assets/work/gridbloom/gridbloom-email.jpg';
+import emailPhone from '../../../assets/work/gridbloom/gridbloom-email-phone.jpg';
+import { report, dashboard } from '../../../data/work/gridbloom';
+
+const titleOf = (i: number) => dashboard.gallery[i]?.title ?? '';
+---
+
+<section id="report" class="rsec" aria-labelledby="report-h">
+  <div class="container container--case">
+    <div class="rsec__grid">
+      <div>
+        <p class="rsec__num mono" aria-hidden="true">
+          {report.num}
+        </p>
+        <h2 id="report-h" class="rsec__h2" tabindex="-1">
+          {report.h2}
+        </h2>
+        <div class="rsec__body bp-desktop">
+          {report.body.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+        <p class="rsec__body bp-mobile">{report.bodyMobile}</p>
+        <div class="rsec__phone bp-desktop">
+          <a
+            class="rsec__phone-thumb"
+            href={emailPhone.src}
+            data-gallery-open={report.phone.dialogIndex}
+            data-title={titleOf(report.phone.dialogIndex)}
+          >
+            <Picture
+              src={emailPhone}
+              alt={report.phone.alt}
+              formats={['avif', 'webp']}
+              widths={[150, 300]}
+              sizes="150px"
+              loading="lazy"
+            />
+          </a>
+          <p class="rsec__phone-side">{report.phone.side}</p>
+        </div>
+      </div>
+      <figure class="rsec__email bp-desktop">
+        <a
+          class="rsec__email-thumb"
+          href={email.src}
+          data-gallery-open={report.email.dialogIndex}
+          data-title={titleOf(report.email.dialogIndex)}
+        >
+          <Picture
+            src={email}
+            alt={report.email.alt}
+            formats={['avif', 'webp']}
+            widths={[480, 760, 1000]}
+            sizes="(min-width: 1104px) 500px, 45vw"
+            loading="lazy"
+          />
+        </a>
+        <figcaption class="rsec__caption">{report.email.caption}</figcaption>
+      </figure>
+      <figure class="rsec__mfig bp-mobile">
+        <div class="rsec__mframe">
+          <Picture
+            src={emailPhone}
+            alt={report.mobileFigure.alt}
+            formats={['avif', 'webp']}
+            widths={[390, 780]}
+            sizes="calc(100vw - 32px)"
+            loading="lazy"
+          />
+        </div>
+        <figcaption class="rsec__caption">
+          <strong>{report.mobileFigure.title}</strong>
+          {` ${report.mobileFigure.caption}`}
+        </figcaption>
+      </figure>
+    </div>
+    <CycleSteps title={report.cycle.title} sub={report.cycle.sub} steps={report.cycle.steps} />
+  </div>
+</section>
+
+<style>
+  .rsec {
+    padding-block: var(--space-18);
+  }
+
+  .rsec__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    align-items: start;
+  }
+
+  .rsec__num {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--electric);
+  }
+
+  .rsec__h2 {
+    margin-top: var(--space-1);
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .rsec__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .rsec__phone {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    margin-top: var(--space-6);
+  }
+
+  .rsec__phone-thumb,
+  .rsec__email-thumb {
+    display: block;
+    overflow: hidden;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    cursor: zoom-in;
+  }
+
+  .rsec__phone-thumb {
+    flex: none;
+    width: 150px;
+    height: 280px;
+  }
+
+  .rsec__email-thumb {
+    width: 100%;
+    height: 620px;
+  }
+
+  .rsec__phone-thumb :global(picture),
+  .rsec__email-thumb :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .rsec__phone-thumb :global(img),
+  .rsec__email-thumb :global(img),
+  .rsec__mframe :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .rsec__phone-thumb:hover,
+  .rsec__email-thumb:hover {
+    border-color: var(--electric);
+  }
+
+  .rsec__phone-side,
+  .rsec__caption {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .rsec__caption {
+    margin-top: var(--space-3);
+  }
+
+  .rsec__caption strong {
+    color: var(--ink);
+  }
+
+  .rsec__mframe {
+    height: 460px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+
+  .rsec__mframe :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  @media (max-width: 899px) {
+    .rsec__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .rsec {
+      padding-block: 40px;
+    }
+
+    .rsec__grid {
+      gap: var(--space-6);
+    }
+
+    .rsec__h2 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .rsec__body {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

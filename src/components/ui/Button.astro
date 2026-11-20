@@ -1,0 +1,56 @@
+---
+/**
+ * Button: primary, secondary or ghost (on navy). Renders <a> when `href` is set, otherwise <button>.
+ * `external` opens in a new tab and announces it (05-accessibility.md).
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'a'> & HTMLAttributes<'button'>, 'type'> {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'md' | 'sm';
+  href?: string;
+  external?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  /** Full width at all sizes, or only below 768 px. */
+  block?: boolean | 'mobile';
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  external = false,
+  type = 'button',
+  block = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const classes = [
+  'btn',
+  `btn--${variant}`,
+  size === 'sm' && 'btn--sm',
+  block === true && 'btn--block',
+  block === 'mobile' && 'btn--block-mobile',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{href ? (
+  <a
+    href={href}
+    class={classes}
+    {...(external ? { target: '_blank', rel: 'noopener' } : {})}
+    {...rest}
+  >
+    <slot />
+    {external && <span class="visually-hidden"> (opens in a new tab)</span>}
+  </a>
+) : (
+  <button type={type} class={classes} {...rest}>
+    <slot />
+  </button>
+)}

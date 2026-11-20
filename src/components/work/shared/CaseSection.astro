@@ -1,0 +1,148 @@
+---
+/**
+ * Case-study section with its header (03-design-system.md, Section header): mono number in
+ * electric above the H2 on the left, intro on the right (slot "intro"); body below.
+ * The H2 is a jump target (tabindex -1).
+ */
+interface Props {
+  id: string;
+  num: string;
+  title: string;
+  titleMobile?: string;
+  paper?: boolean;
+  /** Intro sits under the heading instead of beside it. */
+  stacked?: boolean;
+  class?: string;
+}
+const {
+  id,
+  num,
+  title,
+  titleMobile,
+  paper = false,
+  stacked = false,
+  class: className,
+} = Astro.props;
+const hId = `${id}-h`;
+---
+
+<section
+  id={id}
+  class:list={['cs-section', paper && 'section--paper cs-section--paper', className]}
+  aria-labelledby={hId}
+>
+  <div class="container container--case">
+    <div class:list={['cs-head', stacked && 'cs-head--stacked']}>
+      <div class="cs-head__title">
+        <p class="cs-head__num mono" aria-hidden="true">
+          {num}
+        </p>
+        <h2 id={hId} class="cs-head__h2" tabindex="-1">
+          {titleMobile ? (
+            <>
+              <span class="bp-desktop">{title}</span>
+              <span class="bp-mobile">{titleMobile}</span>
+            </>
+          ) : (
+            title
+          )}
+        </h2>
+      </div>
+      {Astro.slots.has('intro') && (
+        <div class="cs-head__intro">
+          <slot name="intro" />
+        </div>
+      )}
+    </div>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .cs-section {
+    padding-block: var(--space-18);
+  }
+
+  .cs-section--paper {
+    border-block: 1px solid var(--line);
+  }
+
+  .cs-section--paper + :global(.cs-section--paper) {
+    border-top: 0;
+  }
+
+  .cs-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6) 64px;
+  }
+
+  .cs-head__title {
+    flex: 1 1 280px;
+    max-width: 340px;
+  }
+
+  .cs-head--stacked {
+    flex-direction: column;
+  }
+
+  .cs-head--stacked .cs-head__title {
+    max-width: none;
+    flex: none;
+  }
+
+  .cs-head__num {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--electric);
+  }
+
+  .cs-head__h2 {
+    margin-top: var(--space-1);
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .cs-head__intro {
+    flex: 2 1 480px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .cs-head--stacked .cs-head__intro {
+    flex: none;
+    max-width: 46em;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  @media (max-width: 767px) {
+    .cs-section {
+      padding-block: 40px;
+    }
+
+    .cs-head {
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .cs-head__title {
+      flex: none;
+      max-width: none;
+    }
+
+    .cs-head__h2 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .cs-head__intro {
+      flex: none;
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

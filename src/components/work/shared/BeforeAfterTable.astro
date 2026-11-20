@@ -1,0 +1,163 @@
+---
+/**
+ * Before/after table (03-design-system.md): row headers, muted "Before" cells, last header navy.
+ * Two columns (Check | Result) when rows omit `before`. Cells may hold rich text (mono figures).
+ * Phone: optional stacked cards (`mobileCards`), as given in the content/mobile files.
+ */
+import ScrollRegion from './ScrollRegion.astro';
+import RichText from '../../ui/RichText.astro';
+import type { Segment } from '../../../data/types';
+
+interface Row {
+  area: string;
+  before?: string;
+  after: string | Segment[];
+}
+interface MobileCard {
+  title: string;
+  before?: string;
+  after: string;
+}
+interface Props {
+  caption: string;
+  columns: string[];
+  rows: Row[];
+  mobileCards?: MobileCard[];
+  mobileLabels?: { before: string; after: string };
+}
+const { caption, columns, rows, mobileCards, mobileLabels } = Astro.props;
+---
+
+<div class:list={['batable', mobileCards && 'bp-desktop']}>
+  <ScrollRegion label={caption}>
+    <table>
+      <caption class="visually-hidden">{caption}</caption>
+      <thead>
+        <tr>
+          {columns.map((c) => (
+            <th scope="col">{c}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <th scope="row">{r.area}</th>
+            {r.before !== undefined && <td class="is-before">{r.before}</td>}
+            <td>
+              <RichText segments={r.after} />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </ScrollRegion>
+</div>
+{mobileCards && (
+  <ul class="bacards bp-mobile" role="list">
+    {mobileCards.map((c) => (
+      <li class="bacard">
+        <h3 class="bacard__title">{c.title}</h3>
+        {c.before !== undefined && mobileLabels && (
+          <p class="bacard__before">{`${mobileLabels.before} ${c.before}`}</p>
+        )}
+        <p class="bacard__after">
+          {c.before !== undefined && mobileLabels ? `${mobileLabels.after} ${c.after}` : c.after}
+        </p>
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .batable {
+    margin-top: 40px;
+    padding: 6px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  thead th {
+    padding: 12px 16px;
+    border-bottom: 1.5px solid var(--navy);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    text-align: left;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  thead th:last-child {
+    color: var(--navy);
+  }
+
+  tbody th,
+  tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  tbody th {
+    width: 22%;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .is-before {
+    color: var(--text-muted);
+  }
+
+  .bacards {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .bacard {
+    padding: var(--space-4);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .bacard__title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--ink);
+  }
+
+  .bacard__before {
+    margin-top: var(--space-1);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--text-muted);
+  }
+
+  .bacard__after {
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+</style>

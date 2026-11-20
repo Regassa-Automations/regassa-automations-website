@@ -1,0 +1,76 @@
+---
+/**
+ * "Master to trackers" mini-diagram for the PR pipeline card (content/home.md, card 2).
+ * Shapes, text and colors as supplied; the inline style attribute was moved to CSS (CSP).
+ */
+---
+
+<div class="prsync">
+  <svg
+    role="img"
+    aria-label="One master pipeline feeding about 30 client trackers"
+    viewBox="0 0 300 150"
+    font-family="Inter, sans-serif"
+  >
+    <rect
+      x="0"
+      y="50"
+      width="96"
+      height="50"
+      rx="8"
+      fill="#FFFFFF"
+      stroke="#1E3A8A"
+      stroke-width="2"
+    ></rect>
+    <text x="48" y="79" text-anchor="middle" font-size="12" font-weight="700" fill="#1E3A8A">
+      Master
+    </text>
+    <g fill="#FFFFFF" stroke="#A9B0C8">
+      <rect x="190" y="4" width="110" height="28" rx="6"></rect>
+      <rect x="190" y="42" width="110" height="28" rx="6"></rect>
+      <rect x="190" y="80" width="110" height="28" rx="6"></rect>
+      <rect
+        x="190"
+        y="118"
+        width="110"
+        height="28"
+        rx="6"
+        fill="none"
+        stroke-dasharray="4 4"
+      ></rect>
+    </g>
+    <g font-size="11" fill="#0F0F23">
+      <text x="202" y="22">
+        Client A
+      </text>
+      <text x="202" y="60">
+        Client B
+      </text>
+      <text x="202" y="98">
+        Client C
+      </text>
+      <text x="202" y="136" fill="#5A6283">
+        … about 30
+      </text>
+    </g>
+    <g stroke="#5A6283" stroke-width="1.5">
+      <line x1="98" y1="75" x2="186" y2="18"></line>
+      <line x1="98" y1="75" x2="186" y2="56"></line>
+      <line x1="98" y1="75" x2="186" y2="94"></line>
+      <line x1="98" y1="75" x2="186" y2="132"></line>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .prsync {
+    height: 100%;
+    padding: 20px;
+    background: var(--surface-paper);
+  }
+
+  .prsync svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>

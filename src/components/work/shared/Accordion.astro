@@ -1,0 +1,92 @@
+---
+/** Native <details> accordion row (03-design-system.md, Accordion). Closed by default. */
+interface Props {
+  title: string;
+  id?: string;
+  class?: string;
+}
+const { title, id, class: className } = Astro.props;
+---
+
+<details class:list={['det', className]} id={id}>
+  <summary class="det__summary">
+    <span>{title}</span>
+    <svg
+      class="det__chev"
+      aria-hidden="true"
+      focusable="false"
+      viewBox="0 0 16 16"
+      width="16"
+      height="16"
+    >
+      <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.8" />
+    </svg>
+  </summary>
+  <div class="det__body">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .det {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .det:first-of-type {
+    border-top: 1px solid var(--line);
+  }
+
+  .det__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 60px;
+    padding-block: var(--space-3);
+    list-style: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--heading);
+  }
+
+  .det__chev {
+    flex: none;
+    transition: transform 160ms ease;
+  }
+
+  .det[open] .det__chev {
+    transform: rotate(180deg);
+  }
+
+  .det__body {
+    padding-bottom: var(--space-6);
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--text-strong-muted);
+  }
+
+  .det__body :global(p) {
+    max-width: 46em;
+  }
+
+  .det__body :global(p + p),
+  .det__body :global(p + .scroll-region),
+  .det__body :global(.scroll-region + p) {
+    margin-top: var(--space-3);
+  }
+
+  @media (max-width: 767px) {
+    .det__summary {
+      min-height: 52px;
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .det__body {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+</style>

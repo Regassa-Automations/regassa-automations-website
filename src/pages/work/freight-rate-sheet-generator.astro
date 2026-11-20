@@ -1,0 +1,419 @@
+---
+/**
+ * Case study: Automated Freight Rate Sheet Generator
+ * (content/work/freight-rate-sheet-generator.md; phone: content/mobile/freight-mobile.md).
+ */
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/ui/Button.astro';
+import Responsive from '../../components/ui/Responsive.astro';
+import RichText from '../../components/ui/RichText.astro';
+import HexMarker from '../../components/ui/HexMarker.astro';
+import CaseStudyHero from '../../components/work/shared/CaseStudyHero.astro';
+import HeroFigure from '../../components/work/shared/HeroFigure.astro';
+import JumpLinks from '../../components/work/shared/JumpLinks.astro';
+import CaseSection from '../../components/work/shared/CaseSection.astro';
+import ChallengeCards from '../../components/work/shared/ChallengeCards.astro';
+import RouteJourney from '../../components/work/shared/RouteJourney.astro';
+import Callout from '../../components/work/shared/Callout.astro';
+import Gallery from '../../components/work/shared/Gallery.astro';
+import GalleryDialog from '../../components/work/shared/GalleryDialog.astro';
+import CycleSteps from '../../components/work/shared/CycleSteps.astro';
+import BeforeAfterTable from '../../components/work/shared/BeforeAfterTable.astro';
+import IndustryCards from '../../components/work/shared/IndustryCards.astro';
+import TechChips from '../../components/work/shared/TechChips.astro';
+import ArchitectureDiagram from '../../components/work/shared/ArchitectureDiagram.astro';
+import Accordion from '../../components/work/shared/Accordion.astro';
+import ScrollRegion from '../../components/work/shared/ScrollRegion.astro';
+import NextStepBand from '../../components/work/shared/NextStepBand.astro';
+import MoreCaseStudies from '../../components/work/shared/MoreCaseStudies.astro';
+import WalkthroughVideo from '../../components/work/specific/WalkthroughVideo.astro';
+import SamplePdfCard from '../../components/work/specific/SamplePdfCard.astro';
+import FreightArchitecture from '../../components/work/diagrams/FreightArchitecture.astro';
+import type { GalleryItem } from '../../components/work/shared/gallery-types';
+import { site } from '../../config/site';
+import * as d from '../../data/work/freight';
+import { caseStudy } from '../../lib/jsonld';
+
+const jsonLd = caseStudy({
+  name: d.hero.h1,
+  description: d.hero.lede,
+  path: '/work/freight-rate-sheet-generator/',
+  crumb: d.hero.crumb,
+  image: d.meta.ogImage,
+});
+
+import imgGenerator from '../../assets/work/freight/freight-generator.jpg';
+import imgRoutes from '../../assets/work/freight/freight-route-table.jpg';
+import imgException from '../../assets/work/freight/freight-pricing-exception.jpg';
+import imgSheet from '../../assets/work/freight/freight-rate-sheet-p1.png';
+import imgRoutesMobile from '../../assets/work/freight/freight-route-manager-mobile.jpg';
+
+const images: Record<string, ImageMetadata> = {
+  generator: imgGenerator,
+  routes: imgRoutes,
+  exception: imgException,
+  sheet: imgSheet,
+  routesMobile: imgRoutesMobile,
+};
+const gallery: GalleryItem[] = d.application.gallery.map((g) => ({ ...g, image: images[g.key]! }));
+const mobileFigures = d.application.mobileFigures.map((f) => ({ ...f, image: images[f.key]! }));
+---
+
+<Base
+  title={d.meta.title}
+  description={d.meta.description}
+  ogTitle={d.meta.ogTitle}
+  ogDescription={d.meta.ogDescription}
+  ogImage={d.meta.ogImage}
+  ogImageAlt={d.meta.ogImageAlt}
+  current="portfolio"
+  jsonLd={jsonLd}
+>
+  <CaseStudyHero
+    crumb={d.hero.crumb}
+    tags={d.hero.tags}
+    tagsMobile={d.hero.tagsMobile}
+    h1={d.hero.h1}
+    lede={d.hero.lede}
+    ledeMobile={d.hero.ledeMobile}
+    facts={d.hero.facts}
+    factsNoteMobile={d.hero.factsNoteMobile}
+  >
+    <Fragment slot="actions">
+      <Button href={site.bookingUrl} external>
+        Book a free consultation
+      </Button>
+      <Button
+        href={d.hero.secondary.href}
+        variant="secondary"
+        download="freight-rate-sheet-sample-demo.pdf"
+      >
+        {d.hero.secondary.label}
+        <span class="fr-pdf mono bp-desktop">{d.hero.secondary.suffix}</span>
+      </Button>
+    </Fragment>
+    <HeroFigure
+      slot="figure"
+      image={imgSheet}
+      alt={d.hero.figure.alt}
+      altMobile={d.hero.figure.altMobile}
+      caption={d.hero.figure.caption}
+      captionMobile={d.hero.figure.captionMobile}
+      heightMobile={230}
+    />
+    <JumpLinks slot="after" items={d.jumps} />
+  </CaseStudyHero>
+
+  <CaseSection id="overview" num={d.overview.num} title={d.overview.h2}>
+    <Fragment slot="intro">
+      {d.overview.body.map((p) => (
+        <p class="bp-desktop">{p}</p>
+      ))}
+      <p class="bp-mobile">{d.overview.bodyMobile}</p>
+    </Fragment>
+    <ChallengeCards items={d.overview.cards} />
+  </CaseSection>
+
+  <WalkthroughVideo {...d.walkthrough} />
+
+  <CaseSection id="journey" num={d.journey.num} title={d.journey.h2} paper>
+    <Responsive as="p" slot="intro" text={d.journey.intro} textMobile={d.journey.introMobile} />
+    <RouteJourney steps={d.journey.steps} label={d.journey.label} />
+    <Callout
+      class="bp-desktop fr-callout"
+      icon="person"
+      title={d.journey.callout.title}
+      body={d.journey.callout.body}
+    />
+  </CaseSection>
+
+  <CaseSection id="application" num={d.application.num} title={d.application.h2}>
+    <Fragment slot="intro">
+      {d.application.body.map((p) => (
+        <p class="bp-desktop">{p}</p>
+      ))}
+      <p class="bp-mobile">{d.application.bodyMobile}</p>
+    </Fragment>
+    <Gallery items={gallery} label={d.application.galleryLabel} />
+    <ul class="fr-mfigs bp-mobile" role="list">
+      {mobileFigures.map((f) => (
+        <li>
+          <figure class:list={['fr-mfig', `fr-mfig--${f.key}`]}>
+            <div class="fr-mfig__frame">
+              <Picture
+                src={f.image}
+                alt={f.alt}
+                formats={['avif', 'webp']}
+                widths={[400, 800]}
+                sizes="calc(100vw - 32px)"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="fr-mfig__caption">
+              <strong>{f.title}</strong> {f.caption}
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+    <CycleSteps
+      title={d.application.cycle.title}
+      sub={d.application.cycle.sub}
+      steps={d.application.cycle.steps}
+    />
+  </CaseSection>
+
+  <CaseSection id="results" num={d.results.num} title={d.results.h2} paper stacked>
+    <BeforeAfterTable
+      caption={d.results.tableCaption}
+      columns={d.results.columns}
+      rows={d.results.rows}
+      mobileCards={d.results.mobileCards}
+      mobileLabels={d.results.mobileLabels}
+    />
+    <div class="fr-results-cards">
+      <div class="fr-operator bp-desktop">
+        <h3 class="fr-operator__title">{d.results.operator.title}</h3>
+        <ul class="hex-list fr-operator__list">
+          {d.results.operator.items.map((i) => (
+            <li>
+              <HexMarker />
+              {i}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <SamplePdfCard href={d.hero.secondary.href} {...d.results.sample} />
+    </div>
+    <Responsive as="p" class="fr-note" text={d.results.note} textMobile={d.results.noteMobile} />
+  </CaseSection>
+
+  <CaseSection id="elsewhere" num={d.elsewhere.num} title={d.elsewhere.h2}>
+    <Fragment slot="intro">
+      <p class="bp-desktop">
+        <RichText segments={d.elsewhere.intro} />
+      </p>
+      <p class="bp-mobile">{d.elsewhere.introMobile}</p>
+    </Fragment>
+    <IndustryCards items={d.elsewhere.cards} />
+  </CaseSection>
+
+  <CaseSection id="technical" num={d.technical.num} title={d.technical.h2} paper>
+    <TechChips slot="intro" items={d.technical.chips} itemsMobile={d.technical.chipsMobile} />
+    <ArchitectureDiagram caption={d.technical.diagramCaption} hideMobile>
+      <FreightArchitecture />
+    </ArchitectureDiagram>
+
+    <div class="fr-accordions bp-desktop">
+      <Accordion title={d.technical.accordionTitles.decisions}>
+        {d.technical.decisions.map((x) => (
+          <p>
+            <strong>{x.lead}</strong>
+            {x.text}
+          </p>
+        ))}
+      </Accordion>
+      <Accordion title={d.technical.accordionTitles.worked}>
+        <p>{d.technical.worked.intro}</p>
+        <ScrollRegion label={d.technical.worked.caption}>
+          <table class="fr-worked">
+            <caption class="visually-hidden">{d.technical.worked.caption}</caption>
+            <thead>
+              <tr>
+                {d.technical.worked.columns.map((c) => (
+                  <th scope="col">{c}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {d.technical.worked.rows.map(([service, inherited, change, result]) => (
+                <tr>
+                  <th scope="row">{service}</th>
+                  <td class="is-inherited">{inherited}</td>
+                  <td>{change}</td>
+                  <td class="is-result">{result}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </ScrollRegion>
+      </Accordion>
+      {d.technical.accordions.map((a) => (
+        <Accordion title={a.title}>
+          <p>{a.text}</p>
+        </Accordion>
+      ))}
+    </div>
+    <div class="fr-accordions bp-mobile">
+      {d.technical.mobileAccordions.map((a) => (
+        <Accordion title={a.title}>
+          <p>
+            <RichText segments={a.body} />
+          </p>
+        </Accordion>
+      ))}
+    </div>
+  </CaseSection>
+
+  <NextStepBand h2={d.next.h2} body={d.next.body} bodyMobile={d.next.bodyMobile} />
+  <MoreCaseStudies current="freight-rate-sheet-generator" />
+  <GalleryDialog items={gallery} tag={d.application.dialogTag} />
+</Base>
+
+<style>
+  .fr-pdf {
+    margin-left: 2px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  :global(.fr-callout) {
+    margin-top: var(--space-6);
+  }
+
+  .fr-mfigs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+
+  .fr-mfig__frame {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+
+  .fr-mfig__frame :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .fr-mfig__frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+
+  .fr-mfig--exception .fr-mfig__frame {
+    aspect-ratio: 4 / 5;
+  }
+
+  .fr-mfig--routesMobile .fr-mfig__frame {
+    height: 420px;
+  }
+
+  .fr-mfig--generator .fr-mfig__frame {
+    aspect-ratio: 16 / 10;
+  }
+
+  .fr-mfig__caption {
+    margin-top: var(--space-2);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--text-muted);
+  }
+
+  .fr-mfig__caption strong {
+    color: var(--ink);
+  }
+
+  .fr-results-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+
+  .fr-operator {
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .fr-operator__title {
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+
+  .fr-operator__list {
+    margin-top: var(--space-3);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  :global(.fr-note) {
+    max-width: 52em;
+    margin-top: var(--space-6);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .fr-accordions {
+    margin-top: 40px;
+  }
+
+  .fr-worked {
+    max-width: 640px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .fr-worked th,
+  .fr-worked td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: right;
+  }
+
+  .fr-worked thead th {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1.5px solid var(--navy);
+  }
+
+  .fr-worked th:first-child {
+    text-align: left;
+  }
+
+  .fr-worked tbody th {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .fr-worked td {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .fr-worked .is-inherited {
+    color: var(--text-muted);
+  }
+
+  .fr-worked .is-result {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  @media (max-width: 767px) {
+    .fr-results-cards {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: var(--space-4);
+    }
+
+    .fr-accordions {
+      margin-top: var(--space-6);
+    }
+  }
+</style>

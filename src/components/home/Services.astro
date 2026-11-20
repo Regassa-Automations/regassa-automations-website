@@ -1,0 +1,47 @@
+---
+/** Home "Services" (#services). Phone: short description and one related link per column. */
+import SectionHeading from '../ui/SectionHeading.astro';
+import ServiceColumn from './ServiceColumn.astro';
+import { services } from '../../data/home';
+---
+
+<section id="services" class="section section--home" aria-labelledby="services-h">
+  <div class="container">
+    <SectionHeading id="services-h" eyebrow={services.eyebrow} focusTarget>
+      {services.h2}
+    </SectionHeading>
+    <ul class="services__grid" role="list">
+      {services.items.map((item) => (
+        <ServiceColumn
+          {...item}
+          addressesLabel={services.addressesLabel}
+          relatedLabel={services.relatedLabel}
+        />
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 1119px) {
+    .services__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .services__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+  }
+</style>

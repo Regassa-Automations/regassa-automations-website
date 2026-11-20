@@ -1,0 +1,51 @@
+---
+/**
+ * Dev-only stand-in for a missing asset (03-design-system.md, Placeholder).
+ * Must not ship for any asset marked "launch blocker" in the asset manifest.
+ */
+interface Props {
+  label: string;
+  description: string;
+  spec?: string;
+  class?: string;
+}
+const { label, description, spec, class: className } = Astro.props;
+---
+
+<div class:list={['placeholder', className]} role="img" aria-label={`${label}: ${description}`}>
+  <span class="placeholder__label mono">{label}</span>
+  <span class="placeholder__desc">{description}</span>
+  {spec && <span class="placeholder__spec">{spec}</span>}
+</div>
+
+<style>
+  .placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    background: var(--surface-paper);
+    border: 1px dashed var(--rule-strong);
+    border-radius: var(--radius-md);
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  .placeholder__label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .placeholder__desc {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-strong-muted);
+  }
+
+  .placeholder__spec {
+    font-size: 13px;
+    line-height: 20px;
+  }
+</style>

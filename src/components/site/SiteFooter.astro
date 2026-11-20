@@ -1,0 +1,311 @@
+---
+/**
+ * Site footer (03-design-system.md, Footer; content/home.md, Footer; content/mobile/README.md).
+ * full: Home. compact: every other page.
+ */
+import { getCollection } from 'astro:content';
+import logoDarkUrl from '../../assets/brand/regassa-horizontal-dark.svg?url';
+import Button from '../ui/Button.astro';
+import { footerCopy, footerSiteLinks, primaryCta, hrefFor } from '../../config/site';
+
+interface Props {
+  variant?: 'full' | 'compact';
+  onHome?: boolean;
+  /** Extra bottom padding on phones so the sticky CTA bar never covers the footer. */
+  clearMobileCta?: boolean;
+}
+const { variant = 'compact', onHome = false, clearMobileCta = false } = Astro.props;
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const year = new Date().getFullYear();
+const copyright = `© ${year} ${footerCopy.businessName}`;
+const privacy = footerSiteLinks.find((l) => l.label === 'Privacy')!;
+const path = Astro.url.pathname;
+const currentFor = (href: string) => (href === path ? ('page' as const) : undefined);
+---
+
+<footer
+  class:list={[
+    'site-footer',
+    `site-footer--${variant}`,
+    clearMobileCta && 'site-footer--clear-cta',
+  ]}
+>
+  {variant === 'full' ? (
+    <div class="container site-footer__full">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <img
+            class="site-footer__logo"
+            src={logoDarkUrl}
+            alt="Regassa Automations"
+            width="296"
+            height="106"
+          />
+          <p class="site-footer__tagline bp-desktop">{footerCopy.tagline}</p>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Footer">
+          <div class="site-footer__cols bp-desktop">
+            <div class="site-footer__col">
+              <h2 class="site-footer__heading">Work</h2>
+              <ul>
+                {work.map((p) => (
+                  <li>
+                    <a
+                      href={`/work/${p.data.slug}/`}
+                      aria-current={currentFor(`/work/${p.data.slug}/`)}
+                    >
+                      {p.data.footerLabel}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="site-footer__col">
+              <h2 class="site-footer__heading">Site</h2>
+              <ul>
+                {footerSiteLinks.map((l) => (
+                  <li>
+                    <a href={hrefFor(l, onHome)} aria-current={currentFor(l.href)}>
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="site-footer__col">
+              <h2 class="site-footer__heading">Start</h2>
+              <Button href={hrefFor(primaryCta, onHome)} class="site-footer__cta">
+                {primaryCta.label}
+              </Button>
+            </div>
+          </div>
+
+          <div class="site-footer__grid bp-mobile">
+            <ul>
+              {footerSiteLinks.map((l) => (
+                <li>
+                  <a href={hrefFor(l, onHome)} aria-current={currentFor(l.href)}>
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <p class="site-footer__copy site-footer__copy--ruled">{copyright}</p>
+    </div>
+  ) : (
+    <div class="container site-footer__compact">
+      <img
+        class="site-footer__logo"
+        src={logoDarkUrl}
+        alt="Regassa Automations"
+        width="296"
+        height="106"
+      />
+      <nav class="site-footer__inline bp-desktop" aria-label="Footer">
+        <ul>
+          {footerSiteLinks.map((l) => (
+            <li>
+              <a href={hrefFor(l, onHome)} aria-current={currentFor(l.href)}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <p class="site-footer__copy bp-desktop">{copyright}</p>
+      <p class="site-footer__copy bp-mobile">
+        {copyright} ·{' '}
+        <a class="site-footer__privacy" href={privacy.href} aria-current={currentFor(privacy.href)}>
+          {privacy.label}
+        </a>
+      </p>
+    </div>
+  )}
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: var(--footer-text);
+  }
+
+  .site-footer ul {
+    list-style: none;
+  }
+
+  .site-footer a:not(.btn) {
+    color: var(--footer-text);
+  }
+
+  .site-footer a:not(.btn):hover {
+    color: var(--on-navy);
+  }
+
+  .site-footer__copy {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--footer-muted);
+  }
+
+  /* Full */
+  .site-footer--full {
+    padding-block: 56px 40px;
+  }
+
+  .site-footer__full {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .site-footer__top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .site-footer__brand {
+    flex: 1 1 280px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .site-footer--full .site-footer__logo {
+    width: 180px;
+    height: auto;
+  }
+
+  .site-footer__tagline {
+    max-width: 26em;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--footer-muted);
+  }
+
+  .site-footer__nav {
+    flex: 2 1 480px;
+  }
+
+  .site-footer__cols {
+    display: grid;
+    /* Start column sized to its button so the CTA never wraps or overflows at tablet widths. */
+    grid-template-columns: minmax(160px, 1fr) minmax(120px, 1fr) max-content;
+    gap: var(--space-6);
+  }
+
+  .site-footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    line-height: 20px;
+  }
+
+  .site-footer__heading {
+    margin-bottom: 14px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--footer-muted);
+  }
+
+  .site-footer__copy--ruled {
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--footer-rule);
+  }
+
+  /* Compact */
+  .site-footer--compact {
+    padding-block: var(--space-12);
+  }
+
+  .site-footer__compact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .site-footer--compact .site-footer__logo {
+    width: 170px;
+    height: auto;
+  }
+
+  .site-footer__inline ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  @media (max-width: 767px) {
+    .site-footer--full {
+      padding-block: 36px;
+    }
+
+    .site-footer--clear-cta {
+      padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    }
+
+    .site-footer__full,
+    .site-footer__top {
+      gap: 20px;
+    }
+
+    .site-footer__logo,
+    .site-footer--full .site-footer__logo,
+    .site-footer--compact .site-footer__logo {
+      width: 160px;
+    }
+
+    .site-footer__nav {
+      flex: 1 1 100%;
+    }
+
+    .site-footer__grid ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: var(--space-4);
+    }
+
+    .site-footer__grid a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .site-footer__copy {
+      font-size: 13px;
+    }
+
+    .site-footer__copy--ruled {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .site-footer--compact {
+      padding-block: 32px;
+    }
+
+    .site-footer__compact {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .site-footer__privacy {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+</style>

@@ -1,0 +1,11 @@
+# Netlify redirects (OI-10): cover all seven HTML routes from the previous repository.
+# Live checks on 2026-11-20 found index, About and Portfolio live; case-study paths returned 404.
+# Keep the historical case-study redirects and verify every redirect after deployment.
+/index.html                     /                                      301
+/about.html                     /about/                                301
+/portfolio.html                 /work/                                 301
+/case-study-logistics.html      /work/freight-rate-sheet-generator/    301
+/case-study-pr-tracking.html    /work/pr-pipeline-sync/                301
+/case-study-volunteer.html      /work/volunteer-rosters/               301
+# The reporting placeholder was replaced by the quotes library case study (OI-03).
+/case-study-reporting.html      /work/                                 301

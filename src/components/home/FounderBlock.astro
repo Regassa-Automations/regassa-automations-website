@@ -1,0 +1,156 @@
+---
+/** Home "Who you will work with" (#founder). Phone: small portrait beside the heading, merged bio. */
+import { Picture } from 'astro:assets';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Responsive from '../ui/Responsive.astro';
+import portrait from '../../assets/people/portrait-home.jpg';
+import { founder } from '../../data/home';
+---
+
+<section id="founder" class="section section--home" aria-labelledby="founder-h">
+  <div class="container container--case founder">
+    <Picture
+      class="founder__portrait"
+      src={portrait}
+      alt={founder.portraitAlt}
+      formats={['avif', 'webp']}
+      widths={[224, 300, 600, 720]}
+      sizes="(min-width: 768px) 300px, 112px"
+      loading="lazy"
+    />
+    <div class="founder__text">
+      <div class="founder__head">
+        <Eyebrow>
+          <Responsive text={founder.eyebrow} textMobile={founder.eyebrowMobile} />
+        </Eyebrow>
+        <h2 id="founder-h" class="founder__h2" tabindex="-1">
+          {founder.h2}
+        </h2>
+      </div>
+      <div class="founder__body">
+        <div class="bp-desktop founder__paras">
+          {founder.body.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+        <p class="bp-mobile">{founder.bodyMobile}</p>
+        <a class="arrow-link founder__link" href={founder.link.href}>
+          <Responsive text={founder.link.label} textMobile={founder.linkMobile} />
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .founder {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    column-gap: var(--space-12);
+    align-items: start;
+  }
+
+  .founder__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .founder :global(.founder__portrait) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-figure);
+  }
+
+  .founder__head {
+    padding-top: var(--space-6);
+  }
+
+  .founder__h2 {
+    margin-top: var(--space-3);
+    font-size: 34px;
+    line-height: 42px;
+  }
+
+  .founder__body {
+    max-width: 36em;
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .founder__paras {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .founder__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    margin-top: var(--space-3);
+  }
+
+  @media (max-width: 899px) {
+    .founder {
+      grid-template-columns: 220px minmax(0, 1fr);
+      column-gap: var(--space-8);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .founder {
+      grid-template-columns: 112px minmax(0, 1fr);
+      grid-template-areas:
+        'portrait head'
+        'body body';
+      grid-template-rows: auto auto;
+      column-gap: var(--space-4);
+      align-items: center;
+    }
+
+    /* Phone: portrait beside the heading, bio full width below. */
+    .founder__text {
+      display: contents;
+    }
+
+    .founder :global(.founder__portrait) {
+      grid-area: portrait;
+    }
+
+    .founder__head {
+      grid-area: head;
+    }
+
+    .founder__body {
+      grid-area: body;
+    }
+
+    .founder :global(.founder__portrait) {
+      width: 112px;
+      height: 140px;
+      border-radius: var(--radius-md);
+    }
+
+    .founder__head {
+      padding-top: 0;
+    }
+
+    .founder__h2 {
+      margin-top: var(--space-2);
+      font-size: 23px;
+      line-height: 30px;
+    }
+
+    .founder__body {
+      margin-top: var(--space-6);
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

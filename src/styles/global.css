@@ -1,0 +1,454 @@
+/* Global base styles. Values come from tokens.css; see _handoff/docs/03-design-system.md. */
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+}
+
+img,
+svg,
+video,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+summary {
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ---------- Base typography ---------- */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--heading);
+}
+
+/* Short pages keep the footer at the bottom of the viewport. */
+#main {
+  flex: 1 0 auto;
+}
+
+/* ---------- Links ---------- */
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+/* ---------- Focus ring ---------- */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Navy surfaces (inquiry band, review bands, CTA bands) use the on-navy ring. */
+.on-navy :focus-visible {
+  box-shadow: var(--focus-ring-on-navy);
+}
+
+/* Programmatic focus targets (headings with tabindex="-1") get no ring. */
+[tabindex='-1']:focus-visible {
+  box-shadow: none;
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid CanvasText;
+    outline-offset: 2px;
+  }
+
+  [tabindex='-1']:focus-visible {
+    outline: none;
+  }
+}
+
+/* ---------- Anchors and motion ---------- */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 20px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------- Utilities ---------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--heading);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* Containers */
+.container {
+  width: 100%;
+  max-width: calc(var(--w-site) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--about {
+  max-width: calc(var(--w-about) + 2 * var(--gutter));
+}
+
+.container--case {
+  max-width: calc(var(--w-case) + 2 * var(--gutter));
+}
+
+.container--prose {
+  max-width: calc(var(--w-prose) + 2 * var(--gutter));
+}
+
+/* Breakpoint text helpers (_handoff/content/mobile/README.md). Tablet uses desktop strings. */
+@media (max-width: 767px) {
+  .bp-desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .bp-mobile {
+    display: none !important;
+  }
+}
+
+/* Eyebrow */
+.eyebrow {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+/* Mono */
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hex marker: 10x11 electric hexagon, always aria-hidden. */
+.hex {
+  display: inline-block;
+  flex: none;
+  width: 10px;
+  height: 11px;
+  background: var(--electric);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+.hex--sm {
+  width: 8px;
+  height: 9px;
+}
+
+/* Tag */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-1) 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-muted);
+}
+
+.tag--featured {
+  color: var(--accent-text);
+  border-color: var(--pink-soft-line);
+}
+
+.tag--own {
+  color: var(--error-inline);
+  border-color: var(--pink-soft-line);
+  background: var(--error-bg);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.btn--sm {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 15px;
+}
+
+.btn--primary {
+  background: var(--accent-text);
+  color: var(--on-navy);
+}
+
+.btn--primary:hover {
+  background: var(--accent-text-hover);
+  color: var(--on-navy);
+}
+
+.btn--secondary {
+  background: var(--surface);
+  color: var(--heading);
+  box-shadow: inset 0 0 0 1.5px var(--navy);
+}
+
+.btn--secondary:hover {
+  background: var(--surface-paper);
+  color: var(--heading);
+}
+
+/* Keep the border visible when the secondary button has focus. */
+.btn--secondary:focus-visible {
+  box-shadow:
+    inset 0 0 0 1.5px var(--navy),
+    var(--focus-ring);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--on-navy);
+  box-shadow: inset 0 0 0 1.5px var(--on-navy-muted);
+}
+
+.btn--ghost:hover {
+  background: var(--navy-hover);
+  color: var(--on-navy);
+}
+
+.btn--ghost:focus-visible {
+  box-shadow:
+    inset 0 0 0 1.5px var(--on-navy-muted),
+    var(--focus-ring-on-navy);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  background: var(--text-muted);
+  color: var(--on-navy);
+  box-shadow: none;
+  cursor: progress;
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .btn--block-mobile {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@media (forced-colors: active) {
+  .btn {
+    border: 1.5px solid ButtonText;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .btn--secondary {
+    box-shadow: inset 0 0 0 2px var(--navy);
+  }
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding-block: var(--space-18);
+}
+
+.section--home {
+  padding-block: var(--space-section);
+}
+
+.section--paper {
+  background: var(--surface-paper);
+}
+
+.section--ruled {
+  border-block: 1px solid var(--line);
+}
+
+@media (max-width: 767px) {
+  /* Phone Home sections: 32 to 40 px vertical (content/mobile/home-mobile.md). */
+  .section--home {
+    padding-block: 40px;
+  }
+}
+
+/* Text link with a decorative trailing arrow (arrow is aria-hidden in markup). */
+.arrow-link {
+  font-weight: 600;
+  /* Flex layout drops the space before the arrow span; restore it. */
+  column-gap: 0.28em;
+}
+
+/* Hex list: inline items with hex bullets. */
+.hex-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hex-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.hex-list li .hex {
+  transform: translateY(1px);
+}
+
+/* Inline mono figures inside running text (worked examples). */
+.mono-inline {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.92em;
+}
+
+.muted-inline {
+  color: var(--text-muted);
+}

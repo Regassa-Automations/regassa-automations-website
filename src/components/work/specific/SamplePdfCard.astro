@@ -1,0 +1,108 @@
+---
+/**
+ * Sample rate sheet card (id="sample"): page thumbnails (decorative), title, text and a download
+ * link whose size label is computed from the actual file at build time (08, Content proof).
+ */
+import { statSync } from 'node:fs';
+import { Picture } from 'astro:assets';
+import p1 from '../../../assets/work/freight/freight-rate-sheet-p1.png';
+import p2 from '../../../assets/work/freight/freight-rate-sheet-p2.png';
+
+interface Props {
+  href: string;
+  title: string;
+  text: string;
+  textMobilePrefix: string;
+  linkLabel: string;
+}
+const { href, title, text, textMobilePrefix, linkLabel } = Astro.props;
+const kb = Math.round(statSync(`public${href}`).size / 1024);
+const thumb = {
+  formats: ['avif', 'webp'] as const,
+  widths: [84, 168],
+  sizes: '84px',
+  alt: '',
+  loading: 'lazy' as const,
+};
+---
+
+<div id="sample" class="sample" tabindex="-1">
+  <div class="sample__thumbs" aria-hidden="true">
+    <Picture src={p1} {...thumb} formats={['avif', 'webp']} />
+    <Picture
+      src={p2}
+      {...thumb}
+      formats={['avif', 'webp']}
+      pictureAttributes={{ class: 'bp-desktop' }}
+    />
+  </div>
+  <div>
+    <h3 class="sample__title">{title}</h3>
+    <p class="sample__text">
+      <span class="bp-desktop">{text}</span>
+      <span class="bp-mobile">{`${textMobilePrefix}, ${kb} KB`}</span>
+    </p>
+    <a class="sample__link" href={href} download="freight-rate-sheet-sample-demo.pdf">
+      {linkLabel}
+      <span class="bp-desktop">{` (${kb} KB)`}</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .sample {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .sample__thumbs {
+    display: flex;
+    flex: none;
+    gap: var(--space-2);
+  }
+
+  .sample__thumbs :global(img) {
+    width: 84px;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    box-shadow: var(--shadow-raised);
+  }
+
+  .sample__title {
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+
+  .sample__text {
+    margin-top: var(--space-1);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-strong-muted);
+  }
+
+  .sample__link {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.28em;
+    min-height: 44px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    .sample {
+      padding: var(--space-4);
+      gap: var(--space-4);
+    }
+
+    .sample__thumbs :global(img) {
+      width: 64px;
+    }
+  }
+</style>

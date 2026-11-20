@@ -1,0 +1,165 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.408
+Regassa Automations built this application for a freight forwarder.
+
+2
+00:00:04.458 --> 00:00:07.421
+It turns customer routes, carrier rates and pricing
+
+3
+00:00:07.471 --> 00:00:10.079
+rules into branded rate sheets like this one.
+
+4
+00:00:10.129 --> 00:00:12.560
+This is a separate demo, so every company,
+
+5
+00:00:12.610 --> 00:00:15.100
+customer and price you'll see is fictional.
+
+6
+00:00:16.967 --> 00:00:20.306
+The data lived in separate spreadsheets: customer routes,
+
+7
+00:00:20.356 --> 00:00:23.696
+carrier rates that change every cycle, and pricing rules.
+
+8
+00:00:23.746 --> 00:00:26.610
+The same lane can be written differently in each,
+
+9
+00:00:26.660 --> 00:00:31.427
+so a correct quote needs service, routing, equipment and customer terms to agree.
+
+10
+00:00:32.777 --> 00:00:35.176
+Each customer keeps a saved route list.
+
+11
+00:00:35.226 --> 00:00:38.881
+Full container loads, or FCL, are quoted by container size,
+
+12
+00:00:38.931 --> 00:00:41.204
+so the requested sizes stay together.
+
+13
+00:00:41.254 --> 00:00:46.479
+Less than container loads, or LCL, share a container and are priced per cubic meter.
+
+14
+00:00:46.529 --> 00:00:49.368
+The matching engine uses explicit location and
+
+15
+00:00:49.418 --> 00:00:52.194
+routing rules to find the right carrier lane,
+
+16
+00:00:52.244 --> 00:00:56.527
+shows why it chose it, and keeps any lane an operator picked by hand.
+
+17
+00:00:57.910 --> 00:01:00.311
+Matching and pricing are separate decisions.
+
+18
+00:01:00.361 --> 00:01:03.153
+This route follows the customer's standard pricing.
+
+19
+00:01:03.203 --> 00:01:07.777
+Here, the operator adds seven dollars and fifty cents per cubic meter on top of it.
+
+20
+00:01:07.827 --> 00:01:11.176
+The server calculates the new price before anything is saved,
+
+21
+00:01:11.226 --> 00:01:15.410
+and the exception stays with this route when its carrier match is refreshed.
+
+22
+00:01:23.843 --> 00:01:28.885
+In the generator, the operator sets the validity dates and selects the customer.
+
+23
+00:01:28.935 --> 00:01:33.277
+The preview assembles the routes, calculated prices, minimum volumes,
+
+24
+00:01:33.327 --> 00:01:36.587
+notes and terms, including the exception just saved.
+
+25
+00:01:36.637 --> 00:01:38.433
+Nothing has been created yet;
+
+26
+00:01:38.483 --> 00:01:39.833
+this is a review step.
+
+27
+00:01:39.883 --> 00:01:42.633
+Email delivery is switched off in this demo.
+
+28
+00:01:44.010 --> 00:01:48.763
+Generating uses the same pricing as the preview and saves the PDF to Google Drive.
+
+29
+00:01:48.813 --> 00:01:51.750
+The screen shows each stage and reports the result.
+
+30
+00:01:57.543 --> 00:02:00.210
+Here is the saved document, with the adjusted
+
+31
+00:02:00.260 --> 00:02:02.866
+LCL rate and the customer's notes and terms.
+
+32
+00:02:02.916 --> 00:02:07.333
+The internal reason for the price change stays out of the customer's copy.
+
+33
+00:02:08.683 --> 00:02:09.822
+Every run is saved.
+
+34
+00:02:09.872 --> 00:02:12.511
+An operator can return to a previous batch,
+
+35
+00:02:12.561 --> 00:02:16.451
+check its files and open the PDF without regenerating anything,
+
+36
+00:02:16.501 --> 00:02:20.203
+so there is a record of what was produced for each customer.
+
+37
+00:02:21.583 --> 00:02:25.935
+Regassa Automations designed the data model, the matching and pricing logic,
+
+38
+00:02:25.985 --> 00:02:30.511
+the Google Workspace integration, the web application and the cloud deployment.
+
+39
+00:02:30.561 --> 00:02:32.712
+If your business runs on spreadsheets,
+
+40
+00:02:32.762 --> 00:02:35.492
+customer-specific rules and recurring documents,
+
+41
+00:02:35.542 --> 00:02:38.793
+let's talk about building a workflow like this for yours.

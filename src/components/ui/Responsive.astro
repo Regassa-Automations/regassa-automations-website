@@ -1,0 +1,23 @@
+---
+/**
+ * Breakpoint text (content/mobile/README.md): renders the desktop string at 768 px and up and
+ * the phone string below it. Both use display:none, so assistive tech only gets the visible one.
+ * With no `textMobile`, renders `text` once.
+ */
+interface Props {
+  text: string;
+  textMobile?: string;
+  as?: 'span' | 'p' | 'div';
+  class?: string;
+}
+const { text, textMobile, as: Tag = 'span', class: className } = Astro.props;
+---
+
+{textMobile && textMobile !== text ? (
+  <>
+    <Tag class:list={['bp-desktop', className]}>{text}</Tag>
+    <Tag class:list={['bp-mobile', className]}>{textMobile}</Tag>
+  </>
+) : (
+  <Tag class={className}>{text}</Tag>
+)}

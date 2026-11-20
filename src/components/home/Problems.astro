@@ -1,0 +1,65 @@
+---
+/** Home "Problems" (#problems). Phone: intro and detail lines dropped, short link labels. */
+import SectionHeading from '../ui/SectionHeading.astro';
+import ProblemItem from './ProblemItem.astro';
+import { problems } from '../../data/home';
+---
+
+<section id="problems" class="section section--home" aria-labelledby="problems-h">
+  <div class="container problems">
+    <div class="problems__intro">
+      <SectionHeading id="problems-h" eyebrow={problems.eyebrow} focusTarget>
+        {problems.h2}
+      </SectionHeading>
+      <p class="problems__lead bp-desktop">{problems.intro}</p>
+    </div>
+    <ul class="problems__list" role="list">
+      {problems.items.map((item) => (
+        <ProblemItem {...item} />
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .problems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-12) 56px;
+  }
+
+  .problems__intro {
+    flex: 1 1 300px;
+  }
+
+  .problems__lead {
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 26px;
+    color: var(--text-muted);
+  }
+
+  .problems__list {
+    flex: 2 1 640px;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+  }
+
+  @media (max-width: 767px) {
+    .problems {
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .problems__intro,
+    .problems__list {
+      flex: none;
+    }
+
+    .problems__list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

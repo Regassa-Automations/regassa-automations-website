@@ -1,0 +1,38 @@
+---
+/** Home (content/home.md; phone: content/mobile/home-mobile.md). */
+import Base from '../layouts/Base.astro';
+import Hero from '../components/home/Hero.astro';
+import SelectedWork from '../components/home/SelectedWork.astro';
+import Problems from '../components/home/Problems.astro';
+import Featured from '../components/home/Featured.astro';
+import Services from '../components/home/Services.astro';
+import Approach from '../components/home/Approach.astro';
+import Reviews from '../components/home/Reviews.astro';
+import FounderBlock from '../components/home/FounderBlock.astro';
+import InquirySection from '../components/inquiry/InquirySection.astro';
+import { meta } from '../data/home';
+import { professionalService } from '../lib/jsonld';
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  ogTitle={meta.ogTitle}
+  ogDescription={meta.ogDescription}
+  ogImage={meta.ogImage}
+  ogImageAlt={meta.ogImageAlt}
+  current="home"
+  footer="full"
+  mobileCta
+  jsonLd={[professionalService()]}
+>
+  <Hero />
+  <SelectedWork />
+  <Problems />
+  <Featured />
+  <Services />
+  <Approach />
+  <Reviews />
+  <FounderBlock />
+  <InquirySection />
+</Base>

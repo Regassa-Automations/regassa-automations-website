@@ -1,0 +1,245 @@
+---
+/**
+ * Standard project card (03-design-system.md, Project card). One link per card: the title,
+ * stretched over the card with ::after. Media comes through the `media` slot.
+ * `mediaMobile={false}` drops the media below 768 px (content/mobile/home-mobile.md).
+ */
+import Tag from '../ui/Tag.astro';
+import Responsive from '../ui/Responsive.astro';
+
+interface Pair {
+  label: string;
+  text: string;
+  textMobile?: string;
+}
+
+interface Props {
+  href: string;
+  title: string;
+  tag: string;
+  tagMobile?: string;
+  own?: boolean;
+  summary?: string;
+  summaryMobile?: string;
+  /** Label/value pairs ("Problem", "What I built") used on the Portfolio cards. */
+  pairs?: Pair[];
+  linkLine: string;
+  mediaMobile?: boolean;
+  /** Media aspect ratio: Home cards are 16:10, Portfolio grid cards 16:9. */
+  mediaRatio?: '16/10' | '16/9';
+  headingLevel?: 2 | 3;
+}
+
+const {
+  href,
+  title,
+  tag,
+  tagMobile,
+  own = false,
+  summary,
+  summaryMobile,
+  pairs,
+  linkLine,
+  mediaMobile = true,
+  mediaRatio = '16/10',
+  headingLevel = 3,
+} = Astro.props;
+const H = `h${headingLevel}` as 'h2' | 'h3';
+---
+
+<article class="pcard">
+  {Astro.slots.has('media') && (
+    <div class:list={['pcard__media', !mediaMobile && 'bp-desktop']}>
+      <slot name="media" />
+    </div>
+  )}
+  <div class="pcard__body">
+    <div class="pcard__tags">
+      <Tag>
+        <Responsive text={tag} textMobile={tagMobile} />
+      </Tag>
+      {own && <Tag own>Independent project</Tag>}
+    </div>
+    <H class="pcard__title">
+      <a href={href}>{title}</a>
+    </H>
+    {summary && (
+      <Responsive as="p" class="pcard__summary" text={summary} textMobile={summaryMobile} />
+    )}
+    {pairs && (
+      <dl class="pcard__pairs">
+        {pairs.map((p) => (
+          <div>
+            <dt>{p.label}</dt>
+            <dd>
+              <Responsive text={p.text} textMobile={p.textMobile} />
+            </dd>
+          </div>
+        ))}
+      </dl>
+    )}
+    <p class="pcard__more" aria-hidden="true">
+      {linkLine} →
+    </p>
+  </div>
+</article>
+
+<style>
+  .pcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    transition: border-color 120ms ease;
+  }
+
+  .pcard:hover {
+    border-color: var(--electric);
+  }
+
+  .pcard:focus-within {
+    box-shadow: var(--focus-ring);
+  }
+
+  .pcard__media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-paper);
+  }
+
+  .pcard__media :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .pcard__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+
+  .pcard__media :global(img.is-top) {
+    object-position: center top;
+  }
+
+  .pcard__media[data-ratio='16/9'] {
+    aspect-ratio: 16 / 9;
+  }
+
+  .pcard__pairs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .pcard__pairs dt {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .pcard__pairs dd {
+    margin-top: var(--space-1);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-strong-muted);
+  }
+
+  .pcard__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+  }
+
+  .pcard__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+
+  .pcard__title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .pcard__title a {
+    color: var(--heading);
+    text-decoration: none;
+  }
+
+  .pcard__title a:hover {
+    text-decoration: underline;
+  }
+
+  /* Stretch the title link over the whole card; the card shows the focus ring instead. */
+  .pcard__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .pcard__title a:focus-visible {
+    box-shadow: none;
+  }
+
+  .pcard :global(.pcard__summary) {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .pcard__more {
+    margin-top: auto;
+    padding-top: var(--space-3);
+    font-weight: 600;
+    color: var(--electric);
+  }
+
+  @media (forced-colors: active) {
+    .pcard:focus-within {
+      outline: 2px solid CanvasText;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .pcard {
+      border-width: 2px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .pcard__media {
+      aspect-ratio: 16 / 9;
+    }
+
+    .pcard__body {
+      gap: var(--space-2);
+      padding: 18px;
+    }
+
+    .pcard__title {
+      font-size: 19px;
+      line-height: 26px;
+    }
+
+    .pcard :global(.pcard__summary) {
+      font-size: 15px;
+      line-height: 23px;
+    }
+
+    .pcard__more {
+      padding-top: var(--space-1);
+    }
+  }
+</style>

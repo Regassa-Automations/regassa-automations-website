@@ -1,0 +1,44 @@
+---
+/**
+ * Section heading: optional eyebrow above an h2. The heading carries the id that the
+ * section's aria-labelledby points to. `focusTarget` adds tabindex="-1" for jump targets.
+ */
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  id: string;
+  eyebrow?: string;
+  level?: 2 | 3;
+  focusTarget?: boolean;
+  class?: string;
+}
+const { id, eyebrow, level = 2, focusTarget = false, class: className } = Astro.props;
+const H = `h${level}` as 'h2' | 'h3';
+---
+
+<div class:list={['section-heading', className]}>
+  {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+  <H id={id} tabindex={focusTarget ? -1 : undefined}>
+    <slot />
+  </H>
+</div>
+
+<style>
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  h2 {
+    font-size: 34px;
+    line-height: 42px;
+  }
+
+  @media (max-width: 767px) {
+    h2 {
+      font-size: 26px;
+      line-height: 34px;
+    }
+  }
+</style>

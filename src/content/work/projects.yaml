@@ -1,0 +1,101 @@
+# Card data for the `work` content collection. Copy is final (from the design canvas, 2026-11-20).
+# All five projects are published and have case-study pages.
+# homeCard: shown in Home "Selected work" (in this order). portfolioLayout: wide | grid.
+
+projects:
+  - slug: freight-rate-sheet-generator
+    title: Automated Freight Rate Sheet Generator
+    homeCardTitle: Logistics rate sheets
+    portfolioCardTitle: Logistics rate-sheet application
+    footerLabel: Logistics rate sheets
+    moreLabel: Freight Rate Sheet Generator # label in "More case studies"
+    order: 1
+    homeCard: 1
+    portfolioLayout: wide
+    featured: true
+    tags: [Operational application]
+    ownProject: false
+    cardSummary: Matches requested routes to cost data, applies pricing rules, holds exceptions for review, and generates a client-ready PDF.
+    problem: Building a client rate sheet meant matching routes to cost data and applying pricing rules by hand, with exceptions handled case by case.
+    built: An application that matches routes, applies pricing rules, holds exceptions for a person to review, and generates a rate-sheet PDF with a generation report.
+
+  - slug: gridbloom
+    title: 'GridBloom: electricity data you can check'
+    homeCardTitle: GridBloom electricity data
+    portfolioCardTitle: GridBloom electricity data dashboard
+    footerLabel: GridBloom
+    moreLabel: GridBloom electricity data
+    order: 2
+    homeCard: 3
+    portfolioLayout: wide
+    featured: false
+    tags: [Reporting and AI-assisted workflow]
+    ownProject: true # renders the "Independent project" tag
+    cardSummary: A data pipeline, dashboard and weekly report that withhold figures the data can't support, with an AI briefing whose every number is checked.
+    problem: Public hourly grid data has gaps, timing quirks and implausible values. Summing it naively, or letting AI summarize it unchecked, produces confident numbers that are wrong.
+    built: A data pipeline, dashboard and weekly email report that withhold figures the data can't support, with an AI briefing whose every number is checked against its sources.
+
+  - slug: pr-pipeline-sync
+    title: One master pipeline, thirty client trackers
+    homeCardTitle: PR pipeline sync
+    portfolioCardTitle: PR pipeline and client tracker sync
+    footerLabel: PR pipeline sync
+    moreLabel: PR pipeline sync
+    order: 3
+    homeCard: 2
+    portfolioLayout: grid
+    tags: [Integration and data sync]
+    ownProject: false
+    cardSummary: Publishes a PR agency's opportunities from one master pipeline to about 30 client trackers, and keeps each one current until coverage is secured.
+    problem: A PR agency's staff copied opportunities from their master pipeline into about 30 client trackers by hand.
+    built: An Apps Script sync that publishes each record to the right client, updates it in place and follows it from Pipeline to Secured.
+
+  - slug: quotes-library
+    title: From a cluttered workbook to a 400-page reference
+    homeCardTitle: null # not on Home
+    portfolioCardTitle: 'Quotes library: Excel to Word'
+    footerLabel: Quotes library
+    moreLabel: Quotes library
+    order: 4
+    homeCard: null
+    portfolioLayout: grid
+    tags: [Data cleanup and document generation]
+    ownProject: false
+    cardSummary: null
+    problem: A quotations collection spread across worksheets, with copies, near-copies and quotes filed under several categories.
+    built: A Python cleanup with a scored duplicates report, and a generated 400-page Word reference organized by author.
+
+  - slug: volunteer-rosters
+    title: Two sign-up tools, one clean roster per location
+    homeCardTitle: null # not on Home
+    portfolioCardTitle: Volunteer registration and rosters
+    footerLabel: Volunteer rosters
+    moreLabel: Volunteer rosters
+    order: 5
+    homeCard: null
+    portfolioLayout: grid
+    tags: [Integration and data sync]
+    ownProject: false
+    cardSummary: null
+    problem: A four-location volunteer program collected sign-ups through Google Forms and SignUpGenius, with returning volunteers and several roles each.
+    built: An API integration that routes each sign-up to its location's roster, merges returning volunteers and never overwrites coordinators' details.
+
+# Upwork reviews (rendered on Home and on two case studies). Quote exactly; attribute only as shown.
+reviews:
+  items:
+    - id: volunteer
+      project: volunteer-rosters
+      projectLabel: Volunteer registration and rosters
+      excerpt: 'If your systems feel like a tangled plate of spaghetti and you’d rather have a neat picket fence, this freelancer is for you.'
+      full: 'Ayantu took my spreadsheets, Google Forms, and SignUpGenius and made them all talk to each other seamlessly. What felt complicated in my mind, she turned into an easy, logical flow that delivers exactly the information I need. She explained everything in plain language and even left clear notes and diagrams for future use. My data is now organized, connected, and effortless to manage thanks to her work.'
+    - id: lead-intake
+      project: null # no case study
+      projectLabel: Lead intake dashboards
+      excerpt: 'Super responsive/communicative. Fantastic to work with.'
+    - id: quotes
+      project: quotes-library
+      projectLabel: Quotes library
+      excerpt: 'Amazing to work with, she went above and beyond. She far exceeded my expectations.'
+  attribution: 'Client, verified Upwork review'
+  rating: 5
+  profileUrl: https://www.upwork.com/freelancers/aregassa

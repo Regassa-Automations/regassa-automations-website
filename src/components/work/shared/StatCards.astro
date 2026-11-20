@@ -1,0 +1,84 @@
+---
+/** Stat cards: big mono figure and a short description; always followed by the page's note. */
+import Responsive from '../../ui/Responsive.astro';
+
+interface Item {
+  figure: string;
+  text: string;
+  textMobile?: string;
+  hideMobile?: boolean;
+}
+interface Props {
+  items: Item[];
+  min?: 220 | 240;
+}
+const { items, min = 220 } = Astro.props;
+---
+
+<ul class:list={['stats', min === 240 && 'stats--240']} role="list">
+  {items.map((i) => (
+    <li class:list={['stat', i.hideMobile && 'bp-desktop']}>
+      <p class="stat__fig">{i.figure}</p>
+      <Responsive as="p" class="stat__text" text={i.text} textMobile={i.textMobile} />
+    </li>
+  ))}
+</ul>
+
+<style>
+  .stats {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .stats--240 {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .stat {
+    padding: 22px 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .stat__fig {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 44px;
+    font-variant-numeric: tabular-nums;
+    color: var(--navy);
+  }
+
+  .stat :global(.stat__text) {
+    margin-top: var(--space-2);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-strong-muted);
+  }
+
+  @media (max-width: 767px) {
+    .stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .stat {
+      padding: 14px;
+    }
+
+    .stat__fig {
+      font-size: 26px;
+      line-height: 32px;
+    }
+
+    .stat :global(.stat__text) {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+</style>

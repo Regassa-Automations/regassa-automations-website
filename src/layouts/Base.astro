@@ -1,0 +1,120 @@
+---
+/**
+ * Base layout: head, metadata, skip link, header, main, footer.
+ * Props follow _handoff/docs/02-architecture.md (Metadata and structured data).
+ */
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+import montserratUrl from '@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url';
+import interUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import MobileCtaBar from '../components/site/MobileCtaBar.astro';
+import type { NavKey } from '../config/site';
+import { serialize } from '../lib/jsonld';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Absolute or root-relative canonical URL; defaults to the current path on the site origin. */
+  canonical?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  noindex?: boolean;
+  /** Current primary nav item for aria-current. */
+  current?: NavKey;
+  footer?: 'full' | 'compact';
+  /** Home only: sticky mobile CTA bar. */
+  mobileCta?: boolean;
+  /** JSON-LD objects (src/lib/jsonld.ts). Never Review or AggregateRating. */
+  jsonLd?: unknown[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogImageAlt,
+  ogTitle,
+  ogDescription,
+  noindex = false,
+  current,
+  footer = 'compact',
+  mobileCta = false,
+  jsonLd = [],
+} = Astro.props;
+
+const onHome = Astro.url.pathname === '/';
+const canonicalUrl = new URL(canonical ?? Astro.url.pathname, Astro.site);
+// Pages without their own share image use the default one (content files give it for most pages).
+const DEFAULT_OG = {
+  src: '/og/og-default.png',
+  alt: 'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+};
+const ogImageUrl = new URL(ogImage ?? DEFAULT_OG.src, Astro.site).href;
+const ogAlt = ogImage ? ogImageAlt : DEFAULT_OG.alt;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {!noindex && <link rel="canonical" href={canonicalUrl.href} />}
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#FFFFFF" />
+
+    <link rel="preload" href={montserratUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Regassa Automations" />
+    <meta property="og:title" content={ogTitle ?? title} />
+    {(ogDescription ?? description) && (
+      <meta property="og:description" content={ogDescription ?? description} />
+    )}
+    <meta property="og:url" content={canonicalUrl.href} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {ogAlt && <meta property="og:image:alt" content={ogAlt} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle ?? title} />
+    {(ogDescription ?? description) && (
+      <meta name="twitter:description" content={ogDescription ?? description} />
+    )}
+    <meta name="twitter:image" content={ogImageUrl} />
+    {ogAlt && <meta name="twitter:image:alt" content={ogAlt} />}
+    {jsonLd.map((data) => (
+      <script is:inline type="application/ld+json" set:html={serialize(data)} />
+    ))}
+
+    <slot name="head" />
+  </head>
+  <body class:list={[mobileCta && 'has-mobile-cta']}>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <SiteHeader current={current} onHome={onHome} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter variant={footer} onHome={onHome} clearMobileCta={mobileCta} />
+    {mobileCta && <MobileCtaBar />}
+    <script>
+      import '../scripts/focus-on-hash';
+    </script>
+  </body>
+</html>

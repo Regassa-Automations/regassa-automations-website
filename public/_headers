@@ -1,0 +1,16 @@
+# Security and caching headers (Netlify; Cloudflare Pages reads the same file).
+# _handoff/docs/02-architecture.md (Hosting) and 01-implementation-plan.md (Phase 8, task 2).
+# Only Formspree is allowed off-site (form posts and fetch). Booking and Upwork are plain links.
+# Referrer-Policy must stay strict-origin-when-cross-origin: Formspree's "Restrict to Domain" needs it.
+/*
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Content-Type-Options: nosniff
+
+/thanks/
+  X-Robots-Tag: noindex
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

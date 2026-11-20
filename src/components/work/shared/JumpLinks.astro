@@ -1,0 +1,85 @@
+---
+/**
+ * "On this page" jump links. Desktop: wrapping chips. Phone: one horizontally scrolling row
+ * with shorter labels, inside a focusable region.
+ */
+interface Item {
+  label: string;
+  labelMobile?: string;
+  href: string;
+}
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<nav class="jumps" aria-label="On this page">
+  <ul class="jumps__list" role="list">
+    {items.map((i) => (
+      <li>
+        <a class="jumps__link" href={i.href}>
+          {i.labelMobile && i.labelMobile !== i.label ? (
+            <>
+              <span class="bp-desktop">{i.label}</span>
+              <span class="bp-mobile">{i.labelMobile}</span>
+            </>
+          ) : (
+            i.label
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .jumps {
+    margin-top: var(--space-6);
+  }
+
+  .jumps__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .jumps__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--heading);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .jumps__link:hover {
+    border-color: var(--electric);
+    color: var(--heading);
+  }
+
+  @media (max-width: 767px) {
+    .jumps {
+      margin-inline: calc(-1 * var(--gutter));
+    }
+
+    .jumps__list {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding: 2px var(--gutter) 6px;
+      scrollbar-width: thin;
+    }
+
+    .jumps__link {
+      min-height: 44px;
+    }
+  }
+</style>

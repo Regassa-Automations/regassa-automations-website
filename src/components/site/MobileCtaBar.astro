@@ -1,0 +1,49 @@
+---
+/**
+ * Sticky bottom CTA bar, Home only, below 768 px (content/mobile/README.md).
+ * Hidden while #inquiry is on screen (src/scripts/mobile-cta.ts).
+ */
+import Button from '../ui/Button.astro';
+import { primaryCta } from '../../config/site';
+---
+
+<div class="mobile-cta" data-mobile-cta>
+  <Button href={primaryCta.homeHref} block>
+    {primaryCta.label}
+  </Button>
+</div>
+
+<script>
+  import '../../scripts/mobile-cta';
+</script>
+
+<style>
+  .mobile-cta {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .mobile-cta {
+      display: block;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      padding: 10px var(--gutter) calc(14px + env(safe-area-inset-bottom));
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      transition:
+        transform 200ms ease,
+        visibility 0s linear 0s;
+    }
+
+    .mobile-cta.is-hidden {
+      transform: translateY(100%);
+      visibility: hidden;
+      transition:
+        transform 200ms ease,
+        visibility 0s linear 200ms;
+    }
+  }
+</style>

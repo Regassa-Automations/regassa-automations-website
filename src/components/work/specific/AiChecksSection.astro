@@ -1,0 +1,261 @@
+---
+/**
+ * GridBloom "Checked AI briefing" (id="ai"): navy band, two columns (1.25fr / 1fr, stacked under
+ * 900 px), check list with hex markers, the briefing figure as a dialog opener, and a full-width
+ * stat callout. The lead line is approved wording (06-content-rules.md).
+ */
+import { Picture } from 'astro:assets';
+import HexMarker from '../../ui/HexMarker.astro';
+import Responsive from '../../ui/Responsive.astro';
+import briefing from '../../../assets/work/gridbloom/gridbloom-briefing.jpg';
+import { ai, dashboard } from '../../../data/work/gridbloom';
+
+const title = dashboard.gallery[ai.figure.dialogIndex]?.title ?? '';
+---
+
+<section id="ai" class="aisec on-navy" aria-labelledby="ai-h">
+  <div class="container container--case">
+    <div class="aisec__grid">
+      <div class="aisec__copy">
+        <p class="aisec__num mono" aria-hidden="true">
+          {ai.num}
+        </p>
+        <h2 id="ai-h" class="aisec__h2" tabindex="-1">
+          {ai.h2}
+        </h2>
+        <p class="aisec__lead">{ai.lead}</p>
+        <div class="bp-desktop">
+          <p class="aisec__body">{ai.body}</p>
+          <p class="aisec__body">{ai.checksIntro}</p>
+        </div>
+        <p class="aisec__body bp-mobile">{ai.bodyMobile}</p>
+        <ul class="aisec__checks">
+          {ai.checks.map((c, i) => (
+            <li>
+              <HexMarker class="aisec__hex" />
+              <Responsive text={c} textMobile={ai.checksMobile[i]} />
+            </li>
+          ))}
+        </ul>
+        <Responsive as="p" class="aisec__body" text={ai.after} textMobile={ai.afterMobile} />
+      </div>
+      <figure class="aisec__fig">
+        <a
+          class="aisec__thumb bp-desktop"
+          href={briefing.src}
+          data-gallery-open={ai.figure.dialogIndex}
+          data-title={title}
+        >
+          <Picture
+            src={briefing}
+            alt={ai.figure.alt}
+            formats={['avif', 'webp']}
+            widths={[400, 646, 900]}
+            sizes="(min-width: 1104px) 420px, 40vw"
+            loading="lazy"
+          />
+        </a>
+        <div class="aisec__frame bp-mobile">
+          <Picture
+            src={briefing}
+            alt={ai.figure.altMobile}
+            formats={['avif', 'webp']}
+            widths={[400, 720]}
+            sizes="calc(100vw - 32px)"
+            loading="lazy"
+          />
+        </div>
+        <figcaption class="aisec__caption">
+          <Responsive text={ai.figure.caption} textMobile={ai.figure.captionMobile} />
+        </figcaption>
+      </figure>
+    </div>
+    <div class="aisec__stat">
+      <p class="aisec__stat-fig">{ai.stat.figure}</p>
+      <Responsive
+        as="p"
+        class="aisec__stat-text"
+        text={ai.stat.text}
+        textMobile={ai.stat.textMobile}
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .aisec {
+    padding-block: var(--space-18);
+    background: var(--navy);
+    color: var(--on-navy);
+  }
+
+  .aisec__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+  }
+
+  .aisec__num {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--on-navy-muted);
+  }
+
+  .aisec__h2 {
+    margin-top: var(--space-1);
+    font-size: 30px;
+    line-height: 38px;
+    color: var(--on-navy);
+  }
+
+  .aisec__lead {
+    margin-top: var(--space-4);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 30px;
+  }
+
+  .aisec :global(.aisec__body),
+  .aisec__body {
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--footer-text);
+  }
+
+  .aisec__checks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: var(--space-4);
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .aisec__checks li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .aisec__checks :global(.aisec__hex) {
+    background: var(--on-navy-muted);
+    transform: translateY(1px);
+  }
+
+  .aisec__thumb {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: var(--surface);
+    border: 0;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    cursor: zoom-in;
+  }
+
+  .aisec__thumb :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .aisec__frame {
+    padding: 8px;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+  }
+
+  .aisec__frame :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .aisec__caption {
+    margin-top: var(--space-3);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--on-navy-muted);
+  }
+
+  .aisec__stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: var(--navy-hover);
+    border: 1px solid var(--navy-rule);
+    border-radius: var(--radius-lg);
+  }
+
+  .aisec__stat-fig {
+    flex: none;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .aisec :global(.aisec__stat-text) {
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--footer-text);
+  }
+
+  @media (max-width: 899px) {
+    .aisec__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .aisec {
+      padding-block: 40px;
+    }
+
+    .aisec__grid {
+      gap: var(--space-6);
+    }
+
+    .aisec__h2 {
+      font-size: 23px;
+      line-height: 30px;
+    }
+
+    .aisec__lead {
+      font-size: 17px;
+      line-height: 26px;
+    }
+
+    .aisec :global(.aisec__body) {
+      font-size: 15px;
+      line-height: 24px;
+    }
+
+    .aisec__checks {
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .aisec__stat {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+      padding: var(--space-4);
+    }
+
+    .aisec__stat-fig {
+      font-size: 22px;
+      line-height: 28px;
+    }
+
+    .aisec :global(.aisec__stat-text) {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+</style>

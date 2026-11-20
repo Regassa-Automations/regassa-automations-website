@@ -1,0 +1,229 @@
+---
+/**
+ * Sticky site header (03-design-system.md, Header; 04-interactions-and-responsive.md, Mobile navigation).
+ * >= 900 px: desktop nav + CTA. < 900 px: <details> menu, enhanced by src/scripts/menu.ts.
+ * Only one primary nav is exposed at a time (the other is display:none).
+ */
+import logoUrl from '../../assets/brand/regassa-horizontal-light.svg?url';
+import Button from '../ui/Button.astro';
+import { primaryNav, primaryCta, hrefFor, type NavKey } from '../../config/site';
+
+interface Props {
+  current?: NavKey;
+  onHome?: boolean;
+}
+const { current, onHome = false } = Astro.props;
+const ctaHref = hrefFor(primaryCta, onHome);
+const path = Astro.url.pathname;
+// The current section's link is aria-current="page" on its own page, "true" on pages below it
+// (case studies mark Portfolio as current).
+const currentAttr = (item: { key: NavKey; href: string }) =>
+  item.key !== current ? undefined : item.href === path ? ('page' as const) : ('true' as const);
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="/" aria-label="Regassa Automations, home">
+      <img src={logoUrl} alt="" width="296" height="106" />
+    </a>
+
+    <!-- [html-validate-disable-next unique-landmark: desktop and menu navs never display together] -->
+    <nav class="nav-desktop" aria-label="Primary">
+      <ul class="nav-desktop__list">
+        {primaryNav.map((item) => (
+          <li>
+            <a
+              class="nav-desktop__link"
+              href={hrefFor(item, onHome)}
+              aria-current={currentAttr(item)}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <Button href={ctaHref} size="sm">
+        {primaryCta.label}
+      </Button>
+    </nav>
+
+    <details class="menu" data-menu>
+      <summary class="btn btn--secondary btn--sm menu__toggle">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+        <span class="menu__lbl-open">Menu</span>
+        <span class="menu__lbl-close">Close</span>
+      </summary>
+      <!-- [html-validate-disable-next unique-landmark: desktop and menu navs never display together] -->
+      <nav class="menu__panel" aria-label="Primary">
+        <ul class="menu__list">
+          {primaryNav.map((item) => (
+            <li>
+              <a class="menu__link" href={hrefFor(item, onHome)} aria-current={currentAttr(item)}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <Button href={ctaHref} block class="menu__cta">
+          {primaryCta.label}
+        </Button>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  import '../../scripts/menu';
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Header box is 1200 px including its gutters (canvas header), unlike the content container. */
+  .site-header__inner {
+    max-width: var(--w-site);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    height: var(--header-h);
+  }
+
+  .site-header__logo {
+    display: block;
+    flex: none;
+    border-radius: var(--radius-sm);
+  }
+
+  .site-header__logo img {
+    height: 56px;
+    width: auto;
+  }
+
+  /* Desktop nav */
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav-desktop__list {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-desktop__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: var(--space-3);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    color: var(--ink);
+    text-decoration: none;
+    text-underline-offset: 6px;
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-desktop__link:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .nav-desktop__link[aria-current] {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-text);
+  }
+
+  /* Mobile menu */
+  .menu {
+    display: none;
+  }
+
+  .menu__toggle {
+    list-style: none;
+    padding: 0 14px;
+  }
+
+  .menu:not([open]) .menu__lbl-close,
+  .menu[open] .menu__lbl-open {
+    display: none;
+  }
+
+  .menu__panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: var(--space-1) var(--gutter) 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .menu__list {
+    list-style: none;
+  }
+
+  .menu__link {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    border-bottom: 1px solid var(--line);
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .menu__link:hover {
+    color: var(--heading);
+    text-decoration: underline;
+  }
+
+  .menu__link[aria-current] {
+    font-weight: 700;
+    color: var(--heading);
+  }
+
+  .menu__panel :global(.menu__cta) {
+    margin-top: var(--space-4);
+  }
+
+  @media (max-width: 899px) {
+    .nav-desktop {
+      display: none;
+    }
+
+    .menu {
+      display: block;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .site-header__logo img {
+      width: 152px;
+      height: auto;
+    }
+  }
+</style>

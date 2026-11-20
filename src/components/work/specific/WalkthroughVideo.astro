@@ -1,0 +1,361 @@
+---
+/**
+ * Freight walkthrough band (content/work/freight-rate-sheet-generator.md, Walkthrough; OI-08
+ * resolved). Self-hosted MP4 with poster and default English captions; never autoplays.
+ * Chapters are plain text without JS; src/scripts/video-chapters.ts turns them into
+ * "Play from {time}: {name}" buttons. Transcript in <details id="transcript">.
+ * Phone: chapters inside a "N chapters" disclosure, shorter label, no body or meta line.
+ */
+import { getImage } from 'astro:assets';
+import poster from '../../../assets/work/freight/freight-walkthrough-poster.jpg';
+
+interface Chapter {
+  seconds: number;
+  label: string;
+  name: string;
+}
+interface TranscriptEntry {
+  time: string;
+  title: string;
+  text: string;
+}
+interface Props {
+  src: string;
+  captions: string;
+  ariaLabel: string;
+  ariaLabelMobile: string;
+  monoLabel: string;
+  monoLabelMobile: string;
+  h2: string;
+  body: string;
+  meta: { duration: string; captions: string; transcriptLink: string };
+  chapters: Chapter[];
+  chaptersSummaryMobile: string;
+  transcriptSummary: string;
+  transcript: TranscriptEntry[];
+}
+const p = Astro.props;
+const posterImg = await getImage({ src: poster, format: 'webp', width: 1280 });
+---
+
+<section id="walkthrough" class="walk on-navy" aria-labelledby="walkthrough-h">
+  <div class="container container--case">
+    <div class="walk__grid">
+      <div class="walk__media">
+        <video
+          class="walk__video"
+          controls
+          preload="metadata"
+          playsinline
+          poster={posterImg.src}
+          width="1920"
+          height="1080"
+          aria-label={p.ariaLabel}
+          data-walkthrough-video
+        >
+          <source src={p.src} type="video/mp4" />
+          <track kind="captions" srclang="en" label="English" default src={p.captions} />
+        </video>
+        <p class="walk__meta bp-desktop">
+          {`${p.meta.duration} · ${p.meta.captions} · `}
+          <a href="#transcript" data-open-transcript>
+            {p.meta.transcriptLink}
+          </a>
+        </p>
+      </div>
+      <div class="walk__side">
+        <p class="walk__label mono">
+          <span class="bp-desktop">{p.monoLabel}</span>
+          <span class="bp-mobile">{p.monoLabelMobile}</span>
+        </p>
+        <h2 id="walkthrough-h" class="walk__h2" tabindex="-1">
+          {p.h2}
+        </h2>
+        <p class="walk__body bp-desktop">{p.body}</p>
+
+        <ol class="walk__chapters bp-desktop" aria-label="Video chapters" data-chapters>
+          {p.chapters.map((c) => (
+            <li>
+              <span
+                class="walk__chapter"
+                data-seconds={c.seconds}
+                data-name={c.name}
+                data-label={c.label}
+              >
+                <span class="walk__time mono">{c.label}</span>
+                <span>{c.name}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+
+    <details class="walk__disclosure walk__chapters-m bp-mobile">
+      <summary class="walk__summary">
+        <span>{p.chaptersSummaryMobile}</span>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" width="16" height="16">
+          <path
+            d="M3.5 6l4.5 4.5L12.5 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          ></path>
+        </svg>
+      </summary>
+      <ol class="walk__chapters" aria-label="Video chapters" data-chapters>
+        {p.chapters.map((c) => (
+          <li>
+            <span
+              class="walk__chapter"
+              data-seconds={c.seconds}
+              data-name={c.name}
+              data-label={c.label}
+            >
+              <span class="walk__time mono">{c.label}</span>
+              <span>{c.name}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </details>
+
+    <details id="transcript" class="walk__disclosure walk__transcript">
+      <summary class="walk__summary">
+        <span>{p.transcriptSummary}</span>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" width="16" height="16">
+          <path
+            d="M3.5 6l4.5 4.5L12.5 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          ></path>
+        </svg>
+      </summary>
+      <div class="walk__entries">
+        {p.transcript.map((e) => (
+          <div class="walk__entry">
+            <p class="walk__time mono">{e.time}</p>
+            <div>
+              <h3 class="walk__entry-title">{e.title}</h3>
+              <p class="walk__entry-text">{e.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </details>
+  </div>
+</section>
+
+<script>
+  import '../../../scripts/video-chapters';
+</script>
+
+<style>
+  .walk {
+    padding-block: var(--space-18);
+    background: var(--navy);
+    color: var(--on-navy);
+  }
+
+  .walk__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  .walk__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    background: var(--ink);
+  }
+
+  .walk__meta {
+    margin-top: var(--space-3);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--on-navy-muted);
+  }
+
+  .walk__meta a {
+    color: var(--on-navy);
+  }
+
+  .walk__label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-navy-muted);
+  }
+
+  .walk__h2 {
+    margin-top: var(--space-2);
+    font-size: 26px;
+    line-height: 34px;
+    color: var(--on-navy);
+  }
+
+  .walk__body {
+    margin-top: var(--space-3);
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--footer-text);
+  }
+
+  .walk__chapters {
+    list-style: none;
+    margin-top: var(--space-4);
+    border-top: 1px solid var(--navy-rule);
+  }
+
+  .walk__chapters li {
+    border-bottom: 1px solid var(--navy-rule);
+  }
+
+  .walk__chapter {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    min-height: 44px;
+    padding: 0 var(--space-2);
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    line-height: 22px;
+    text-align: left;
+    color: var(--on-navy);
+  }
+
+  button.walk__chapter:hover {
+    background: var(--navy-hover);
+  }
+
+  .walk__time {
+    flex: none;
+    min-width: 3.2em;
+    font-variant-numeric: tabular-nums;
+    color: var(--on-navy-muted);
+  }
+
+  .walk__disclosure {
+    border-bottom: 1px solid var(--navy-rule);
+  }
+
+  .walk__transcript {
+    margin-top: 40px;
+    border-top: 1px solid var(--navy-rule);
+  }
+
+  .walk__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 52px;
+    list-style: none;
+    font-weight: 600;
+    color: var(--on-navy);
+  }
+
+  .walk__summary svg {
+    transition: transform 160ms ease;
+  }
+
+  .walk__disclosure[open] > .walk__summary svg {
+    transform: rotate(180deg);
+  }
+
+  .walk__entries {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-bottom: var(--space-6);
+  }
+
+  .walk__entry {
+    display: grid;
+    grid-template-columns: 4em minmax(0, 1fr);
+    gap: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--navy-rule);
+  }
+
+  .walk__entry-title {
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--on-navy);
+  }
+
+  .walk__entry-text {
+    margin-top: var(--space-1);
+    max-width: 52em;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--footer-text);
+  }
+
+  @media (max-width: 899px) {
+    .walk__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .walk {
+      padding-block: 40px;
+    }
+
+    .walk__grid {
+      gap: var(--space-4);
+    }
+
+    .walk__video {
+      border-radius: var(--radius-md);
+    }
+
+    .walk__side {
+      order: -1;
+    }
+
+    .walk__h2 {
+      font-size: 22px;
+      line-height: 29px;
+    }
+
+    .walk__chapters {
+      margin-top: 0;
+    }
+
+    .walk__summary {
+      min-height: 48px;
+    }
+
+    .walk__chapters-m {
+      margin-top: var(--space-4);
+      border-top: 1px solid var(--navy-rule);
+    }
+
+    .walk__transcript {
+      margin-top: 0;
+      border-top: 0;
+    }
+
+    .walk__entry {
+      display: block;
+    }
+
+    .walk__entry-title {
+      display: inline;
+      font-size: 14px;
+    }
+
+    .walk__entry-text {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+</style>

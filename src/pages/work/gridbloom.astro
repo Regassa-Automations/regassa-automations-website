@@ -1,0 +1,285 @@
+---
+/**
+ * Case study: GridBloom (independent project on real public data)
+ * (content/work/gridbloom.md; phone: content/mobile/gridbloom-mobile.md).
+ * Never describe it as client work or hint at the private client it stands in for.
+ */
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/ui/Button.astro';
+import Responsive from '../../components/ui/Responsive.astro';
+import RichText from '../../components/ui/RichText.astro';
+import CaseStudyHero from '../../components/work/shared/CaseStudyHero.astro';
+import HeroFigure from '../../components/work/shared/HeroFigure.astro';
+import JumpLinks from '../../components/work/shared/JumpLinks.astro';
+import CaseSection from '../../components/work/shared/CaseSection.astro';
+import ChallengeCards from '../../components/work/shared/ChallengeCards.astro';
+import RouteJourney from '../../components/work/shared/RouteJourney.astro';
+import Callout from '../../components/work/shared/Callout.astro';
+import Gallery from '../../components/work/shared/Gallery.astro';
+import GalleryDialog from '../../components/work/shared/GalleryDialog.astro';
+import BeforeAfterTable from '../../components/work/shared/BeforeAfterTable.astro';
+import IndustryCards from '../../components/work/shared/IndustryCards.astro';
+import TechChips from '../../components/work/shared/TechChips.astro';
+import ArchitectureDiagram from '../../components/work/shared/ArchitectureDiagram.astro';
+import Accordion from '../../components/work/shared/Accordion.astro';
+import NextStepBand from '../../components/work/shared/NextStepBand.astro';
+import MoreCaseStudies from '../../components/work/shared/MoreCaseStudies.astro';
+import AiChecksSection from '../../components/work/specific/AiChecksSection.astro';
+import ReportSection from '../../components/work/specific/ReportSection.astro';
+import GridBloomArchitecture from '../../components/work/diagrams/GridBloomArchitecture.astro';
+import type { GalleryItem } from '../../components/work/shared/gallery-types';
+import { site } from '../../config/site';
+import * as d from '../../data/work/gridbloom';
+import { caseStudy } from '../../lib/jsonld';
+
+const jsonLd = caseStudy({
+  name: d.hero.h1,
+  description: d.hero.lede,
+  path: '/work/gridbloom/',
+  crumb: d.hero.crumb,
+  image: d.meta.ogImage,
+});
+
+import imgDashboard from '../../assets/work/gridbloom/gridbloom-dashboard-pjm.jpg';
+import imgGaps from '../../assets/work/gridbloom/gridbloom-gaps-isone.jpg';
+import imgNyiso from '../../assets/work/gridbloom/gridbloom-nyiso-dark.jpg';
+import imgBriefing from '../../assets/work/gridbloom/gridbloom-briefing.jpg';
+import imgEmail from '../../assets/work/gridbloom/gridbloom-email.jpg';
+import imgEmailPhone from '../../assets/work/gridbloom/gridbloom-email-phone.jpg';
+
+const images: Record<string, ImageMetadata> = {
+  dashboard: imgDashboard,
+  gaps: imgGaps,
+  nyiso: imgNyiso,
+  briefing: imgBriefing,
+  email: imgEmail,
+  emailPhone: imgEmailPhone,
+};
+const gallery: GalleryItem[] = d.dashboard.gallery.map((g) => ({ ...g, image: images[g.key]! }));
+const mobileFigures = d.dashboard.mobileFigures.map((f) => ({ ...f, image: images[f.key]! }));
+---
+
+<Base
+  title={d.meta.title}
+  description={d.meta.description}
+  ogTitle={d.meta.ogTitle}
+  ogDescription={d.meta.ogDescription}
+  ogImage={d.meta.ogImage}
+  ogImageAlt={d.meta.ogImageAlt}
+  current="portfolio"
+  jsonLd={jsonLd}
+>
+  <CaseStudyHero
+    crumb={d.hero.crumb}
+    tags={d.hero.tags}
+    tagsMobile={d.hero.tagsMobile}
+    own
+    h1={d.hero.h1}
+    lede={d.hero.lede}
+    ledeMobile={d.hero.ledeMobile}
+    facts={d.hero.facts}
+    factsNoteMobile={d.hero.factsNoteMobile}
+  >
+    <Fragment slot="actions">
+      <Button href={site.bookingUrl} external>
+        Book a free consultation
+      </Button>
+      <Button href={d.hero.secondary.href} variant="secondary">
+        {d.hero.secondary.label}
+      </Button>
+    </Fragment>
+    <HeroFigure
+      slot="figure"
+      image={imgDashboard}
+      alt={d.hero.figure.alt}
+      altMobile={d.hero.figure.altMobile}
+      caption={d.hero.figure.caption}
+      captionMobile={d.hero.figure.captionMobile}
+      heightMobile={220}
+      position="top-left"
+    />
+    <JumpLinks slot="after" items={d.jumps} />
+  </CaseStudyHero>
+
+  <CaseSection id="overview" num={d.overview.num} title={d.overview.h2}>
+    <Fragment slot="intro">
+      {d.overview.body.map((p) => (
+        <p class="bp-desktop">{p}</p>
+      ))}
+      {d.overview.bodyMobile.map((p) => (
+        <p class="bp-mobile">{p}</p>
+      ))}
+    </Fragment>
+    <ChallengeCards items={d.overview.cards} />
+  </CaseSection>
+
+  <CaseSection id="journey" num={d.journey.num} title={d.journey.h2} paper>
+    <p slot="intro" class="bp-desktop">
+      {d.journey.intro}
+    </p>
+    <RouteJourney steps={d.journey.steps} label={d.journey.label} />
+    <Callout
+      class="bp-desktop gb-callout"
+      icon="alert"
+      title={d.journey.callout.title}
+      body={d.journey.callout.body}
+    />
+  </CaseSection>
+
+  <CaseSection id="dashboard" num={d.dashboard.num} title={d.dashboard.h2}>
+    <Fragment slot="intro">
+      {d.dashboard.body.map((p) => (
+        <p class="bp-desktop">{p}</p>
+      ))}
+      <p class="bp-mobile">{d.dashboard.bodyMobile}</p>
+    </Fragment>
+    <Gallery items={gallery} count={4} label={d.dashboard.galleryLabel} />
+    <ul class="gb-mfigs bp-mobile" role="list">
+      {mobileFigures.map((f) => (
+        <li>
+          <figure>
+            <div class:list={['gb-mfig__frame', f.ratio === '4/5' ? 'is-45' : 'is-1611']}>
+              <Picture
+                src={f.image}
+                alt={f.alt}
+                formats={['avif', 'webp']}
+                widths={[400, 800]}
+                sizes="calc(100vw - 32px)"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="gb-mfig__caption">
+              <strong>{f.title}</strong>
+              {` ${f.caption}`}
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </CaseSection>
+
+  <AiChecksSection />
+  <ReportSection />
+
+  <CaseSection id="results" num={d.results.num} title={d.results.h2} paper stacked>
+    <BeforeAfterTable
+      caption={d.results.tableCaption}
+      columns={d.results.columns}
+      rows={d.results.rows}
+      mobileCards={d.results.mobileCards}
+    />
+    <Responsive as="p" class="gb-note" text={d.results.note} textMobile={d.results.noteMobile} />
+  </CaseSection>
+
+  <CaseSection id="elsewhere" num={d.elsewhere.num} title={d.elsewhere.h2}>
+    <Fragment slot="intro">
+      <p class="bp-desktop">
+        <RichText segments={d.elsewhere.intro} />
+      </p>
+      <p class="bp-mobile">{d.elsewhere.introMobile}</p>
+    </Fragment>
+    <IndustryCards items={d.elsewhere.cards} />
+  </CaseSection>
+
+  <CaseSection id="technical" num={d.technical.num} title={d.technical.h2} paper>
+    <TechChips slot="intro" items={d.technical.chips} itemsMobile={d.technical.chipsMobile} />
+    <ArchitectureDiagram caption={d.technical.diagramCaption} hideMobile>
+      <GridBloomArchitecture />
+    </ArchitectureDiagram>
+    <div class="gb-accordions bp-desktop">
+      {d.technical.accordions.map((a) => (
+        <Accordion title={a.title}>
+          {'leads' in a &&
+            a.leads?.map((x) => (
+              <p>
+                <strong>{x.lead}</strong>
+                {x.text}
+              </p>
+            ))}
+          {'paragraphs' in a && a.paragraphs?.map((p) => <p>{p}</p>)}
+        </Accordion>
+      ))}
+    </div>
+    <div class="gb-accordions bp-mobile">
+      {d.technical.mobileAccordions.map((a) => (
+        <Accordion title={a.title}>
+          <p>{a.text}</p>
+        </Accordion>
+      ))}
+    </div>
+  </CaseSection>
+
+  <NextStepBand h2={d.next.h2} body={d.next.body} bodyMobile={d.next.bodyMobile} />
+  <MoreCaseStudies current="gridbloom" />
+  <GalleryDialog items={gallery} />
+</Base>
+
+<style>
+  :global(.gb-callout) {
+    margin-top: var(--space-6);
+  }
+
+  .gb-mfigs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+
+  .gb-mfig__frame {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+
+  .gb-mfig__frame.is-45 {
+    aspect-ratio: 4 / 5;
+  }
+
+  .gb-mfig__frame.is-1611 {
+    aspect-ratio: 16 / 11;
+  }
+
+  .gb-mfig__frame :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .gb-mfig__frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .gb-mfig__caption {
+    margin-top: var(--space-2);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--text-muted);
+  }
+
+  .gb-mfig__caption strong {
+    color: var(--ink);
+  }
+
+  :global(.gb-note) {
+    max-width: 52em;
+    margin-top: var(--space-6);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .gb-accordions {
+    margin-top: 40px;
+  }
+
+  @media (max-width: 767px) {
+    .gb-accordions {
+      margin-top: var(--space-6);
+    }
+  }
+</style>

@@ -1,0 +1,178 @@
+---
+/**
+ * PaperPage: illustration of a generated Word page in Source Serif 4
+ * (03-design-system.md, PaperPage; content/work/quotes-library.md; content/portfolio.md).
+ * With `label` it stands for an image (role="img" + aria-label, fragments not read);
+ * without it, it carries real content (the before/after entry) and is read as text.
+ * Pages using it must import @fontsource/source-serif-4 (400, 400 italic, 600).
+ */
+import type { PaperEntry } from './paper-types';
+
+interface Props {
+  entries: PaperEntry[];
+  size: 'card' | 'hero' | 'entry';
+  label?: string;
+  class?: string;
+}
+const { entries, size, label, class: className } = Astro.props;
+---
+
+<div
+  class:list={['paper', `paper--${size}`, className]}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+>
+  {entries.map((e) => (
+    <>
+      {e.letter && <p class="paper__letter">{e.letter}</p>}
+      <p class="paper__author">{e.author}</p>
+      {e.quotes.map((q) => (
+        <>
+          <p class="paper__quote">“{q.text}”</p>
+          <p class="paper__cats">{q.categories}</p>
+        </>
+      ))}
+    </>
+  ))}
+</div>
+
+<style>
+  .paper {
+    background: var(--surface);
+    border: 1px solid #d5d9e6;
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: #1a1a2e;
+  }
+
+  .paper__letter {
+    margin: 18px 0 6px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .paper__letter:first-child {
+    margin-top: 0;
+  }
+
+  .paper__author {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .paper__quote {
+    font-style: italic;
+  }
+
+  .paper__cats {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--electric);
+  }
+
+  /* Card (Portfolio): 78% wide, small. */
+  .paper--card {
+    width: 78%;
+    padding: 16px 20px;
+    border-radius: 3px;
+    box-shadow: 0 6px 18px rgba(30, 58, 138, 0.12);
+  }
+
+  .paper--card .paper__author {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .paper--card .paper__quote {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .paper--card .paper__cats {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 14px;
+  }
+
+  /* Hero page. */
+  .paper--hero {
+    max-width: 440px;
+    margin-inline: auto;
+    padding: 40px 44px;
+    border-radius: 4px;
+    box-shadow:
+      0 1px 2px rgba(15, 15, 35, 0.06),
+      0 12px 32px rgba(30, 58, 138, 0.12);
+  }
+
+  .paper--hero .paper__author {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .paper--hero .paper__quote {
+    margin-top: 4px;
+    font-size: 17px;
+    line-height: 27px;
+  }
+
+  .paper--hero .paper__cats,
+  .paper--entry .paper__cats {
+    margin: 4px 0 14px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .paper--hero .paper__cats:last-child,
+  .paper--entry .paper__cats:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Before/after entry. */
+  .paper--entry {
+    padding: 24px 28px;
+    border-radius: 4px;
+    box-shadow: var(--shadow-figure);
+  }
+
+  .paper--entry .paper__author {
+    font-size: 19px;
+    line-height: 26px;
+  }
+
+  .paper--entry .paper__quote {
+    margin-top: 4px;
+    font-size: 16px;
+    line-height: 25px;
+  }
+
+  @media (max-width: 767px) {
+    .paper--card {
+      width: 82%;
+      padding: 14px 16px;
+    }
+
+    .paper--hero {
+      padding: 20px 22px;
+    }
+
+    .paper--hero .paper__author {
+      font-size: 18px;
+      line-height: 25px;
+    }
+
+    .paper--hero .paper__quote {
+      font-size: 15px;
+      line-height: 23px;
+    }
+
+    .paper--entry {
+      padding: 18px 20px;
+    }
+  }
+</style>

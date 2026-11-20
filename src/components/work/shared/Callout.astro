@@ -1,0 +1,107 @@
+---
+/**
+ * Callout with an accent hexagon icon (03-design-system.md, Callout variants).
+ * Icons: person, alert (exclamation in a circle), check, lines. All aria-hidden.
+ */
+import RichText from '../../ui/RichText.astro';
+import type { Segment } from '../../../data/types';
+
+interface Props {
+  icon: 'person' | 'alert' | 'check' | 'lines';
+  title: string;
+  body: Segment[] | string;
+  /** Phone text; when set, the phone version is a plain pink-bordered card without the icon. */
+  bodyMobile?: string;
+  class?: string;
+}
+const { icon, title, body, bodyMobile, class: className } = Astro.props;
+---
+
+<div class:list={['callout', className]}>
+  <span class:list={['callout__hex', bodyMobile && 'bp-desktop']} aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      focusable="false"
+    >
+      {icon === 'person' && (
+        <>
+          <circle cx="12" cy="8" r="3.5" />
+          <path d="M5 20c1.2-3.6 4-5.5 7-5.5s5.8 1.9 7 5.5" />
+        </>
+      )}
+      {icon === 'alert' && (
+        <>
+          <circle cx="12" cy="12" r="8.5" />
+          <path d="M12 7.5v5.5M12 16.2v.3" />
+        </>
+      )}
+      {icon === 'check' && <path d="M5 12.5l4.5 4.5L19 7.5" />}
+      {icon === 'lines' && <path d="M4 7h16M4 12h10M4 17h7" />}
+    </svg>
+  </span>
+  <div>
+    <h3 class="callout__title">{title}</h3>
+    <p class="callout__body">
+      {bodyMobile ? (
+        <>
+          <span class="bp-desktop">
+            <RichText segments={body} />
+          </span>
+          <span class="bp-mobile">{bodyMobile}</span>
+        </>
+      ) : (
+        <RichText segments={body} />
+      )}
+    </p>
+  </div>
+</div>
+
+<style>
+  .callout {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--pink-soft-line);
+    border-radius: var(--radius-lg);
+  }
+
+  .callout__hex {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 40px;
+    background: var(--accent-text);
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    color: var(--on-navy);
+  }
+
+  .callout__title {
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+
+  .callout__body {
+    margin-top: var(--space-1);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-strong-muted);
+  }
+
+  @media (max-width: 767px) {
+    .callout {
+      padding: var(--space-4);
+    }
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+/** Privacy (content/privacy.md). Text-led, prose column 680 px, compact footer. */
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import RichText from '../components/ui/RichText.astro';
+import { meta, intro, sections, returnLink } from '../data/privacy';
+import { privacyLastUpdated } from '../config/site';
+
+// Last updated date lives in src/config/site.ts (OI-05).
+const updated = privacyLastUpdated ?? intro.launchPlaceholder;
+---
+
+<Base title={meta.title} description={meta.description}>
+  <article class="container container--prose privacy" aria-labelledby="privacy-h">
+    <Eyebrow>{intro.eyebrow}</Eyebrow>
+    <h1 id="privacy-h" class="privacy__h1">
+      {intro.h1}
+    </h1>
+    <p class="privacy__meta">{`${intro.updatedPrefix} ${updated}`}</p>
+    <p class="privacy__lede">{intro.lede}</p>
+
+    {sections.map((s) => (
+      <section class="privacy__section" aria-labelledby={`p-${s.id}`}>
+        <h2 id={`p-${s.id}`}>{s.h2}</h2>
+        {s.paragraphs?.map((p) => (
+          <p>
+            <RichText segments={p} />
+          </p>
+        ))}
+        {s.list && (
+          <ul>
+            {s.list.map((li) => (
+              <li>{li}</li>
+            ))}
+          </ul>
+        )}
+        {s.after?.map((p) => (
+          <p>
+            <RichText segments={p} />
+          </p>
+        ))}
+      </section>
+    ))}
+
+    <p class="privacy__return">
+      <a class="arrow-link" href={returnLink.href}>
+        {returnLink.label}
+      </a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .privacy {
+    padding-block: var(--space-18) 88px;
+  }
+
+  .privacy__h1 {
+    margin-top: var(--space-3);
+    font-size: 44px;
+    line-height: 52px;
+    letter-spacing: -0.01em;
+  }
+
+  .privacy__meta {
+    margin-top: var(--space-4);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-muted);
+  }
+
+  .privacy__lede {
+    margin-top: var(--space-4);
+  }
+
+  .privacy__section {
+    margin-top: 40px;
+  }
+
+  .privacy__section h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .privacy__section p,
+  .privacy__section ul {
+    margin-top: var(--space-3);
+  }
+
+  .privacy__section ul {
+    padding-left: 22px;
+  }
+
+  .privacy__section li + li {
+    margin-top: var(--space-1);
+  }
+
+  .privacy__return {
+    margin-top: 40px;
+  }
+
+  .privacy__return a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  @media (max-width: 767px) {
+    .privacy {
+      padding-block: 40px 56px;
+    }
+
+    .privacy__h1 {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .privacy__section h2 {
+      font-size: 22px;
+      line-height: 30px;
+    }
+  }
+</style>

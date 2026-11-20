@@ -1,0 +1,139 @@
+---
+/** Home hero (content/home.md, Hero; mobile: hex list dropped, 4:3 figure, short caption). */
+import Eyebrow from '../ui/Eyebrow.astro';
+import Button from '../ui/Button.astro';
+import HexMarker from '../ui/HexMarker.astro';
+import MediaFigure from '../ui/MediaFigure.astro';
+import Responsive from '../ui/Responsive.astro';
+import routeTable from '../../assets/work/freight/freight-route-table.jpg';
+import { hero } from '../../data/home';
+---
+
+<section class="hero" aria-labelledby="hero-h">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <Eyebrow>{hero.eyebrow}</Eyebrow>
+      <h1 id="hero-h" class="hero__h1">
+        {hero.h1}
+      </h1>
+      <p class="hero__lede">{hero.lede}</p>
+      <div class="hero__ctas">
+        <Button href={hero.primary.href} block="mobile">
+          {hero.primary.label}
+        </Button>
+        <Button href={hero.secondary.href} variant="secondary" block="mobile">
+          {hero.secondary.label}
+        </Button>
+      </div>
+      <ul class="hero__hexes bp-desktop">
+        {hero.hexList.map((item) => (
+          <li>
+            <HexMarker />
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <MediaFigure
+      class="hero__figure"
+      src={routeTable}
+      alt={hero.figure.alt}
+      widths={[480, 640, 960, 1280, 1440]}
+      sizes="(min-width: 1232px) 612px, (min-width: 960px) 50vw, calc(100vw - 32px)"
+      ratio="16/10"
+      ratioMobile="4/3"
+      position="top-left"
+      tag={hero.figure.tag}
+      eager
+    >
+      <Responsive text={hero.figure.caption} textMobile={hero.figure.captionMobile} />
+    </MediaFigure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: 80px var(--space-section);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 68px;
+  }
+
+  .hero__h1 {
+    margin-top: var(--space-6);
+    max-width: 15ch;
+    font-size: 56px;
+    line-height: 62px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero__lede {
+    margin-top: var(--space-6);
+    font-size: 19px;
+    line-height: 30px;
+    max-width: 34em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+  }
+
+  .hero__hexes {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    margin-top: var(--space-8);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .hero__hexes li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  @media (max-width: 959px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-12);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      padding-block: 40px;
+    }
+
+    .hero__grid {
+      gap: var(--space-8);
+    }
+
+    .hero__h1 {
+      margin-top: var(--space-4);
+      font-size: 34px;
+      line-height: 40px;
+    }
+
+    .hero__lede {
+      margin-top: var(--space-4);
+      font-size: 17px;
+      line-height: 27px;
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+      margin-top: var(--space-6);
+    }
+  }
+</style>

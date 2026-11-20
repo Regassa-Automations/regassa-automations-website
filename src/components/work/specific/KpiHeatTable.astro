@@ -1,0 +1,182 @@
+---
+/**
+ * KPI heat table (content/work/pr-pipeline-sync.md): staff by client, open opportunities.
+ * Heat colors are page-scoped; every cell shows its number, so color never carries meaning alone.
+ * Column headers may be abbreviated with a full title (phone version).
+ */
+import ScrollRegion from '../shared/ScrollRegion.astro';
+
+interface Col {
+  label: string;
+  full?: string;
+}
+interface Row {
+  name: string;
+  total: number;
+  cells: Array<[number, 0 | 1 | 2 | 3 | 4]>;
+}
+interface Props {
+  caption: string;
+  staffLabel: string;
+  totalLabel: string;
+  columns: Col[];
+  rows: Row[];
+  totals: { total: number; cells: number[] };
+  compact?: boolean;
+  /** Desktop and phone versions share a label; only one is ever displayed. */
+  pairedDuplicate?: boolean;
+}
+const {
+  caption,
+  staffLabel,
+  totalLabel,
+  columns,
+  rows,
+  totals,
+  compact = false,
+  pairedDuplicate = false,
+} = Astro.props;
+---
+
+<div class:list={['kpi', compact && 'kpi--compact']}>
+  <ScrollRegion label={caption} pairedDuplicate={pairedDuplicate}>
+    <table>
+      <caption>{caption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">
+            <span class="visually-hidden">{staffLabel}</span>
+          </th>
+          <th scope="col">{totalLabel}</th>
+          {columns.map((c) => (
+            <th scope="col">{c.full ? <abbr title={c.full}>{c.label}</abbr> : c.label}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <th scope="row">{r.name}</th>
+            <td class="is-tot">{r.total}</td>
+            {r.cells.map(([v, h]) => (
+              <td class={`h${h}`}>{v}</td>
+            ))}
+          </tr>
+        ))}
+        <tr class="is-total-row">
+          <th scope="row">{totalLabel}</th>
+          <td class="is-tot">{totals.total}</td>
+          {totals.cells.map((v) => (
+            <td class="is-tot">{v}</td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  </ScrollRegion>
+</div>
+
+<style>
+  .kpi {
+    /* Page-scoped heat colors (content/work/pr-pipeline-sync.md). */
+    /* Spec gives #A9B0C8 for zero cells; that fails 4.5:1 on white, so zeros use --text-muted. */
+    --heat-0: var(--text-muted);
+    --heat-1: #eef1fc;
+    --heat-2: #d9e0fa;
+    --heat-3: #b9c6f5;
+  }
+
+  .kpi :global(.scroll-region) {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  caption {
+    padding: 10px 14px;
+    background: var(--surface-paper);
+    border-bottom: 1px solid var(--line);
+    font-weight: 600;
+    text-align: left;
+    color: var(--text-strong-muted);
+  }
+
+  thead th {
+    padding: 8px 10px;
+    background: var(--navy);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--on-navy);
+    white-space: nowrap;
+  }
+
+  thead abbr {
+    text-decoration: none;
+  }
+
+  tbody th {
+    padding: 8px 10px;
+    background: var(--surface-paper);
+    border: 1px solid var(--line);
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .h0 {
+    color: var(--heat-0);
+  }
+
+  .h1 {
+    background: var(--heat-1);
+  }
+
+  .h2 {
+    background: var(--heat-2);
+  }
+
+  .h3 {
+    background: var(--heat-3);
+  }
+
+  .h4 {
+    background: var(--electric);
+    color: var(--on-electric);
+    font-weight: 600;
+  }
+
+  .is-tot {
+    background: var(--error-bg);
+    font-weight: 700;
+    color: var(--error-inline);
+  }
+
+  .kpi--compact table {
+    font-size: 12px;
+  }
+
+  .kpi--compact thead th {
+    padding: 6px 5px;
+    font-size: 11px;
+    line-height: 14px;
+  }
+
+  .kpi--compact tbody th,
+  .kpi--compact tbody td {
+    padding: 6px 5px;
+  }
+</style>

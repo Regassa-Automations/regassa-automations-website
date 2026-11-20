@@ -1,0 +1,122 @@
+---
+/** Home "Featured project" (#featured). Phone: intro dropped, compact step rows, one figure. */
+import SectionHeading from '../ui/SectionHeading.astro';
+import Tag from '../ui/Tag.astro';
+import Button from '../ui/Button.astro';
+import MediaFigure from '../ui/MediaFigure.astro';
+import Responsive from '../ui/Responsive.astro';
+import WorkflowSteps from './WorkflowSteps.astro';
+import routeTable from '../../assets/work/freight/freight-route-table.jpg';
+import rateSheetP1 from '../../assets/work/freight/freight-rate-sheet-p1.png';
+import { featured } from '../../data/home';
+
+const [fig1, fig2] = featured.figures;
+const figSizes = '(min-width: 1232px) 588px, (min-width: 768px) 48vw, calc(100vw - 32px)';
+---
+
+<section id="featured" class="section section--home section--paper" aria-labelledby="featured-h">
+  <div class="container">
+    <SectionHeading
+      id="featured-h"
+      eyebrow={featured.eyebrow}
+      focusTarget
+      class="featured__heading"
+    >
+      {featured.h2}
+    </SectionHeading>
+    <div class="featured__introrow">
+      <p class="featured__intro bp-desktop">{featured.intro}</p>
+      <Tag hex class="featured__tag">
+        <Responsive text={featured.tag} textMobile={featured.tagMobile} />
+      </Tag>
+    </div>
+
+    <WorkflowSteps label={featured.stepsLabel} steps={featured.steps} />
+
+    <div class="featured__figures">
+      {fig1 && (
+        <MediaFigure
+          src={routeTable}
+          alt={fig1.alt}
+          widths={[480, 640, 960, 1200]}
+          sizes={figSizes}
+          ratio="16/10"
+          ratioMobile="4/3"
+          position="top-left"
+        >
+          <span class="bp-desktop">{fig1.caption}</span>
+        </MediaFigure>
+      )}
+      {fig2 && (
+        <MediaFigure
+          class="bp-desktop"
+          src={rateSheetP1}
+          alt={fig2.alt}
+          widths={[480, 640, 960, 1200]}
+          sizes={figSizes}
+          ratio="16/10"
+          position="top"
+        >
+          {`${fig2.caption} `}
+          {fig2.link && <a href={fig2.link.href}>{fig2.link.label}</a>}
+        </MediaFigure>
+      )}
+    </div>
+
+    <Button href={featured.button.href} variant="secondary" block="mobile" class="featured__cta">
+      {featured.button.label}
+    </Button>
+  </div>
+</section>
+
+<style>
+  .featured__heading {
+    max-width: 680px;
+  }
+
+  .featured__introrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4) var(--space-8);
+    margin-top: var(--space-4);
+  }
+
+  .featured__intro {
+    max-width: 42em;
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .featured__figures {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  .featured :global(.featured__cta),
+  .container > :global(.featured__cta) {
+    margin-top: var(--space-8);
+  }
+
+  @media (max-width: 767px) {
+    .featured__introrow {
+      margin-top: var(--space-4);
+    }
+
+    .featured__figures {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: var(--space-4);
+    }
+
+    .featured__figures :global(.media-figure__caption) {
+      display: none;
+    }
+
+    .container > :global(.featured__cta) {
+      margin-top: var(--space-4);
+    }
+  }
+</style>

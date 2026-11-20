@@ -1,0 +1,116 @@
+---
+/** One service column with a 3 px colored top rule (navy, electric, accent text). */
+import HexMarker from '../ui/HexMarker.astro';
+import type { Service } from '../../data/home';
+
+interface Props extends Service {
+  addressesLabel: string;
+  relatedLabel: string;
+}
+const {
+  title,
+  description,
+  descriptionMobile,
+  addresses,
+  related,
+  rule,
+  addressesLabel,
+  relatedLabel,
+} = Astro.props;
+---
+
+<li class:list={['service', `service--${rule}`]}>
+  <h3 class="service__title">{title}</h3>
+  <p class="service__desc">
+    <span class="bp-desktop">{description}</span>
+    <span class="bp-mobile">{descriptionMobile}</span>
+  </p>
+  <div class="bp-desktop">
+    <p class="service__label">{addressesLabel}</p>
+    <ul class="hex-list service__list">
+      {addresses.map((a) => (
+        <li>
+          <HexMarker />
+          {a}
+        </li>
+      ))}
+    </ul>
+  </div>
+  <p class="service__related">
+    {relatedLabel}{' '}
+    {related.map((link, i) => (
+      <span class:list={[i > 0 && 'bp-desktop']}>
+        {i > 0 && ', '}
+        <a href={link.href}>{link.label}</a>
+      </span>
+    ))}
+  </p>
+</li>
+
+<style>
+  .service {
+    padding-top: var(--space-8);
+    border-top: 3px solid var(--navy);
+  }
+
+  .service--electric {
+    border-top-color: var(--electric);
+  }
+
+  .service--accent {
+    border-top-color: var(--accent-text);
+  }
+
+  .service__title {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .service__desc {
+    margin-top: var(--space-3);
+  }
+
+  .service__label {
+    margin-top: var(--space-6);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .service__list {
+    margin-top: var(--space-3);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .service__related {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  @media (max-width: 767px) {
+    .service {
+      padding-top: var(--space-6);
+    }
+
+    .service__title {
+      font-size: 19px;
+      line-height: 26px;
+    }
+
+    .service__desc {
+      margin-top: var(--space-2);
+      font-size: 15px;
+      line-height: 24px;
+    }
+
+    .service__related {
+      margin-top: var(--space-2);
+    }
+  }
+</style>

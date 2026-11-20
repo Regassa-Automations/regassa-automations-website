@@ -1,0 +1,95 @@
+---
+/** "Other industries" cards. Phone: 2-column grid of label + title only. */
+import Responsive from '../../ui/Responsive.astro';
+
+interface Item {
+  label: string;
+  labelMobile?: string;
+  title: string;
+  titleMobile?: string;
+  text: string;
+}
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<ul class="icards" role="list">
+  {items.map((i) => (
+    <li class="icard">
+      <p class="icard__label mono">
+        <Responsive text={i.label} textMobile={i.labelMobile} />
+      </p>
+      <h3 class="icard__title">
+        <Responsive text={i.title} textMobile={i.titleMobile} />
+      </h3>
+      <p class="icard__text bp-desktop">{i.text}</p>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .icards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: 40px;
+  }
+
+  .icard {
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .icard__label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--electric);
+  }
+
+  .icard__title {
+    margin-top: var(--space-3);
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--ink);
+  }
+
+  .icard__text {
+    margin-top: var(--space-2);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-strong-muted);
+  }
+
+  @media (max-width: 959px) {
+    .icards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .icards {
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .icard {
+      padding: 14px;
+    }
+
+    .icard__label {
+      font-size: 10px;
+      line-height: 14px;
+    }
+
+    .icard__title {
+      margin-top: var(--space-1);
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+</style>

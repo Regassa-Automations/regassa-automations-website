@@ -1,0 +1,243 @@
+---
+/**
+ * GridBloom architecture diagram, copied from content/work/gridbloom.md (marker id ah-gb).
+ * Drawing unchanged; the inline style attribute moved to CSS (ArchitectureDiagram) for the CSP.
+ */
+---
+
+<svg
+  focusable="false"
+  role="img"
+  aria-label="Architecture: EIA API and EIA bulk data are imported with provenance into a local SQLite database. A metrics library applies the versioned metric policy and feeds a read-only API, which serves the React dashboard. On request, a local briefing service sends approved facts to the OpenAI API, checks the reply and saves it in a separate cache. A scheduled email report reads the metrics, saved briefings and pipeline status."
+  viewBox="0 0 960 400"
+>
+  <defs>
+    <marker
+      id="ah-gb"
+      viewBox="0 0 10 10"
+      refX="9"
+      refY="5"
+      markerWidth="8"
+      markerHeight="8"
+      orient="auto-start-reverse"
+    >
+      <path d="M0 0L10 5L0 10z" fill="#5A6283" />
+    </marker>
+  </defs>
+  <text x="8" y="16" font-size="11" font-weight="600" letter-spacing="1.5" fill="#5A6283">
+    PUBLIC SOURCES
+  </text>
+  <rect x="8" y="30" width="170" height="64" rx="8" fill="#F6F7FB" stroke="#A9B0C8" />
+  <text x="93" y="58" text-anchor="middle" font-size="14" font-weight="600" fill="#0F0F23">
+    EIA API
+  </text>
+  <text x="93" y="78" text-anchor="middle" font-size="12" fill="#5A6283">
+    Hourly pulls
+  </text>
+  <rect x="8" y="114" width="170" height="64" rx="8" fill="#F6F7FB" stroke="#A9B0C8" />
+  <text x="93" y="142" text-anchor="middle" font-size="14" font-weight="600" fill="#0F0F23">
+    EIA bulk extract
+  </text>
+  <text x="93" y="162" text-anchor="middle" font-size="12" fill="#5A6283">
+    Six months of history
+  </text>
+  <rect
+    x="232"
+    y="30"
+    width="430"
+    height="200"
+    rx="10"
+    fill="#FFFFFF"
+    stroke="#1E3A8A"
+    stroke-width="2"
+  />
+  <text
+    x="447"
+    y="56"
+    text-anchor="middle"
+    font-size="15"
+    font-weight="700"
+    fill="#1E3A8A"
+    font-family="Montserrat, Arial, sans-serif"
+  >
+    Runs locally
+  </text>
+  <rect x="252" y="72" width="120" height="64" rx="6" fill="#E8ECFB" />
+  <text x="312" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#1E3A8A">
+    Import
+  </text>
+  <text x="312" y="118" text-anchor="middle" font-size="11" fill="#5A6283">
+    with provenance
+  </text>
+  <rect x="388" y="72" width="120" height="64" rx="6" fill="#E8ECFB" />
+  <text x="448" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#1E3A8A">
+    SQLite
+  </text>
+  <text x="448" y="118" text-anchor="middle" font-size="11" fill="#5A6283">
+    observations
+  </text>
+  <rect x="524" y="72" width="120" height="64" rx="6" fill="#E8ECFB" />
+  <text x="584" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#1E3A8A">
+    Metrics
+  </text>
+  <text x="584" y="118" text-anchor="middle" font-size="11" fill="#5A6283">
+    + metric policy
+  </text>
+  <rect x="388" y="152" width="256" height="60" rx="6" fill="#E8ECFB" />
+  <text x="516" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="#1E3A8A">
+    Read-only API
+  </text>
+  <text x="516" y="196" text-anchor="middle" font-size="11" fill="#5A6283">
+    FastAPI; cannot change the data
+  </text>
+  <line
+    x1="182"
+    y1="62"
+    x2="248"
+    y2="98"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <line
+    x1="182"
+    y1="146"
+    x2="248"
+    y2="112"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <line
+    x1="374"
+    y1="104"
+    x2="384"
+    y2="104"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <line
+    x1="510"
+    y1="104"
+    x2="520"
+    y2="104"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <line
+    x1="584"
+    y1="138"
+    x2="584"
+    y2="148"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <rect x="772" y="140" width="180" height="80" rx="8" fill="#F6F7FB" stroke="#A9B0C8" />
+  <text x="862" y="174" text-anchor="middle" font-size="15" font-weight="600" fill="#0F0F23">
+    React dashboard
+  </text>
+  <text x="862" y="196" text-anchor="middle" font-size="12" fill="#5A6283">
+    Charts, tables, quality
+  </text>
+  <line
+    x1="648"
+    y1="182"
+    x2="768"
+    y2="182"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <rect
+    x="232"
+    y="290"
+    width="200"
+    height="80"
+    rx="8"
+    fill="#FFFFFF"
+    stroke="#1E3A8A"
+    stroke-width="1.5"
+  />
+  <text x="332" y="322" text-anchor="middle" font-size="14" font-weight="600" fill="#1E3A8A">
+    Briefing service
+  </text>
+  <text x="332" y="342" text-anchor="middle" font-size="12" fill="#5A6283">
+    Approved facts, checks
+  </text>
+  <rect x="8" y="290" width="170" height="80" rx="8" fill="#FDF1F5" stroke="#F3C6D7" />
+  <text x="93" y="322" text-anchor="middle" font-size="14" font-weight="600" fill="#A3174C">
+    OpenAI API
+  </text>
+  <text x="93" y="342" text-anchor="middle" font-size="12" fill="#5A6283">
+    External, on request
+  </text>
+  <line
+    x1="182"
+    y1="318"
+    x2="228"
+    y2="318"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-start="url(#ah-gb)"
+    marker-end="url(#ah-gb)"
+  />
+  <rect x="488" y="290" width="170" height="80" rx="8" fill="#F6F7FB" stroke="#A9B0C8" />
+  <text x="573" y="322" text-anchor="middle" font-size="14" font-weight="600" fill="#0F0F23">
+    Briefing cache
+  </text>
+  <text x="573" y="342" text-anchor="middle" font-size="12" fill="#5A6283">
+    Separate database
+  </text>
+  <line
+    x1="436"
+    y1="330"
+    x2="484"
+    y2="330"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <rect x="772" y="290" width="180" height="80" rx="8" fill="#F6F7FB" stroke="#A9B0C8" />
+  <text x="862" y="322" text-anchor="middle" font-size="15" font-weight="600" fill="#0F0F23">
+    Weekly email
+  </text>
+  <text x="862" y="342" text-anchor="middle" font-size="12" fill="#5A6283">
+    Scheduled report
+  </text>
+  <line
+    x1="662"
+    y1="330"
+    x2="768"
+    y2="330"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <line
+    x1="516"
+    y1="214"
+    x2="352"
+    y2="286"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <text x="410" y="262" font-size="12" fill="#5A6283">
+    metrics
+  </text>
+  <line
+    x1="640"
+    y1="214"
+    x2="800"
+    y2="286"
+    stroke="#5A6283"
+    stroke-width="1.5"
+    marker-end="url(#ah-gb)"
+  />
+  <text x="728" y="262" font-size="12" fill="#5A6283">
+    figures, pipeline
+  </text>
+</svg>

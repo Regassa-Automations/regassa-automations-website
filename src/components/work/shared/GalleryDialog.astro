@@ -1,0 +1,170 @@
+---
+/**
+ * Shared gallery dialog (native <dialog>, showModal()). One per page; holds every gallery item.
+ * Close button gets focus on open; Escape closes (native); ArrowLeft/Right move; focus returns
+ * to the opener. Rendered closed; without JS it is never shown (thumbnails link to the images).
+ */
+import { getImage } from 'astro:assets';
+import Tag from '../../ui/Tag.astro';
+import type { GalleryItem } from './gallery-types';
+
+interface Props {
+  items: GalleryItem[];
+  tag?: string;
+}
+const { items, tag } = Astro.props;
+const full = await Promise.all(
+  items.map((i) =>
+    getImage({ src: i.image, format: 'webp', width: Math.min(i.image.width, 1600) }),
+  ),
+);
+---
+
+<dialog class="gdialog" id="gallery-dialog" aria-labelledby="gd-title" data-gallery-dialog>
+  <div class="gdialog__inner">
+    <div class="gdialog__bar">
+      <h2 class="gdialog__title" id="gd-title">
+        {items[0]?.title}
+      </h2>
+      <button type="button" class="btn btn--secondary btn--sm gdialog__close" data-gallery-close>
+        Close
+      </button>
+    </div>
+    <div class="gdialog__items">
+      {items.map((item, i) => (
+        <figure
+          class="gdialog__item"
+          data-gallery-item={i}
+          data-title={item.title}
+          data-max={item.maxWidth}
+          hidden={i !== 0}
+        >
+          <img
+            src={full[i]!.src}
+            width={full[i]!.attributes.width ?? item.image.width}
+            height={full[i]!.attributes.height ?? item.image.height}
+            alt={item.alt}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption class="gdialog__caption">
+            {tag && <Tag hex>{tag}</Tag>} {item.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <div class="gdialog__nav">
+      <button
+        type="button"
+        class="btn btn--secondary btn--sm"
+        data-gallery-prev
+        aria-label="Previous image"
+      >
+        <span aria-hidden="true">←</span>
+      </button>
+      <p class="gdialog__pos" aria-live="polite" data-gallery-pos>
+        1 of {items.length}
+      </p>
+      <button
+        type="button"
+        class="btn btn--secondary btn--sm"
+        data-gallery-next
+        aria-label="Next image"
+      >
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import '../../../scripts/gallery';
+</script>
+
+<style>
+  .gdialog {
+    width: min(1100px, calc(100vw - 32px));
+    max-height: calc(100vh - 32px);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .gdialog::backdrop {
+    background: rgba(15, 15, 35, 0.86);
+  }
+
+  .gdialog__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 20px 24px 24px;
+  }
+
+  .gdialog__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .gdialog__title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .gdialog__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gdialog__item[hidden] {
+    display: none;
+  }
+
+  .gdialog__item img {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 260px);
+    object-fit: contain;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+
+  .gdialog__caption {
+    align-self: stretch;
+    margin-top: var(--space-3);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .gdialog__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .gdialog__pos {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 767px) {
+    .gdialog {
+      width: 100vw;
+      max-width: 100vw;
+      height: 100vh;
+      max-height: 100vh;
+      border-radius: 0;
+    }
+
+    .gdialog__inner {
+      padding: var(--space-4);
+    }
+  }
+</style>

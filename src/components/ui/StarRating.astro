@@ -1,0 +1,20 @@
+---
+/** Five stars announced as "Rated 5 out of 5" (05-accessibility.md). Color comes from the parent. */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<span class:list={['stars', className]} role="img" aria-label="Rated 5 out of 5">
+  ★★★★★
+</span>
+
+<style>
+  .stars {
+    display: inline-block;
+    letter-spacing: 2px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+</style>

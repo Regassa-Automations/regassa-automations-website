@@ -1,0 +1,279 @@
+---
+/** Portfolio (content/portfolio.md; phone: content/mobile/portfolio-mobile.md). */
+import '@fontsource/source-serif-4/400.css';
+import '@fontsource/source-serif-4/400-italic.css';
+import '@fontsource/source-serif-4/600.css';
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Button from '../../components/ui/Button.astro';
+import Responsive from '../../components/ui/Responsive.astro';
+import WideCard from '../../components/portfolio/WideCard.astro';
+import ProjectCard from '../../components/home/ProjectCard.astro';
+import PrSyncDiagram from '../../components/work/shared/PrSyncDiagram.astro';
+import VolunteerDiagram from '../../components/work/shared/VolunteerDiagram.astro';
+import PaperPage from '../../components/work/specific/PaperPage.astro';
+import routeTable from '../../assets/work/freight/freight-route-table.jpg';
+import dashboard from '../../assets/work/gridbloom/gridbloom-dashboard-pjm.jpg';
+import { meta, intro, labels, cards, quotesCardIllustration, cta } from '../../data/portfolio';
+
+const projects = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const wide = projects.filter((p) => p.data.portfolioLayout === 'wide');
+const grid = projects.filter((p) => p.data.portfolioLayout === 'grid');
+const images: Record<string, ImageMetadata> = {
+  'freight-rate-sheet-generator': routeTable,
+  gridbloom: dashboard,
+};
+
+const pairsFor = (slug: string, problem: string, built: string) => [
+  { label: labels.problem, text: problem, textMobile: cards[slug]?.problemMobile },
+  { label: labels.built, text: built, textMobile: cards[slug]?.builtMobile },
+];
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  ogTitle={meta.ogTitle}
+  ogDescription={meta.ogDescription}
+  ogImage={meta.ogImage}
+  ogImageAlt={meta.ogImageAlt}
+  current="portfolio"
+>
+  <section class="container pf-intro" aria-labelledby="pf-h">
+    <Eyebrow>{intro.eyebrow}</Eyebrow>
+    <h1 id="pf-h" class="pf-intro__h1">
+      {intro.h1}
+    </h1>
+    <Responsive as="p" class="pf-intro__lede" text={intro.lede} textMobile={intro.ledeMobile} />
+  </section>
+
+  <section class="container pf-projects" aria-label={labels.projects}>
+    <ul class="pf-wide" role="list">
+      {wide.map((p) => {
+        const extra = cards[p.data.slug];
+        const image = images[p.data.slug];
+        return (
+          image && (
+            <li>
+              <WideCard
+                href={`/work/${p.data.slug}/`}
+                title={p.data.portfolioCardTitle}
+                tag={p.data.tags[0] ?? ''}
+                tagMobile={extra?.tagMobile}
+                featured={p.data.featured ? labels.featured : undefined}
+                own={p.data.ownProject}
+                image={image}
+                alt={extra?.alt ?? ''}
+                altMobile={extra?.altMobile}
+                caption={extra?.caption}
+                framed={p.data.slug === 'gridbloom'}
+                pairs={pairsFor(p.data.slug, p.data.problem, p.data.built)}
+                linkLine={labels.linkLine}
+                navyMobile={p.data.featured}
+              />
+            </li>
+          )
+        );
+      })}
+    </ul>
+
+    <ul class="pf-grid" role="list">
+      {grid.map((p) => (
+        <li>
+          <ProjectCard
+            href={`/work/${p.data.slug}/`}
+            title={p.data.portfolioCardTitle}
+            tag={p.data.tags[0] ?? ''}
+            tagMobile={cards[p.data.slug]?.tagMobile}
+            own={p.data.ownProject}
+            pairs={pairsFor(p.data.slug, p.data.problem, p.data.built)}
+            linkLine={labels.linkLine}
+            mediaRatio="16/9"
+            headingLevel={2}
+          >
+            {p.data.slug === 'pr-pipeline-sync' && <PrSyncDiagram slot="media" />}
+            {p.data.slug === 'volunteer-rosters' && <VolunteerDiagram slot="media" />}
+            {p.data.slug === 'quotes-library' && (
+              <div slot="media" class="pf-paper">
+                <PaperPage
+                  size="card"
+                  label={quotesCardIllustration.label}
+                  entries={[
+                    {
+                      author: quotesCardIllustration.author,
+                      quotes: [
+                        {
+                          text: quotesCardIllustration.quote,
+                          categories: quotesCardIllustration.categories,
+                        },
+                      ],
+                    },
+                  ]}
+                />
+              </div>
+            )}
+          </ProjectCard>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="pf-cta section--paper" aria-labelledby="pf-cta-h">
+    <div class="container pf-cta__inner">
+      <div>
+        <h2 id="pf-cta-h" class="pf-cta__h2">
+          {cta.h2}
+        </h2>
+        <Responsive as="p" class="pf-cta__body" text={cta.body} textMobile={cta.bodyMobile} />
+      </div>
+      <Button href={cta.button.href} block="mobile">
+        {cta.button.label}
+      </Button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pf-intro {
+    padding-block: var(--space-18) 40px;
+  }
+
+  .pf-intro__h1 {
+    max-width: 18ch;
+    margin-top: var(--space-3);
+    font-size: 48px;
+    line-height: 54px;
+    letter-spacing: -0.01em;
+  }
+
+  .pf-intro :global(.pf-intro__lede) {
+    max-width: 38em;
+    margin-top: var(--space-4);
+    font-size: 18px;
+    line-height: 29px;
+  }
+
+  .pf-projects {
+    padding-bottom: var(--space-18);
+  }
+
+  .pf-wide,
+  .pf-grid {
+    list-style: none;
+  }
+
+  .pf-wide {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .pf-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+
+  .pf-grid > li {
+    display: flex;
+  }
+
+  .pf-grid > li > :global(*) {
+    flex: 1;
+  }
+
+  .pf-grid :global(.pcard__title) {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .pf-paper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+    background: var(--surface-paper);
+  }
+
+  .pf-cta {
+    padding-block: var(--space-18);
+    border-top: 1px solid var(--line);
+  }
+
+  .pf-cta__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6) var(--space-12);
+  }
+
+  .pf-cta__h2 {
+    max-width: 22ch;
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .pf-cta :global(.pf-cta__body) {
+    margin-top: var(--space-3);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  @media (max-width: 1119px) {
+    .pf-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .pf-intro {
+      padding-block: 40px var(--space-6);
+    }
+
+    .pf-intro__h1 {
+      font-size: 34px;
+      line-height: 40px;
+    }
+
+    .pf-intro :global(.pf-intro__lede) {
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .pf-projects {
+      padding-bottom: 40px;
+    }
+
+    .pf-wide,
+    .pf-grid {
+      gap: var(--space-4);
+    }
+
+    .pf-grid {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: var(--space-4);
+    }
+
+    .pf-grid :global(.pcard__title) {
+      font-size: 19px;
+      line-height: 26px;
+    }
+
+    .pf-cta {
+      padding-block: 40px;
+    }
+
+    .pf-cta__h2 {
+      font-size: 24px;
+      line-height: 31px;
+    }
+
+    .pf-cta__inner > :global(.btn) {
+      width: 100%;
+    }
+  }
+</style>

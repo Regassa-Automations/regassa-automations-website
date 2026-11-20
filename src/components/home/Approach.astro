@@ -1,0 +1,119 @@
+---
+/** Home "How a project runs" (#approach). Phone: vertical list with short lines. */
+import SectionHeading from '../ui/SectionHeading.astro';
+import { approach } from '../../data/home';
+---
+
+<section id="approach" class="section section--home section--paper" aria-labelledby="approach-h">
+  <div class="container">
+    <SectionHeading id="approach-h" eyebrow={approach.eyebrow} focusTarget>
+      {approach.h2}
+    </SectionHeading>
+    <ol class="approach__steps">
+      {approach.steps.map((s) => (
+        <li class="astep">
+          <span class="astep__num mono">{s.num}</span>
+          <div class="astep__body">
+            <h3 class="astep__title">{s.title}</h3>
+            <p class="astep__text">
+              <span class="bp-desktop">{s.text}</span>
+              <span class="bp-mobile">{s.textMobile}</span>
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <p class="approach__note">
+      <span class="bp-desktop">{approach.note}</span>
+      <span class="bp-mobile">{approach.noteMobile}</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .approach__steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-8);
+    margin-top: 40px;
+  }
+
+  .astep {
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .astep__num {
+    display: block;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--electric);
+  }
+
+  .astep__title {
+    margin-top: var(--space-3);
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--ink);
+  }
+
+  .astep__text {
+    margin-top: var(--space-3);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .approach__note {
+    max-width: 46em;
+    margin-top: 40px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 1119px) {
+    .approach__steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .approach__steps {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    .astep {
+      display: flex;
+      gap: var(--space-4);
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .astep__num {
+      flex: none;
+      line-height: 22px;
+    }
+
+    .astep__title {
+      margin-top: 0;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    .astep__text {
+      margin-top: 2px;
+      font-size: 14px;
+      line-height: 22px;
+      color: var(--text-strong-muted);
+    }
+
+    .approach__note {
+      margin-top: var(--space-6);
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+</style>

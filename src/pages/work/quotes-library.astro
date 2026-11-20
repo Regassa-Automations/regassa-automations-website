@@ -1,0 +1,513 @@
+---
+/**
+ * Case study: Quotes library (content/work/quotes-library.md;
+ * phone: content/mobile/quotes-library-mobile.md). Source Serif 4 loads only here and on Portfolio.
+ * Public-domain sample quotations only; the review comes from projects.yaml.
+ */
+import '@fontsource/source-serif-4/400.css';
+import '@fontsource/source-serif-4/400-italic.css';
+import '@fontsource/source-serif-4/600.css';
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/ui/Button.astro';
+import Responsive from '../../components/ui/Responsive.astro';
+import RichText from '../../components/ui/RichText.astro';
+import CaseStudyHero from '../../components/work/shared/CaseStudyHero.astro';
+import JumpLinks from '../../components/work/shared/JumpLinks.astro';
+import CaseSection from '../../components/work/shared/CaseSection.astro';
+import ChallengeCards from '../../components/work/shared/ChallengeCards.astro';
+import SheetMock from '../../components/work/shared/SheetMock.astro';
+import Callout from '../../components/work/shared/Callout.astro';
+import CycleSteps from '../../components/work/shared/CycleSteps.astro';
+import ReviewBand from '../../components/work/shared/ReviewBand.astro';
+import StatCards from '../../components/work/shared/StatCards.astro';
+import BeforeAfterTable from '../../components/work/shared/BeforeAfterTable.astro';
+import IndustryCards from '../../components/work/shared/IndustryCards.astro';
+import TechChips from '../../components/work/shared/TechChips.astro';
+import Accordion from '../../components/work/shared/Accordion.astro';
+import NextStepBand from '../../components/work/shared/NextStepBand.astro';
+import MoreCaseStudies from '../../components/work/shared/MoreCaseStudies.astro';
+import PaperPage from '../../components/work/specific/PaperPage.astro';
+import { site } from '../../config/site';
+import * as d from '../../data/work/quotes';
+import { caseStudy } from '../../lib/jsonld';
+
+const jsonLd = caseStudy({
+  name: d.hero.h1,
+  description: d.hero.lede,
+  path: '/work/quotes-library/',
+  crumb: d.hero.crumb,
+});
+
+const review = (await getEntry('reviews', 'quotes'))?.data;
+if (!review) throw new Error('Quotes review missing from projects.yaml');
+---
+
+<Base
+  title={d.meta.title}
+  description={d.meta.description}
+  ogTitle={d.meta.ogTitle}
+  ogDescription={d.meta.ogDescription}
+  ogImage={d.meta.ogImage}
+  ogImageAlt={d.meta.ogImageAlt}
+  current="portfolio"
+  jsonLd={jsonLd}
+>
+  <CaseStudyHero
+    crumb={d.hero.crumb}
+    tags={d.hero.tags}
+    tagsMobile={d.hero.tagsMobile}
+    h1={d.hero.h1}
+    lede={d.hero.lede}
+    ledeMobile={d.hero.ledeMobile}
+    facts={d.hero.facts}
+    factsNoteMobile={d.hero.factsNoteMobile}
+  >
+    <Fragment slot="actions">
+      <Button href={site.bookingUrl} external>
+        Book a free consultation
+      </Button>
+      <Button href={d.hero.secondary.href} variant="secondary">
+        {d.hero.secondary.label}
+      </Button>
+    </Fragment>
+    <figure slot="figure">
+      <div class="ql-hero-panel">
+        <PaperPage
+          class="bp-desktop"
+          size="hero"
+          label={d.hero.paperLabel}
+          entries={d.hero.paper}
+        />
+        <PaperPage
+          class="bp-mobile"
+          size="hero"
+          label={d.hero.paperLabelMobile}
+          entries={d.hero.paperMobile}
+        />
+      </div>
+      <figcaption class="ql-caption">
+        <Responsive text={d.hero.caption} textMobile={d.hero.captionMobile} />
+      </figcaption>
+    </figure>
+    <JumpLinks slot="after" items={d.jumps} />
+  </CaseStudyHero>
+
+  <CaseSection id="overview" num={d.overview.num} title={d.overview.h2}>
+    <Fragment slot="intro">
+      {d.overview.body.map((p) => (
+        <p class="bp-desktop">{p}</p>
+      ))}
+      <p class="bp-mobile">{d.overview.bodyMobile}</p>
+    </Fragment>
+    <ChallengeCards items={d.overview.cards} />
+  </CaseSection>
+
+  <CaseSection id="transform" num={d.transform.num} title={d.transform.h2} paper>
+    <p slot="intro" class="bp-desktop">
+      {d.transform.intro}
+    </p>
+    <div class="ql-ba bp-desktop">
+      <figure>
+        <SheetMock
+          caption={d.transform.sheet.caption}
+          columns={d.transform.sheet.columns}
+          rows={d.transform.sheet.rows}
+        />
+        <figcaption class="ql-caption ql-caption--sm">{d.transform.sheet.figcaption}</figcaption>
+      </figure>
+      <svg
+        class="ql-ba__arrow"
+        aria-hidden="true"
+        focusable="false"
+        width="40"
+        height="24"
+        viewBox="0 0 40 24"
+      >
+        <path d="M2 12h32M26 4l8 8-8 8" fill="none" stroke="#4361EE" stroke-width="2.5"></path>
+      </svg>
+      <figure>
+        <PaperPage size="entry" entries={d.transform.entry} />
+        <figcaption class="ql-caption ql-caption--sm">{d.transform.entryCaption}</figcaption>
+      </figure>
+    </div>
+    <div class="bp-mobile">
+      <p class="ql-mlabel mono">{d.transform.mobileSourceLabel}</p>
+      <ul class="ql-mrows" role="list">
+        {d.transform.mobileRows.map((r) => (
+          <li class:list={['ql-mrow', `ql-mrow--${r.tone}`]}>
+            {r.hidden && <span class="visually-hidden">{`${r.hidden}: `}</span>}
+            <span class="ql-mrow__sheet">{r.sheet}</span>
+            <span>{r.text}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="ql-caption ql-caption--xs">{d.transform.mobileLegend}</p>
+      <p class="ql-mlabel ql-mlabel--doc mono">{d.transform.mobileDocLabel}</p>
+      <PaperPage size="entry" entries={d.transform.entry} />
+    </div>
+    <Callout
+      class="ql-callout"
+      icon="lines"
+      title={d.transform.callout.title}
+      body={d.transform.callout.body}
+      bodyMobile={d.transform.callout.bodyMobile}
+    />
+  </CaseSection>
+
+  <section id="duplicates" class="ql-dup" aria-labelledby="duplicates-h">
+    <div class="container container--case">
+      <div class="ql-dup__grid">
+        <div>
+          <p class="ql-num mono" aria-hidden="true">
+            {d.duplicates.num}
+          </p>
+          <h2 id="duplicates-h" class="ql-h2" tabindex="-1">
+            {d.duplicates.h2}
+          </h2>
+          <div class="ql-body bp-desktop">
+            {d.duplicates.body.map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+          <p class="ql-body bp-mobile">{d.duplicates.bodyMobile}</p>
+        </div>
+        <figure class="bp-desktop">
+          <SheetMock
+            caption={d.duplicates.sheet.caption}
+            columns={d.duplicates.sheet.columns}
+            rows={d.duplicates.sheet.rows}
+          />
+          <figcaption class="ql-caption">{d.duplicates.sheet.figcaption}</figcaption>
+        </figure>
+        <div class="bp-mobile">
+          <ul class="ql-scores" role="list">
+            {d.duplicates.mobileRows.map((r) => (
+              <li class="ql-score">
+                <span>{r.pair}</span>
+                <span class:list={['ql-score__n mono', r.strong && 'is-strong']}>
+                  <span class="visually-hidden">{`${d.duplicates.similarityLabel} `}</span>
+                  {r.score}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p class="ql-caption">{d.duplicates.mobileNote}</p>
+        </div>
+      </div>
+      <ul class="ql-cards bp-desktop" role="list">
+        {d.duplicates.cards.map((c) => (
+          <li class="ql-card">
+            <p class="ql-card__label mono">{c.label}</p>
+            <h3 class="ql-card__title">{c.title}</h3>
+            <p class="ql-card__text">{c.text}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="ql-card ql-card--mobile bp-mobile">
+        <h3 class="ql-card__title">{d.duplicates.mobileCard.title}</h3>
+        <p class="ql-card__text">{d.duplicates.mobileCard.text}</p>
+      </div>
+    </div>
+  </section>
+
+  <CaseSection id="document" num={d.document.num} title={d.document.h2} paper>
+    <p slot="intro" class="bp-desktop">
+      {d.document.intro}
+    </p>
+    <CycleSteps steps={d.document.steps} />
+  </CaseSection>
+
+  <ReviewBand quote={review.excerpt} wrapQuotesMobile />
+
+  <CaseSection id="results" num={d.results.num} title={d.results.h2} stacked>
+    <StatCards items={d.results.stats} />
+    <p class="ql-line bp-mobile">{d.results.lineMobile}</p>
+    <div class="bp-desktop">
+      <BeforeAfterTable
+        caption={d.results.tableCaption}
+        columns={d.results.columns}
+        rows={d.results.rows}
+      />
+    </div>
+    <Responsive as="p" class="ql-note" text={d.results.note} textMobile={d.results.noteMobile} />
+  </CaseSection>
+
+  <CaseSection id="elsewhere" num={d.elsewhere.num} title={d.elsewhere.h2} paper>
+    <p slot="intro" class="bp-desktop">
+      <RichText segments={d.elsewhere.intro} />
+    </p>
+    <IndustryCards items={d.elsewhere.cards} />
+  </CaseSection>
+
+  <CaseSection id="technical" num={d.technical.num} title={d.technical.h2}>
+    <TechChips slot="intro" items={d.technical.chips} itemsMobile={d.technical.chipsMobile} />
+    <div class="ql-accordions bp-desktop">
+      {d.technical.accordions.map((a) => (
+        <Accordion title={a.title}>
+          <p>{a.text}</p>
+        </Accordion>
+      ))}
+    </div>
+    <div class="ql-accordions bp-mobile">
+      {d.technical.mobileAccordions.map((a) => (
+        <Accordion title={a.title}>
+          <p>{a.text}</p>
+        </Accordion>
+      ))}
+    </div>
+  </CaseSection>
+
+  <NextStepBand h2={d.next.h2} body={d.next.body} bodyMobile={d.next.bodyMobile} />
+  <MoreCaseStudies current="quotes-library" />
+</Base>
+
+<style>
+  .ql-hero-panel {
+    padding: 32px 40px;
+    background: var(--surface-paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .ql-caption {
+    margin-top: var(--space-3);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .ql-caption--sm {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .ql-caption--xs {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .ql-ba {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) auto minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  :global(.ql-callout) {
+    margin-top: var(--space-6);
+  }
+
+  .ql-mlabel {
+    margin-top: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .ql-mlabel--doc {
+    margin-bottom: var(--space-2);
+    color: var(--electric);
+  }
+
+  .ql-mrows {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .ql-mrow {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  /* Page-scoped illustration colors (content/work/quotes-library.md). */
+  .ql-mrow--yellow {
+    background: #fff7d6;
+  }
+
+  .ql-mrow--pink {
+    background: var(--error-bg);
+  }
+
+  .ql-mrow__sheet {
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--text-muted);
+  }
+
+  .ql-dup {
+    padding-block: var(--space-18);
+  }
+
+  .ql-dup__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 48px;
+    align-items: start;
+  }
+
+  .ql-num {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--electric);
+  }
+
+  .ql-h2 {
+    margin-top: var(--space-1);
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .ql-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .ql-scores {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .ql-score {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .ql-score__n {
+    flex: none;
+    color: var(--text-muted);
+  }
+
+  .ql-score__n.is-strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .ql-cards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: 40px;
+  }
+
+  .ql-card {
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .ql-card--mobile {
+    margin-top: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .ql-card__label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--electric);
+  }
+
+  .ql-card__title {
+    margin-top: var(--space-2);
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--ink);
+  }
+
+  .ql-card__text {
+    margin-top: var(--space-2);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-strong-muted);
+  }
+
+  .ql-line {
+    margin-top: var(--space-4);
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  :global(.ql-note) {
+    max-width: 52em;
+    margin-top: var(--space-6);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .ql-accordions {
+    margin-top: 40px;
+  }
+
+  @media (max-width: 899px) {
+    .ql-ba {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+    }
+
+    .ql-ba > figure {
+      width: 100%;
+    }
+
+    .ql-ba__arrow {
+      transform: rotate(90deg);
+    }
+
+    .ql-dup__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ql-hero-panel {
+      padding: 18px;
+    }
+
+    .ql-dup {
+      padding-block: 40px;
+    }
+
+    .ql-dup__grid {
+      gap: var(--space-4);
+    }
+
+    .ql-h2 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .ql-body {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .ql-accordions {
+      margin-top: var(--space-6);
+    }
+  }
+</style>

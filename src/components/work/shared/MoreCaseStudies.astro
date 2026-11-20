@@ -1,0 +1,56 @@
+---
+/** "More case studies" nav: the other four case studies plus "All work". Dropped on phones. */
+import { getCollection } from 'astro:content';
+
+interface Props {
+  current: string;
+}
+const { current } = Astro.props;
+const others = (await getCollection('work'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .filter((p) => p.data.slug !== current);
+---
+
+<nav class="more bp-desktop" aria-labelledby="more-h">
+  <div class="container container--case">
+    <h2 id="more-h" class="more__h2">
+      More case studies
+    </h2>
+    <ul class="more__list" role="list">
+      {others.map((p) => (
+        <li>
+          <a href={`/work/${p.data.slug}/`}>{p.data.moreLabel}</a>
+        </li>
+      ))}
+      <li>
+        <a href="/work/">All work</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .more {
+    padding-block: var(--space-12);
+  }
+
+  .more__h2 {
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+
+  .more__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-8);
+    margin-top: var(--space-3);
+  }
+
+  .more__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+</style>

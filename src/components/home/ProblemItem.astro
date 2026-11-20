@@ -1,0 +1,87 @@
+---
+/**
+ * One problem: H3, detail line and related links separated by " · ".
+ * `linksMobile` holds the phone labels; a null entry drops that link on phones.
+ */
+import type { Problem } from '../../data/home';
+
+type Props = Problem;
+const { title, detail, links, linksMobile } = Astro.props;
+---
+
+<li class="problem">
+  <h3 class="problem__title">{title}</h3>
+  <p class="problem__detail bp-desktop">{detail}</p>
+  <p class="problem__links">
+    {links.map((link, i) => {
+      const mobile = linksMobile[i];
+      const sep = i > 0 ? ' · ' : '';
+      return mobile === null ? (
+        <span class="bp-desktop">
+          {sep}
+          <a href={link.href}>{link.label}</a>
+        </span>
+      ) : (
+        <>
+          {sep}
+          <a href={link.href}>
+            {mobile !== undefined && mobile !== link.label ? (
+              <>
+                <span class="bp-desktop">{link.label}</span>
+                <span class="bp-mobile">{mobile}</span>
+              </>
+            ) : (
+              link.label
+            )}
+          </a>
+        </>
+      );
+    })}
+  </p>
+</li>
+
+<style>
+  .problem {
+    padding-block: var(--space-6) 28px;
+    border-top: 1px solid var(--line);
+  }
+
+  .problem__title {
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+
+  .problem__detail {
+    margin-top: var(--space-2);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-muted);
+  }
+
+  .problem__links {
+    margin-top: var(--space-2);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 767px) {
+    .problem {
+      padding-block: var(--space-4);
+    }
+
+    .problem:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .problem__title {
+      font-size: 17px;
+      line-height: 24px;
+    }
+
+    .problem__links {
+      margin-top: var(--space-1);
+    }
+  }
+</style>

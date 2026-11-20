@@ -1,0 +1,20 @@
+---
+/**
+ * Tag chip. `hex` adds the small hex marker (used for "Fictional demo data").
+ * `own` renders the "Independent project" variant; `featured` the "Featured" variant.
+ */
+import HexMarker from './HexMarker.astro';
+
+interface Props {
+  hex?: boolean;
+  own?: boolean;
+  featured?: boolean;
+  class?: string;
+}
+const { hex = false, own = false, featured = false, class: className } = Astro.props;
+---
+
+<span class:list={['tag', own && 'tag--own', featured && 'tag--featured', className]}>
+  {hex && <HexMarker size="sm" />}
+  <slot />
+</span>

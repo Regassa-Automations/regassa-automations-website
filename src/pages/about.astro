@@ -1,0 +1,460 @@
+---
+/** About (content/about.md; phone: content/mobile/about-mobile.md). Container 1100 px. */
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import Responsive from '../components/ui/Responsive.astro';
+import portrait from '../assets/people/portrait-about.jpg';
+import { meta, intro, background, approach, tools, cta } from '../data/about';
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  ogTitle={meta.ogTitle}
+  ogDescription={meta.ogDescription}
+  ogImage={meta.ogImage}
+  ogImageAlt={meta.ogImageAlt}
+  current="about"
+>
+  <section class="ab-intro" aria-labelledby="ab-h1">
+    <div class="container container--about ab-intro__grid">
+      <div class="ab-intro__copy">
+        <div class="ab-intro__head">
+          <Eyebrow>{intro.eyebrow}</Eyebrow>
+          <h1 id="ab-h1" class="ab-intro__h1">
+            {intro.h1}
+          </h1>
+        </div>
+        <div class="ab-intro__body">
+          <Responsive
+            as="p"
+            class="ab-intro__lede"
+            text={intro.lede}
+            textMobile={intro.ledeMobile}
+          />
+          <div class="ab-intro__ctas">
+            <Button href={intro.primary.href} block="mobile">
+              {intro.primary.label}
+            </Button>
+            <Button href={intro.secondary.href} variant="secondary" class="bp-desktop">
+              {intro.secondary.label}
+            </Button>
+          </div>
+        </div>
+      </div>
+      <Picture
+        class="ab-portrait"
+        src={portrait}
+        alt={intro.portraitAlt}
+        formats={['avif', 'webp']}
+        widths={[360, 380, 720]}
+        sizes="(min-width: 768px) 380px, calc(100vw - 32px)"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <section class="ab-section section--paper section--ruled" aria-labelledby="ab-bg-h">
+    <div class="container container--about ab-bg">
+      <h2 id="ab-bg-h" class="ab-h2">
+        {background.h2}
+      </h2>
+      <ul class="ab-bg__items" role="list">
+        {background.items.map((i) => (
+          <li>
+            <h3 class="ab-bg__title">{i.title}</h3>
+            <Responsive as="p" class="ab-bg__text" text={i.text} textMobile={i.textMobile} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="ab-section" aria-labelledby="ab-ap-h">
+    <div class="container container--about">
+      <Eyebrow>{approach.eyebrow}</Eyebrow>
+      <h2 id="ab-ap-h" class="ab-h2 ab-ap__h2">
+        {approach.h2}
+      </h2>
+      <ol class="ab-ap__cards">
+        {approach.cards.map((c) => (
+          <li class="ab-card">
+            <p class="ab-card__label mono">{c.label}</p>
+            <h3 class="ab-card__title">{c.title}</h3>
+            <Responsive as="p" class="ab-card__text" text={c.text} textMobile={c.textMobile} />
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="ab-section section--paper section--ruled" aria-labelledby="ab-tools-h">
+    <div class="container container--about">
+      <h2 id="ab-tools-h" class="ab-h2">
+        {tools.h2}
+      </h2>
+      <p class="ab-tools__intro bp-desktop">{tools.intro}</p>
+      <div class="ab-tools__cards">
+        <div class="ab-tools__card">
+          <h3 class="ab-tools__title">{tools.used.title}</h3>
+          <ul class="ab-tools__tags" role="list">
+            {tools.used.tags.map((t) => (
+              <li class="ab-tool">{t}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="ab-tools__card">
+          <h3 class="ab-tools__title">{tools.future.title}</h3>
+          <Responsive
+            as="p"
+            class="ab-tools__text"
+            text={tools.future.text}
+            textMobile={tools.future.textMobile}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-cta" aria-labelledby="ab-cta-h">
+    <div class="container container--about ab-cta__inner">
+      <div>
+        <h2 id="ab-cta-h" class="ab-h2">
+          {cta.h2}
+        </h2>
+        <p class="ab-cta__body">{cta.body}</p>
+      </div>
+      <div class="ab-cta__actions">
+        <Button href={cta.primary.href} block="mobile">
+          {cta.primary.label}
+        </Button>
+        <Button
+          href={cta.secondaryMobile.href}
+          variant="secondary"
+          block="mobile"
+          class="bp-mobile"
+        >
+          {cta.secondaryMobile.label}
+        </Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ab-intro {
+    padding-block: var(--space-18);
+  }
+
+  .ab-intro__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+    column-gap: 64px;
+    align-items: center;
+  }
+
+  .ab-intro__head {
+    grid-area: head;
+  }
+
+  .ab-intro__body {
+    grid-area: body;
+  }
+
+  .ab-intro :global(.ab-portrait) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-figure);
+  }
+
+  .ab-intro__h1 {
+    max-width: 16ch;
+    margin-top: var(--space-3);
+    font-size: 48px;
+    line-height: 54px;
+    letter-spacing: -0.01em;
+  }
+
+  .ab-intro :global(.ab-intro__lede) {
+    max-width: 36em;
+    margin-top: var(--space-4);
+    font-size: 19px;
+    line-height: 30px;
+  }
+
+  .ab-intro__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .ab-section {
+    padding-block: var(--space-18);
+  }
+
+  .ab-h2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .ab-bg {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.75fr);
+    gap: var(--space-8) 64px;
+  }
+
+  .ab-bg__items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .ab-bg__title {
+    font-size: 19px;
+    line-height: 27px;
+    color: var(--ink);
+  }
+
+  .ab-section :global(.ab-bg__text) {
+    margin-top: var(--space-1);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .ab-ap__h2 {
+    margin-top: var(--space-3);
+  }
+
+  .ab-ap__cards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .ab-card {
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .ab-card__label {
+    color: var(--electric);
+  }
+
+  .ab-card__title {
+    margin-top: var(--space-3);
+    font-size: 19px;
+    line-height: 27px;
+    color: var(--ink);
+  }
+
+  .ab-section :global(.ab-card__text) {
+    margin-top: var(--space-2);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .ab-tools__intro {
+    max-width: 46em;
+    margin-top: var(--space-3);
+    color: var(--text-muted);
+  }
+
+  .ab-tools__cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .ab-tools__card {
+    padding: var(--space-6);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .ab-tools__title {
+    font-size: 19px;
+    line-height: 27px;
+    color: var(--ink);
+  }
+
+  .ab-tools__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  /* About tools tag variant (03-design-system.md, Tag): 6/12 padding, 13/18, ink. */
+  .ab-tool {
+    padding: 6px 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--ink);
+  }
+
+  .ab-section :global(.ab-tools__text) {
+    margin-top: var(--space-3);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .ab-cta {
+    padding-block: var(--space-18);
+  }
+
+  .ab-cta__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6) var(--space-12);
+  }
+
+  .ab-cta__body {
+    margin-top: var(--space-3);
+    max-width: 36em;
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .ab-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 1023px) {
+    .ab-ap__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 899px) {
+    .ab-intro__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+      column-gap: var(--space-8);
+    }
+
+    .ab-bg {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ab-intro {
+      padding-block: 40px;
+    }
+
+    /* Phone: portrait between the H1 and the paragraph (about-mobile.md). */
+    .ab-intro__grid {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'head' 'portrait' 'body';
+      row-gap: var(--space-6);
+    }
+
+    .ab-intro__copy {
+      display: contents;
+    }
+
+    .ab-intro :global(.ab-portrait) {
+      grid-area: portrait;
+    }
+
+    .ab-intro__h1 {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    .ab-intro :global(.ab-intro__lede) {
+      margin-top: 0;
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .ab-section,
+    .ab-cta {
+      padding-block: 40px;
+    }
+
+    .ab-h2 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .ab-bg {
+      gap: var(--space-4);
+    }
+
+    .ab-bg__items {
+      gap: var(--space-4);
+    }
+
+    .ab-section :global(.ab-bg__text) {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .ab-ap__cards {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .ab-card {
+      padding: var(--space-4);
+    }
+
+    .ab-card__title {
+      font-size: 17px;
+      line-height: 24px;
+    }
+
+    .ab-section :global(.ab-card__text) {
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    /* Phone: no cards in the tools section, just headings, tags and text. */
+    .ab-tools__cards {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+      margin-top: var(--space-4);
+    }
+
+    .ab-tools__card {
+      padding: 0;
+      background: none;
+      border: 0;
+    }
+
+    .ab-tools__title {
+      font-size: 16px;
+      line-height: 23px;
+    }
+
+    .ab-cta__actions {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+</style>

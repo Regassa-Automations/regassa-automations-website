@@ -1,0 +1,79 @@
+---
+/** Small review card (03-design-system.md, Review card). Project label links when it has a case study. */
+import StarRating from '../ui/StarRating.astro';
+
+interface Props {
+  quote: string;
+  attribution: string;
+  attributionMobile?: string;
+  projectLabel: string;
+  projectHref?: string;
+}
+const { quote, attribution, attributionMobile, projectLabel, projectHref } = Astro.props;
+---
+
+<figure class="rcard">
+  <blockquote class="rcard__quote">
+    <p>“{quote}”</p>
+  </blockquote>
+  <figcaption class="rcard__caption">
+    <StarRating class="rcard__stars" />
+    <span>
+      <span class="bp-desktop">{attribution}</span>
+      <span class="bp-mobile">{attributionMobile ?? attribution}</span> ·{' '}
+      {projectHref ? <a href={projectHref}>{projectLabel}</a> : projectLabel}
+    </span>
+  </figcaption>
+</figure>
+
+<style>
+  .rcard {
+    flex: 1;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .rcard__quote p {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 29px;
+    color: var(--ink);
+  }
+
+  .rcard__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-top: var(--space-4);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .rcard__caption :global(.rcard__stars) {
+    color: var(--accent-text);
+  }
+
+  @media (max-width: 767px) {
+    .rcard {
+      padding: 18px;
+    }
+
+    .rcard__quote p {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .rcard__caption {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-2);
+      margin-top: var(--space-2);
+      font-size: 13px;
+    }
+  }
+</style>

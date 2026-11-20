@@ -1,0 +1,203 @@
+---
+/**
+ * Home inquiry band (#inquiry): navy with the hexagon outline device, prompt left, form right.
+ * Phone: intro merged with "What happens next" (mobile copy); the H3 and list are dropped.
+ */
+import InquiryForm from './InquiryForm.astro';
+import { inquiry } from '../../data/home';
+import { site } from '../../config/site';
+---
+
+<section id="inquiry" class="inquiry on-navy" aria-labelledby="inquiry-h">
+  <!-- Legacy anchor: the previous site linked to #book (e.g. /index.html#book). Kept so those
+       links still land on the inquiry form, with or without JavaScript. -->
+  <div id="book" class="inquiry__alias"></div>
+  <svg
+    class="inquiry__device"
+    aria-hidden="true"
+    focusable="false"
+    viewBox="0 0 120 110"
+    fill="none"
+    stroke-width="0.6"
+  >
+    <polygon stroke="#4361EE" points="34.02,40 60,55 60,85 34.02,100 8.04,85 8.04,55"></polygon>
+    <polygon stroke="#E6266F" points="85.98,40 111.96,55 111.96,85 85.98,100 60,85 60,55"></polygon>
+    <polygon stroke="#98A8F4" points="60,10 85.98,25 85.98,55 60,70 34.02,55 34.02,25"></polygon>
+  </svg>
+  <div class="container inquiry__grid">
+    <div class="inquiry__prompt">
+      <p class="eyebrow inquiry__eyebrow">{inquiry.eyebrow}</p>
+      <h2 id="inquiry-h" class="inquiry__h2" tabindex="-1">
+        {inquiry.h2}
+      </h2>
+      <p class="inquiry__intro">
+        <span class="bp-desktop">{inquiry.intro}</span>
+        <span class="bp-mobile">{inquiry.introMobile}</span>
+      </p>
+      <p class="inquiry__booking">
+        {inquiry.bookingPrefix}{' '}
+        <a href={site.bookingUrl} target="_blank" rel="noopener">
+          {inquiry.bookingLink}
+          <span class="visually-hidden"> (opens in a new tab)</span>
+        </a>
+        .
+      </p>
+      <div class="bp-desktop">
+        <h3 class="inquiry__h3">{inquiry.nextH3}</h3>
+        <ol class="inquiry__next">
+          {inquiry.next.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ol>
+      </div>
+    </div>
+    <div class="inquiry__panel">
+      <InquiryForm />
+    </div>
+  </div>
+</section>
+
+<style>
+  .inquiry {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--space-section);
+    background: var(--navy);
+    color: var(--on-navy);
+  }
+
+  .inquiry__alias {
+    position: absolute;
+    top: 0;
+    height: 0;
+  }
+
+  .inquiry__device {
+    position: absolute;
+    top: -120px;
+    right: -180px;
+    width: 720px;
+    height: auto;
+    pointer-events: none;
+  }
+
+  .inquiry__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
+    gap: 64px;
+    align-items: start;
+  }
+
+  .inquiry__prompt {
+    padding-top: var(--space-2);
+  }
+
+  .inquiry__eyebrow {
+    color: var(--on-navy);
+  }
+
+  .inquiry__h2 {
+    max-width: 14ch;
+    margin-top: var(--space-4);
+    font-size: 38px;
+    line-height: 46px;
+    color: var(--on-navy);
+  }
+
+  .inquiry__intro {
+    margin-top: 20px;
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .inquiry__booking {
+    margin-top: var(--space-3);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .inquiry__booking a {
+    color: var(--on-navy);
+    font-weight: 600;
+  }
+
+  .inquiry__booking a:hover {
+    color: var(--on-navy);
+  }
+
+  .inquiry__h3 {
+    margin-top: var(--space-8);
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--on-navy);
+  }
+
+  .inquiry__next {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: var(--space-4);
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .inquiry__panel {
+    padding: var(--space-8);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    color: var(--text);
+  }
+
+  /* The form panel is a white surface: use the standard focus ring inside it. */
+  .inquiry__panel :global(:focus-visible) {
+    box-shadow: var(--focus-ring);
+  }
+
+  @media (max-width: 959px) {
+    /* Stacked layout: the outline device would run behind the heading, so it is left out. */
+    .inquiry__device {
+      display: none;
+    }
+
+    .inquiry__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+
+    .inquiry__h2 {
+      max-width: 20ch;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .inquiry {
+      padding-block: 40px;
+    }
+
+    .inquiry__grid {
+      gap: var(--space-6);
+    }
+
+    .inquiry__eyebrow {
+      font-size: 11px;
+    }
+
+    .inquiry__h2 {
+      margin-top: var(--space-3);
+      font-size: 27px;
+      line-height: 34px;
+    }
+
+    .inquiry__intro {
+      margin-top: var(--space-3);
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .inquiry__panel {
+      padding: 20px 16px;
+    }
+  }
+</style>

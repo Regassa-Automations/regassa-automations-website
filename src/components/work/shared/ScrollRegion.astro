@@ -1,0 +1,26 @@
+---
+/** Focusable horizontal scroll container for wide tables and diagrams (04, Breakpoints). */
+interface Props {
+  label: string;
+  class?: string;
+  /** A desktop/phone pair shares this label; only one is displayed (tells html-validate). */
+  pairedDuplicate?: boolean;
+}
+const { label, class: className, pairedDuplicate = false } = Astro.props;
+const directive =
+  '<!-- [html-validate-disable-next unique-landmark: desktop and phone versions never display together] -->';
+---
+
+{pairedDuplicate && <Fragment set:html={directive} />}
+<div class:list={['scroll-region', className]} role="region" aria-label={label} tabindex="0">
+  <slot />
+</div>
+
+<style>
+  .scroll-region {
+    /* Positioned so visually hidden (absolute) labels inside cells are clipped with the table. */
+    position: relative;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+</style>

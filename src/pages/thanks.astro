@@ -1,0 +1,93 @@
+---
+/**
+ * Form success page (content/system-pages.md). Not reached on the Formspree Free plan (no
+ * custom redirect, OI-01); built so an upgrade only needs a `_next` field. noindex, excluded
+ * from the sitemap, linked from nowhere.
+ */
+import Base from '../layouts/Base.astro';
+import HexMarker from '../components/ui/HexMarker.astro';
+import { thanks } from '../data/system';
+import { site } from '../config/site';
+---
+
+<Base title={thanks.title} noindex>
+  <section class="container container--prose thanks" aria-labelledby="thanks-h">
+    <p class="thanks__label mono">
+      <HexMarker size="sm" />
+      {thanks.label}
+    </p>
+    <h1 id="thanks-h" class="thanks__h1">
+      {thanks.h1}
+    </h1>
+    <p class="thanks__body">{thanks.body}</p>
+    <p class="thanks__body">
+      {`${thanks.bookingPrefix} `}
+      <a href={site.bookingUrl} target="_blank" rel="noopener">
+        {thanks.bookingLink}
+        <span class="visually-hidden"> (opens in a new tab)</span>
+      </a>
+      .
+    </p>
+    <ul class="thanks__links">
+      {thanks.links.map((l) => (
+        <li>
+          <a href={l.href}>{l.label}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .thanks {
+    padding-block: var(--space-18) 88px;
+  }
+
+  .thanks__label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--electric);
+  }
+
+  .thanks__h1 {
+    margin-top: var(--space-3);
+    font-size: 44px;
+    line-height: 52px;
+    letter-spacing: -0.01em;
+  }
+
+  .thanks__body {
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .thanks__links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  .thanks__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    .thanks {
+      padding-block: 40px 56px;
+    }
+
+    .thanks__h1 {
+      font-size: 32px;
+      line-height: 40px;
+    }
+  }
+</style>

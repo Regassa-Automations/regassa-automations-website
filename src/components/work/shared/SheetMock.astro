@@ -1,0 +1,288 @@
+---
+/**
+ * SheetMock: a real HTML table styled like a spreadsheet (03-design-system.md, SheetMock).
+ * Caption at the top; wrapped in a focusable horizontal scroll region. Status colors are
+ * page-scoped illustration colors from the content files and never carry meaning alone:
+ * chips have text, checkboxes have role="img" labels, kept/changed cells and highlighted rows
+ * carry a visually hidden label.
+ */
+import ScrollRegion from './ScrollRegion.astro';
+import type { SheetColumn, SheetRow } from './sheet-types';
+
+interface Props {
+  caption: string;
+  columns: SheetColumn[];
+  rows: SheetRow[];
+  /** First column is a row header (th scope="row"). */
+  rowHeaders?: boolean;
+  shadow?: boolean;
+  /** The content file gives no visible caption: keep it for screen readers only. */
+  captionHidden?: boolean;
+  class?: string;
+}
+const {
+  caption,
+  columns,
+  rows,
+  rowHeaders = false,
+  shadow = false,
+  captionHidden = false,
+  class: className,
+} = Astro.props;
+---
+
+<div class:list={['sheet', shadow && 'sheet--shadow', className]}>
+  <ScrollRegion label={caption}>
+    <table>
+      <caption class:list={[captionHidden && 'visually-hidden']}>{caption}</caption>
+      <thead>
+        <tr>
+          {columns.map((c) => (
+            <th scope="col" class:list={[c.highlight && 'is-hl']}>
+              {c.hidden ? <span class="visually-hidden">{c.label}</span> : c.label}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr class:list={[row.highlight && 'is-row-hl', row.tone && `is-tone-${row.tone}`]}>
+            {row.cells.map((cell, i) => {
+              const Cell = rowHeaders && i === 0 ? 'th' : 'td';
+              const scope = rowHeaders && i === 0 ? 'row' : undefined;
+              const hl = columns[i]?.highlight;
+              return (
+                <Cell
+                  scope={scope}
+                  class:list={[
+                    hl && 'is-hl-col',
+                    typeof cell !== 'string' && `is-${cell.kind}`,
+                    typeof cell !== 'string' && cell.kind === 'score' && cell.strong && 'is-strong',
+                  ]}
+                >
+                  {i === 0 && row.toneLabel && (
+                    <span class="visually-hidden">{`${row.toneLabel}: `}</span>
+                  )}
+                  {typeof cell === 'string' ? (
+                    cell
+                  ) : cell.kind === 'chip' ? (
+                    <span class:list={['chip', `chip--${cell.tone}`]}>{cell.text}</span>
+                  ) : cell.kind === 'check' ? (
+                    <span
+                      class:list={['cbox', cell.on && 'cbox--on']}
+                      role="img"
+                      aria-label={cell.on ? 'Ticked' : 'Not ticked'}
+                    />
+                  ) : cell.kind === 'dd' ? (
+                    <span class="dd">
+                      {cell.text}
+                      <span aria-hidden="true"> ▾</span>
+                    </span>
+                  ) : cell.kind === 'kept' || cell.kind === 'changed' ? (
+                    <>
+                      {cell.text}
+                      <span class="visually-hidden">{` (${cell.label})`}</span>
+                    </>
+                  ) : (
+                    cell.text
+                  )}
+                </Cell>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </ScrollRegion>
+  <slot />
+</div>
+
+<style>
+  .sheet {
+    /* Page-scoped illustration colors (content/work/pr-pipeline-sync.md, volunteer-rosters.md). */
+    --sheet-head: #f0f2f8;
+    --sheet-border: #d5d9e6;
+    --chip-ok-bg: #e6f4ec;
+    --chip-ok-fg: #1d6b3f;
+    --chip-req-bg: #fff4db;
+    --chip-req-fg: #7a5300;
+    --chip-fail-bg: #fde7ee;
+    --chip-fail-fg: #a3174c;
+    --id-bg: #f6f8fe;
+    --kept-fg: #1d6b3f;
+    --row-hl-bg: #fff7d6;
+    --row-hl-head: #fff1b8;
+  }
+
+  .sheet :global(.scroll-region) {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .sheet--shadow :global(.scroll-region) {
+    box-shadow: var(--shadow-figure);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  caption {
+    padding: 10px 14px;
+    background: var(--surface-paper);
+    border-bottom: 1px solid var(--sheet-border);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: left;
+    color: var(--text-strong-muted);
+  }
+
+  thead th {
+    padding: 8px 10px;
+    background: var(--sheet-head);
+    border: 1px solid var(--sheet-border);
+    border-top: 0;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: left;
+    white-space: nowrap;
+    color: var(--text-strong-muted);
+  }
+
+  thead th.is-hl {
+    background: var(--navy-tint);
+    color: var(--navy);
+  }
+
+  tbody th,
+  tbody td {
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-weight: 400;
+  }
+
+  tbody th {
+    font-weight: 600;
+  }
+
+  .is-hl-col {
+    background: var(--id-bg);
+  }
+
+  .is-id {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .is-wrap {
+    min-width: 180px;
+    white-space: normal;
+  }
+
+  .is-muted {
+    color: var(--text-muted);
+  }
+
+  /* Kept and changed cells also carry visually hidden "(kept)" / "(updated)" text. */
+  .is-kept {
+    font-weight: 600;
+    color: var(--kept-fg);
+  }
+
+  .is-changed {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .is-tone-yellow > * {
+    background: var(--row-hl-bg);
+  }
+
+  .is-tone-pink > * {
+    background: var(--error-bg);
+  }
+
+  .is-score {
+    font-family: var(--font-mono);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+  }
+
+  .is-score.is-strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .is-row-hl > td {
+    background: var(--row-hl-bg);
+  }
+
+  .is-row-hl > th {
+    background: var(--row-hl-head);
+  }
+
+  .chip {
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .chip--ok {
+    background: var(--chip-ok-bg);
+    color: var(--chip-ok-fg);
+  }
+
+  .chip--req {
+    background: var(--chip-req-bg);
+    color: var(--chip-req-fg);
+  }
+
+  .chip--fail {
+    background: var(--chip-fail-bg);
+    color: var(--chip-fail-fg);
+  }
+
+  .dd {
+    display: inline-block;
+    padding: 1px 6px;
+    background: var(--surface-paper);
+    border: 1px solid var(--on-navy-muted);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--navy);
+  }
+
+  .cbox {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--input-border);
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+
+  .cbox--on {
+    background: var(--electric);
+    border-color: var(--electric);
+  }
+
+  @media (forced-colors: active) {
+    .cbox--on {
+      background: CanvasText;
+    }
+  }
+</style>

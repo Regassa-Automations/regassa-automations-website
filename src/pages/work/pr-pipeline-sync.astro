@@ -1,0 +1,517 @@
+---
+/**
+ * Case study: PR pipeline sync (content/work/pr-pipeline-sync.md;
+ * phone: content/mobile/pr-pipeline-sync-mobile.md). Never name the agency (OI-15).
+ */
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/ui/Button.astro';
+import Responsive from '../../components/ui/Responsive.astro';
+import RichText from '../../components/ui/RichText.astro';
+import HexMarker from '../../components/ui/HexMarker.astro';
+import CaseStudyHero from '../../components/work/shared/CaseStudyHero.astro';
+import JumpLinks from '../../components/work/shared/JumpLinks.astro';
+import CaseSection from '../../components/work/shared/CaseSection.astro';
+import ChallengeCards from '../../components/work/shared/ChallengeCards.astro';
+import RouteJourney from '../../components/work/shared/RouteJourney.astro';
+import Callout from '../../components/work/shared/Callout.astro';
+import SheetMock from '../../components/work/shared/SheetMock.astro';
+import CycleSteps from '../../components/work/shared/CycleSteps.astro';
+import StatCards from '../../components/work/shared/StatCards.astro';
+import BeforeAfterTable from '../../components/work/shared/BeforeAfterTable.astro';
+import IndustryCards from '../../components/work/shared/IndustryCards.astro';
+import TechChips from '../../components/work/shared/TechChips.astro';
+import Accordion from '../../components/work/shared/Accordion.astro';
+import NextStepBand from '../../components/work/shared/NextStepBand.astro';
+import MoreCaseStudies from '../../components/work/shared/MoreCaseStudies.astro';
+import KpiHeatTable from '../../components/work/specific/KpiHeatTable.astro';
+import PrHeroDiagram from '../../components/work/diagrams/PrHeroDiagram.astro';
+import PrHeroDiagramMobile from '../../components/work/diagrams/PrHeroDiagramMobile.astro';
+import { site } from '../../config/site';
+import * as d from '../../data/work/pr-sync';
+import { caseStudy } from '../../lib/jsonld';
+
+const jsonLd = caseStudy({
+  name: d.hero.h1,
+  description: d.hero.lede,
+  path: '/work/pr-pipeline-sync/',
+  crumb: d.hero.crumb,
+});
+---
+
+<Base
+  title={d.meta.title}
+  description={d.meta.description}
+  ogTitle={d.meta.ogTitle}
+  ogDescription={d.meta.ogDescription}
+  ogImage={d.meta.ogImage}
+  ogImageAlt={d.meta.ogImageAlt}
+  current="portfolio"
+  jsonLd={jsonLd}
+>
+  <CaseStudyHero
+    crumb={d.hero.crumb}
+    tags={d.hero.tags}
+    tagsMobile={d.hero.tagsMobile}
+    h1={d.hero.h1}
+    lede={d.hero.lede}
+    ledeMobile={d.hero.ledeMobile}
+    facts={d.hero.facts}
+    factsNoteMobile={d.hero.factsNoteMobile}
+  >
+    <Fragment slot="actions">
+      <Button href={site.bookingUrl} external>
+        Book a free consultation
+      </Button>
+      <Button href={d.hero.secondary.href} variant="secondary">
+        {d.hero.secondary.label}
+      </Button>
+    </Fragment>
+    <figure slot="figure" class="pr-hero-fig">
+      <div class="pr-hero-fig__panel">
+        <div class="bp-desktop">
+          <PrHeroDiagram />
+        </div>
+        <div class="bp-mobile">
+          <PrHeroDiagramMobile />
+        </div>
+      </div>
+      <figcaption class="pr-caption">{d.hero.caption}</figcaption>
+    </figure>
+    <JumpLinks slot="after" items={d.jumps} />
+  </CaseStudyHero>
+
+  <CaseSection id="overview" num={d.overview.num} title={d.overview.h2}>
+    <Fragment slot="intro">
+      {d.overview.body.map((p) => (
+        <p class="bp-desktop">{p}</p>
+      ))}
+      <p class="bp-mobile">{d.overview.bodyMobile}</p>
+    </Fragment>
+    <ChallengeCards items={d.overview.cards} />
+  </CaseSection>
+
+  <CaseSection id="journey" num={d.journey.num} title={d.journey.h2} paper>
+    <p slot="intro" class="bp-desktop">
+      {d.journey.intro}
+    </p>
+    <RouteJourney steps={d.journey.steps} label={d.journey.label} />
+    <Callout
+      class="bp-desktop pr-callout"
+      icon="alert"
+      title={d.journey.callout.title}
+      body={d.journey.callout.body}
+    />
+  </CaseSection>
+
+  <section id="identity" class="pr-identity" aria-labelledby="identity-h">
+    <div class="container container--case pr-identity__grid">
+      <div>
+        <p class="pr-num mono" aria-hidden="true">
+          {d.identity.num}
+        </p>
+        <h2 id="identity-h" class="pr-h2" tabindex="-1">
+          {d.identity.h2}
+        </h2>
+        <div class="pr-body bp-desktop">
+          {d.identity.body.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+        <p class="pr-body bp-mobile">{d.identity.bodyMobile}</p>
+      </div>
+      <figure class="bp-desktop">
+        <SheetMock
+          caption={d.identity.sheet.caption}
+          columns={d.identity.sheet.columns}
+          rows={d.identity.sheet.rows}
+        />
+        <figcaption class="pr-caption">{d.identity.sheet.figcaption}</figcaption>
+      </figure>
+      <div class="bp-mobile">
+        <ul class="pr-idcards" role="list">
+          {d.identity.mobileCards.map((c) => (
+            <li class="pr-idcard">
+              <dl>
+                <div>
+                  <dt>{d.identity.idLabel}</dt>
+                  <dd class="pr-idcard__id">{c.id}</dd>
+                </div>
+                {c.rows.map((r) => (
+                  <div>
+                    <dt>{r.k}</dt>
+                    <dd>{r.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </li>
+          ))}
+        </ul>
+        <p class="pr-caption">{d.identity.mobileNote}</p>
+      </div>
+    </div>
+  </section>
+
+  <CaseSection id="sheet" num={d.sheet.num} title={d.sheet.h2} paper>
+    <Responsive as="p" slot="intro" text={d.sheet.body} textMobile={d.sheet.bodyMobile} />
+    <figure class="pr-sheet bp-desktop">
+      <SheetMock
+        caption={d.sheet.mock.caption}
+        columns={d.sheet.mock.columns}
+        rows={d.sheet.mock.rows}
+        shadow
+      />
+      <figcaption class="pr-caption">{d.sheet.mock.figcaption}</figcaption>
+    </figure>
+    <ul class="pr-status bp-mobile" role="list">
+      {d.sheet.statusRowsMobile.map((r) => (
+        <li class="pr-status__row">
+          <span class="mono">{r.left}</span>
+          <span class:list={['pr-chip', `pr-chip--${r.tone}`]}>{r.status}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="pr-kpi">
+      <div>
+        <h3 class="pr-kpi__h3">{d.sheet.kpi.h3}</h3>
+        <Responsive
+          as="p"
+          class="pr-kpi__body"
+          text={d.sheet.kpi.body}
+          textMobile={d.sheet.kpi.bodyMobile}
+        />
+        <ul class="hex-list pr-kpi__list bp-desktop">
+          {d.sheet.kpi.list.map((i) => (
+            <li>
+              <HexMarker />
+              {i}
+            </li>
+          ))}
+        </ul>
+        <p class="pr-kpi__small bp-desktop">{d.sheet.kpi.small}</p>
+      </div>
+      <figure class="bp-desktop">
+        <KpiHeatTable
+          caption={d.sheet.kpi.caption}
+          staffLabel={d.sheet.kpi.staffLabel}
+          totalLabel={d.sheet.kpi.totalLabel}
+          columns={d.sheet.kpi.columns}
+          rows={d.sheet.kpi.rows}
+          totals={d.sheet.kpi.totals}
+          pairedDuplicate
+        />
+        <figcaption class="pr-caption">{d.sheet.kpi.figcaption}</figcaption>
+      </figure>
+      <figure class="bp-mobile">
+        <KpiHeatTable
+          caption={d.sheet.kpi.caption}
+          staffLabel={d.sheet.kpi.staffLabel}
+          totalLabel={d.sheet.kpi.totalLabel}
+          columns={d.sheet.kpi.mobile.columns}
+          rows={d.sheet.kpi.mobile.rows}
+          totals={d.sheet.kpi.mobile.totals}
+          compact
+          pairedDuplicate
+        />
+        <figcaption class="pr-caption">{d.sheet.kpi.mobile.note}</figcaption>
+      </figure>
+    </div>
+  </CaseSection>
+
+  <CaseSection id="rollout" num={d.rollout.num} title={d.rollout.h2}>
+    <Responsive as="p" slot="intro" text={d.rollout.body} textMobile={d.rollout.bodyMobile} />
+    <CycleSteps steps={d.rollout.steps} />
+    <div class="pr-example bp-desktop">
+      <p class="pr-example__label mono">{d.rollout.example.label}</p>
+      <p>{d.rollout.example.text}</p>
+    </div>
+  </CaseSection>
+
+  <CaseSection id="results" num={d.results.num} title={d.results.h2} paper stacked>
+    <StatCards items={d.results.stats} />
+    <BeforeAfterTable
+      caption={d.results.tableCaption}
+      columns={d.results.columns}
+      rows={d.results.rows}
+      mobileCards={d.results.mobileCards}
+      mobileLabels={d.results.mobileLabels}
+    />
+    <Responsive as="p" class="pr-note" text={d.results.note} textMobile={d.results.noteMobile} />
+  </CaseSection>
+
+  <CaseSection id="elsewhere" num={d.elsewhere.num} title={d.elsewhere.h2}>
+    <Fragment slot="intro">
+      <p class="bp-desktop">
+        <RichText segments={d.elsewhere.intro} />
+      </p>
+      <p class="bp-mobile">{d.elsewhere.introMobile}</p>
+    </Fragment>
+    <IndustryCards items={d.elsewhere.cards} />
+  </CaseSection>
+
+  <CaseSection id="technical" num={d.technical.num} title={d.technical.h2} paper>
+    <TechChips slot="intro" items={d.technical.chips} itemsMobile={d.technical.chipsMobile} />
+    <div class="pr-accordions bp-desktop">
+      {d.technical.accordions.map((a) => (
+        <Accordion title={a.title}>
+          <p>{a.text}</p>
+        </Accordion>
+      ))}
+    </div>
+    <div class="pr-accordions bp-mobile">
+      {d.technical.mobileAccordions.map((a) => (
+        <Accordion title={a.title}>
+          <p>{a.text}</p>
+        </Accordion>
+      ))}
+    </div>
+  </CaseSection>
+
+  <NextStepBand h2={d.next.h2} body={d.next.body} bodyMobile={d.next.bodyMobile} />
+  <MoreCaseStudies current="pr-pipeline-sync" />
+</Base>
+
+<style>
+  .pr-hero-fig__panel {
+    padding: 28px;
+    background: var(--surface-paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .pr-caption {
+    margin-top: var(--space-3);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  :global(.pr-callout) {
+    margin-top: var(--space-6);
+  }
+
+  .pr-identity {
+    padding-block: var(--space-18);
+  }
+
+  .pr-identity__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 48px;
+    align-items: start;
+  }
+
+  .pr-num {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--electric);
+  }
+
+  .pr-h2 {
+    margin-top: var(--space-1);
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .pr-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .pr-idcards {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .pr-idcard {
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .pr-idcard dl > div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .pr-idcard dt {
+    flex: none;
+    color: var(--text-muted);
+  }
+
+  .pr-idcard dd {
+    text-align: right;
+  }
+
+  .pr-idcard__id {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .pr-sheet {
+    margin-top: 40px;
+  }
+
+  .pr-status {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .pr-status__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+  }
+
+  .pr-chip {
+    flex: none;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  /* Page-scoped illustration colors (content/work/pr-pipeline-sync.md). */
+  .pr-chip--ok {
+    background: #e6f4ec;
+    color: #1d6b3f;
+  }
+
+  .pr-chip--req {
+    background: #fff4db;
+    color: #7a5300;
+  }
+
+  .pr-chip--fail {
+    background: #fde7ee;
+    color: #a3174c;
+  }
+
+  .pr-kpi {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 40px;
+    align-items: start;
+    margin-top: var(--space-12);
+  }
+
+  .pr-kpi__h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  :global(.pr-kpi__body) {
+    margin-top: var(--space-3);
+  }
+
+  .pr-kpi__list {
+    margin-top: var(--space-4);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .pr-kpi__small {
+    margin-top: var(--space-4);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .pr-example {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    padding: 18px 20px;
+    background: var(--surface-paper);
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-strong-muted);
+  }
+
+  .pr-example__label {
+    flex: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 24px;
+    color: var(--electric);
+  }
+
+  :global(.pr-note) {
+    max-width: 52em;
+    margin-top: var(--space-6);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .pr-accordions {
+    margin-top: 40px;
+  }
+
+  @media (max-width: 899px) {
+    .pr-identity__grid,
+    .pr-kpi {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .pr-hero-fig__panel {
+      padding: 16px;
+    }
+
+    .pr-identity {
+      padding-block: 40px;
+    }
+
+    .pr-identity__grid {
+      gap: var(--space-4);
+    }
+
+    .pr-h2 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .pr-body {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .pr-kpi {
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+
+    .pr-kpi__h3 {
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    .pr-accordions {
+      margin-top: var(--space-6);
+    }
+  }
+</style>

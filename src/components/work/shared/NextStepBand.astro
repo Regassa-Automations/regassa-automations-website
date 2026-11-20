@@ -1,0 +1,136 @@
+---
+/**
+ * Case-study CTA band (navy, single hexagon outline at 18% opacity).
+ * Booking goes to bookingUrl in a new tab (OI-04); the ghost button to /#inquiry.
+ * Phone: shorter body, full-width buttons and a "See other case studies" link.
+ */
+import Button from '../../ui/Button.astro';
+import Responsive from '../../ui/Responsive.astro';
+import { site } from '../../../config/site';
+
+interface Props {
+  h2: string;
+  body: string;
+  bodyMobile?: string;
+  ghostLabel?: string;
+  otherLinkMobile?: string;
+}
+const {
+  h2,
+  body,
+  bodyMobile,
+  ghostLabel = 'Tell me about your project',
+  otherLinkMobile = 'See other case studies',
+} = Astro.props;
+---
+
+<section class="nextstep on-navy" aria-labelledby="next-h">
+  <svg class="nextstep__hex" aria-hidden="true" focusable="false" viewBox="0 0 52 60" fill="none">
+    <polygon
+      points="26,1 51,15.5 51,44.5 26,59 1,44.5 1,15.5"
+      stroke="#C9D2F4"
+      stroke-width="0.6"
+    ></polygon>
+  </svg>
+  <div class="container container--case nextstep__inner">
+    <h2 id="next-h" class="nextstep__h2">
+      {h2}
+    </h2>
+    <Responsive as="p" class="nextstep__body" text={body} textMobile={bodyMobile} />
+    <div class="nextstep__actions">
+      <Button href={site.bookingUrl} external block="mobile">
+        Book a free consultation
+      </Button>
+      <Button href="/#inquiry" variant="ghost" block="mobile">
+        {ghostLabel}
+      </Button>
+    </div>
+    <a class="nextstep__other bp-mobile" href="/work/">
+      {otherLinkMobile}
+    </a>
+  </div>
+</section>
+
+<style>
+  .nextstep {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--space-18);
+    background: var(--navy);
+    color: var(--on-navy);
+  }
+
+  .nextstep__hex {
+    position: absolute;
+    right: 40px;
+    top: -60px;
+    width: 300px;
+    height: auto;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .nextstep__inner {
+    position: relative;
+  }
+
+  .nextstep__h2 {
+    max-width: 18ch;
+    font-size: 32px;
+    line-height: 40px;
+    color: var(--on-navy);
+  }
+
+  .nextstep :global(.nextstep__body) {
+    max-width: 36em;
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--footer-text);
+  }
+
+  .nextstep__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+  }
+
+  .nextstep__other {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: var(--space-3);
+    font-weight: 600;
+    color: var(--on-navy);
+  }
+
+  .nextstep__other:hover {
+    color: var(--on-navy);
+  }
+
+  @media (max-width: 767px) {
+    .nextstep {
+      padding-block: 40px;
+    }
+
+    .nextstep__hex {
+      display: none;
+    }
+
+    .nextstep__h2 {
+      font-size: 23px;
+      line-height: 30px;
+    }
+
+    .nextstep :global(.nextstep__body) {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .nextstep__actions {
+      flex-direction: column;
+      margin-top: var(--space-6);
+    }
+  }
+</style>

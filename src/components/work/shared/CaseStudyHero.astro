@@ -1,0 +1,268 @@
+---
+/**
+ * Case-study hero (03-design-system.md; content/work/*.md, Hero; content/mobile/README.md).
+ * Desktop: breadcrumb, tags, H1, lede and actions beside the figure, facts <dl> below.
+ * Phone: "← Portfolio" link, figure before the full-width actions, facts replaced by a note.
+ * Slots: `figure` (the hero figure), `actions` (the two buttons).
+ */
+import Tag from '../../ui/Tag.astro';
+import Responsive from '../../ui/Responsive.astro';
+import type { Pair } from '../../../data/types';
+
+interface Props {
+  crumb: string;
+  tags: string[];
+  /** Tags shown on phones (defaults to `tags`). */
+  tagsMobile?: string[];
+  own?: boolean;
+  h1: string;
+  lede: string;
+  ledeMobile?: string;
+  facts: Pair[];
+  factsNoteMobile?: string;
+}
+const {
+  crumb,
+  tags,
+  tagsMobile,
+  own = false,
+  h1,
+  lede,
+  ledeMobile,
+  facts,
+  factsNoteMobile,
+} = Astro.props;
+const mobileTags = tagsMobile ?? tags;
+---
+
+<section class="cshero" aria-labelledby="cs-h1">
+  <div class="container cshero__grid">
+    <div class="cshero__copy">
+      <nav class="cshero__crumbs bp-desktop" aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <a href="/work/">Portfolio</a>
+          </li>
+          <li>
+            <span aria-current="page">{crumb}</span>
+          </li>
+        </ol>
+      </nav>
+      <a class="cshero__back bp-mobile" href="/work/">
+        <span aria-hidden="true">←</span> Portfolio
+      </a>
+      <ul class="cshero__tags" role="list">
+        {own && (
+          <li>
+            <Tag own>Independent project</Tag>
+          </li>
+        )}
+        {tags.map((t) => (
+          <li class:list={[!mobileTags.includes(t) && 'bp-desktop']}>
+            <Tag>{t}</Tag>
+          </li>
+        ))}
+        {mobileTags
+          .filter((t) => !tags.includes(t))
+          .map((t) => (
+            <li class="bp-mobile">
+              <Tag>{t}</Tag>
+            </li>
+          ))}
+      </ul>
+      <h1 id="cs-h1" class="cshero__h1">
+        {h1}
+      </h1>
+      <Responsive as="p" class="cshero__lede" text={lede} textMobile={ledeMobile} />
+    </div>
+    <div class="cshero__actions">
+      <slot name="actions" />
+    </div>
+    <div class="cshero__figure">
+      <slot name="figure" />
+    </div>
+  </div>
+  <div class="container">
+    <dl class:list={['cshero__facts', factsNoteMobile && 'bp-desktop']}>
+      {facts.map((f) => (
+        <div>
+          <dt>{f.k}</dt>
+          <dd>{f.v}</dd>
+        </div>
+      ))}
+    </dl>
+    {factsNoteMobile && <p class="cshero__note bp-mobile">{factsNoteMobile}</p>}
+    <slot name="after" />
+  </div>
+</section>
+
+<style>
+  .cshero {
+    padding-block: var(--space-6) 40px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cshero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    grid-template-areas:
+      'copy figure'
+      'actions figure';
+    grid-template-rows: auto 1fr;
+    column-gap: 56px;
+  }
+
+  .cshero__copy {
+    grid-area: copy;
+  }
+
+  .cshero__actions {
+    grid-area: actions;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .cshero__figure {
+    grid-area: figure;
+    margin-top: var(--space-6);
+  }
+
+  .cshero__crumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-strong-muted);
+  }
+
+  .cshero__crumbs li + li::before {
+    content: '/';
+    margin-right: var(--space-2);
+    color: var(--text-muted);
+  }
+
+  .cshero__crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+  }
+
+  .cshero__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    font-weight: 600;
+  }
+
+  .cshero__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: 40px;
+  }
+
+  .cshero__h1 {
+    margin-top: var(--space-4);
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.01em;
+  }
+
+  .cshero :global(.cshero__lede) {
+    margin-top: var(--space-4);
+    font-size: 20px;
+    line-height: 31px;
+  }
+
+  .cshero__facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-8);
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--line);
+  }
+
+  .cshero__facts dt {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .cshero__facts dd {
+    margin-top: var(--space-2);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  @media (max-width: 959px) {
+    .cshero__grid {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'copy' 'actions' 'figure';
+      grid-template-rows: none;
+    }
+
+    .cshero__facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .cshero {
+      padding-block: var(--space-2) var(--space-6);
+    }
+
+    .cshero__grid {
+      grid-template-areas: 'copy' 'figure' 'actions';
+    }
+
+    .cshero__tags {
+      margin-top: var(--space-3);
+    }
+
+    .cshero__h1 {
+      margin-top: var(--space-3);
+      font-size: 30px;
+      line-height: 37px;
+    }
+
+    .cshero :global(.cshero__lede) {
+      font-size: 17px;
+      line-height: 27px;
+    }
+
+    .cshero__figure {
+      margin-top: var(--space-6);
+    }
+
+    .cshero__actions {
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: var(--space-4);
+    }
+
+    .cshero__actions :global(.btn) {
+      width: 100%;
+    }
+
+    .cshero__note {
+      margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      line-height: 20px;
+      color: var(--text-muted);
+    }
+  }
+</style>

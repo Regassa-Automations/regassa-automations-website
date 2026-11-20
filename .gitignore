@@ -1,0 +1,28 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# handoff package: local read-only reference, not committed
+_handoff/
+
+# test output
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# logs
+npm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# OS / editor
+.DS_Store
+.idea/
+tools/.og-*.html

@@ -1,0 +1,286 @@
+---
+/**
+ * Wide project card (03-design-system.md, Project card (wide, Portfolio)).
+ * Media panel on paper beside a text panel; wraps under ~960 px. One link per card (the H2).
+ * Phone: 4:3 media, caption dropped; `navyMobile` adds the navy border (freight).
+ */
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+import Tag from '../ui/Tag.astro';
+import Responsive from '../ui/Responsive.astro';
+
+interface Pair {
+  label: string;
+  text: string;
+  textMobile?: string;
+}
+
+interface Props {
+  href: string;
+  title: string;
+  tag: string;
+  tagMobile?: string;
+  featured?: string;
+  own?: boolean;
+  image: ImageMetadata;
+  alt: string;
+  altMobile?: string;
+  caption?: string;
+  framed?: boolean;
+  pairs: Pair[];
+  linkLine: string;
+  navyMobile?: boolean;
+}
+
+const {
+  href,
+  title,
+  tag,
+  tagMobile,
+  featured,
+  own = false,
+  image,
+  alt,
+  altMobile,
+  caption,
+  framed = false,
+  pairs,
+  linkLine,
+  navyMobile = false,
+} = Astro.props;
+const sizes = '(min-width: 1232px) 600px, (min-width: 960px) 50vw, calc(100vw - 32px)';
+const widths = [480, 640, 960, 1280];
+---
+
+<article class:list={['wcard', navyMobile && 'wcard--navy-mobile']}>
+  <figure class="wcard__media">
+    <div class:list={['wcard__frame', framed && 'wcard__frame--framed']}>
+      {altMobile ? (
+        <>
+          <Picture
+            pictureAttributes={{ class: 'bp-desktop' }}
+            src={image}
+            alt={alt}
+            formats={['avif', 'webp']}
+            widths={widths}
+            sizes={sizes}
+            loading="lazy"
+          />
+          <Picture
+            pictureAttributes={{ class: 'bp-mobile' }}
+            src={image}
+            alt={altMobile}
+            formats={['avif', 'webp']}
+            widths={widths}
+            sizes={sizes}
+            loading="lazy"
+          />
+        </>
+      ) : (
+        <Picture
+          src={image}
+          alt={alt}
+          formats={['avif', 'webp']}
+          widths={widths}
+          sizes={sizes}
+          loading="lazy"
+        />
+      )}
+    </div>
+    {caption && <figcaption class="wcard__caption bp-desktop">{caption}</figcaption>}
+  </figure>
+  <div class="wcard__body">
+    <div class="wcard__tags">
+      <Tag>
+        <Responsive text={tag} textMobile={tagMobile} />
+      </Tag>
+      {featured && <Tag featured>{featured}</Tag>}
+      {own && <Tag own>Independent project</Tag>}
+    </div>
+    <h2 class="wcard__title">
+      <a href={href}>{title}</a>
+    </h2>
+    <dl class="wcard__pairs">
+      {pairs.map((p) => (
+        <div>
+          <dt>{p.label}</dt>
+          <dd>
+            <Responsive text={p.text} textMobile={p.textMobile} />
+          </dd>
+        </div>
+      ))}
+    </dl>
+    <p class="wcard__more" aria-hidden="true">
+      {linkLine} →
+    </p>
+  </div>
+</article>
+
+<style>
+  .wcard {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    transition: border-color 120ms ease;
+  }
+
+  .wcard:hover {
+    border-color: var(--electric);
+  }
+
+  .wcard:focus-within {
+    box-shadow: var(--focus-ring);
+  }
+
+  .wcard__media {
+    padding: var(--space-6);
+    background: var(--surface-paper);
+    border-right: 1px solid var(--line);
+  }
+
+  .wcard__frame {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+  }
+
+  .wcard__frame--framed {
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .wcard__frame :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .wcard__frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+
+  .wcard__caption {
+    margin-top: var(--space-3);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--text-muted);
+  }
+
+  .wcard__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-8);
+  }
+
+  .wcard__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .wcard__title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .wcard__title a {
+    color: var(--heading);
+    text-decoration: none;
+  }
+
+  .wcard__title a:hover {
+    text-decoration: underline;
+  }
+
+  .wcard__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .wcard__title a:focus-visible {
+    box-shadow: none;
+  }
+
+  .wcard__pairs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .wcard__pairs dt {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .wcard__pairs dd {
+    margin-top: var(--space-1);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .wcard__more {
+    margin-top: auto;
+    padding-top: var(--space-2);
+    font-weight: 600;
+    color: var(--electric);
+  }
+
+  @media (forced-colors: active) {
+    .wcard:focus-within {
+      outline: 2px solid CanvasText;
+    }
+  }
+
+  @media (max-width: 959px) {
+    .wcard {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .wcard__media {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .wcard--navy-mobile {
+      border: 1.5px solid var(--navy);
+    }
+
+    .wcard__media {
+      padding: var(--space-4);
+    }
+
+    .wcard__frame {
+      aspect-ratio: 4 / 3;
+    }
+
+    .wcard__body {
+      gap: var(--space-3);
+      padding: 18px;
+    }
+
+    .wcard__title {
+      font-size: 21px;
+      line-height: 28px;
+    }
+
+    .wcard__pairs dd {
+      font-size: 15px;
+      line-height: 23px;
+    }
+  }
+</style>

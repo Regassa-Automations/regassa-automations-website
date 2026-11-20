@@ -1,0 +1,218 @@
+---
+/**
+ * Four-step journey (03-design-system.md, Route journey): cards with key/value panels and a note,
+ * chevrons between them on desktop, 2x2 under 1000 px, stacked with hex numerals on phones.
+ * The final step has the navy border and navy-tint panel.
+ */
+import HexNumeral from './HexNumeral.astro';
+import Responsive from '../../ui/Responsive.astro';
+import type { Pair } from '../../../data/types';
+
+export interface JourneyStep {
+  label: string;
+  title: string;
+  rows: Pair[];
+  /** Phone rows; omit to reuse `rows`; [] hides the panel on phones. */
+  rowsMobile?: Pair[];
+  note: string;
+  noteMobile?: string | null;
+  /** Phone-only accent note (replaces the dropped callout). */
+  alertMobile?: string;
+}
+interface Props {
+  steps: JourneyStep[];
+  label: string;
+}
+const { steps, label } = Astro.props;
+const last = steps.length - 1;
+---
+
+<ol class="journey" aria-label={label}>
+  {steps.map((s, i) => (
+    <li class:list={['jstep', i === last && 'jstep--final']}>
+      <HexNumeral n={i + 1} class="jstep__hex bp-mobile" />
+      <div class="jstep__body">
+        <p class="jstep__label mono bp-desktop">{s.label}</p>
+        <h3 class="jstep__title">{s.title}</h3>
+        {s.rows.length > 0 && (
+          <dl class:list={['jstep__kv', s.rowsMobile && 'bp-desktop']}>
+            {s.rows.map((r) => (
+              <div class:list={[r.muted && 'is-muted', r.mono && 'is-mono']}>
+                <dt>{r.k}</dt>
+                <dd>{r.v}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        {s.rowsMobile && s.rowsMobile.length > 0 && (
+          <dl class="jstep__kv bp-mobile">
+            {s.rowsMobile.map((r) => (
+              <div class:list={[r.muted && 'is-muted', r.mono && 'is-mono']}>
+                <dt>{r.k}</dt>
+                <dd>{r.v}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        {s.noteMobile === null ? (
+          <p class="jstep__note bp-desktop">{s.note}</p>
+        ) : (
+          <Responsive as="p" class="jstep__note" text={s.note} textMobile={s.noteMobile} />
+        )}
+        {s.alertMobile && <p class="jstep__alert bp-mobile">{s.alertMobile}</p>}
+      </div>
+      {i < last && (
+        <svg
+          class="jstep__chev"
+          aria-hidden="true"
+          focusable="false"
+          viewBox="0 0 12 12"
+          width="12"
+          height="12"
+        >
+          <path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+      )}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .journey {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .jstep {
+    position: relative;
+    display: flex;
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .jstep--final {
+    border: 1.5px solid var(--navy);
+  }
+
+  .jstep__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .jstep__label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--electric);
+  }
+
+  .jstep__title {
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--ink);
+  }
+
+  .jstep__kv {
+    padding: 12px;
+    background: var(--surface-paper);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .jstep--final .jstep__kv {
+    background: var(--navy-tint);
+  }
+
+  .jstep__kv > div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .jstep__kv dt {
+    color: var(--text-muted);
+  }
+
+  .jstep__kv dd {
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .jstep--final .jstep__kv dt,
+  .jstep--final .jstep__kv dd {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--navy);
+  }
+
+  .jstep__kv .is-mono dd {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .jstep__kv .is-muted dt,
+  .jstep__kv .is-muted dd {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .jstep :global(.jstep__note) {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-strong-muted);
+  }
+
+  .jstep__alert {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--error-inline);
+  }
+
+  .jstep__chev {
+    position: absolute;
+    top: 18px;
+    right: -16px;
+    color: var(--electric);
+  }
+
+  @media (max-width: 999px) {
+    .journey {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .jstep__chev {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .journey {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .jstep {
+      gap: var(--space-3);
+      padding: 14px;
+    }
+
+    .jstep__body {
+      gap: var(--space-2);
+      flex: 1;
+    }
+
+    .jstep__title {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+</style>

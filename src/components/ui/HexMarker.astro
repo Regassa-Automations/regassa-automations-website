@@ -1,0 +1,10 @@
+---
+/** Decorative hexagon marker (03-design-system.md, Brand devices). Always hidden from assistive tech. */
+interface Props {
+  size?: 'md' | 'sm';
+  class?: string;
+}
+const { size = 'md', class: className } = Astro.props;
+---
+
+<span class:list={['hex', size === 'sm' && 'hex--sm', className]} aria-hidden="true"></span>

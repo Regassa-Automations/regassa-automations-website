@@ -1,0 +1,66 @@
+---
+/** Not found (content/system-pages.md). noindex; Netlify serves dist/404.html for unknown routes. */
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import { notFound } from '../data/system';
+---
+
+<Base title={notFound.title} noindex>
+  <section class="container container--prose nf" aria-labelledby="nf-h">
+    <Eyebrow>{notFound.eyebrow}</Eyebrow>
+    <h1 id="nf-h" class="nf__h1">
+      {notFound.h1}
+    </h1>
+    <p class="nf__body">{notFound.body}</p>
+    <div class="nf__ctas">
+      <Button href={notFound.primary.href} block="mobile">
+        {notFound.primary.label}
+      </Button>
+      <Button href={notFound.secondary.href} variant="secondary" block="mobile">
+        {notFound.secondary.label}
+      </Button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-block: var(--space-18) 88px;
+  }
+
+  .nf__h1 {
+    margin-top: var(--space-3);
+    font-size: 44px;
+    line-height: 52px;
+    letter-spacing: -0.01em;
+  }
+
+  .nf__body {
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .nf__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+  }
+
+  @media (max-width: 767px) {
+    .nf {
+      padding-block: 40px 56px;
+    }
+
+    .nf__h1 {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .nf__ctas {
+      flex-direction: column;
+    }
+  }
+</style>

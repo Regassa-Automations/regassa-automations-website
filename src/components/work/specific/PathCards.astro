@@ -1,0 +1,130 @@
+---
+/**
+ * Volunteer intake path cards (03-design-system.md, Path card): mono label, H3, intro and an
+ * ordered list with mono electric numbers. The scheduled path has the navy border.
+ * Phone: plain cards with one short paragraph instead of the list.
+ */
+interface Card {
+  label: string;
+  labelMobile?: string;
+  title: string;
+  intro: string;
+  steps: string[];
+  textMobile: string;
+  scheduled?: boolean;
+}
+interface Props {
+  cards: Card[];
+}
+const { cards } = Astro.props;
+---
+
+<ul class="paths" role="list">
+  {cards.map((c) => (
+    <li class:list={['path', c.scheduled && 'path--scheduled']}>
+      <p class="path__label mono">
+        <span class="bp-desktop">{c.label}</span>
+        <span class="bp-mobile">{c.labelMobile ?? c.label}</span>
+      </p>
+      <h3 class="path__title">{c.title}</h3>
+      <p class="path__intro bp-desktop">{c.intro}</p>
+      <ol class="path__steps bp-desktop">
+        {c.steps.map((s, i) => (
+          <li>
+            <span class="path__num mono" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span>{s}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="path__intro bp-mobile">{c.textMobile}</p>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .paths {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: 40px;
+  }
+
+  .path {
+    padding: var(--space-6);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .path--scheduled {
+    border: 1.5px solid var(--navy);
+  }
+
+  .path__label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--electric);
+  }
+
+  .path__title {
+    margin-top: var(--space-2);
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--ink);
+  }
+
+  .path__intro {
+    margin-top: var(--space-2);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-strong-muted);
+  }
+
+  .path__steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .path__steps li {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .path__num {
+    flex: none;
+    line-height: 24px;
+    color: var(--electric);
+  }
+
+  @media (max-width: 899px) {
+    .paths {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .paths {
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    .path {
+      padding: var(--space-4);
+    }
+
+    .path__title {
+      font-size: 17px;
+      line-height: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+/**
+ * Architecture diagram panel: white bordered panel that scrolls horizontally below 760 px
+ * (focusable region labelled "Architecture diagram"), with a visible caption. The SVG comes
+ * through the default slot and carries role="img" and the full aria-label from the content file.
+ * `hideMobile` drops it on phones where the phone design does.
+ */
+import ScrollRegion from './ScrollRegion.astro';
+
+interface Props {
+  caption: string;
+  hideMobile?: boolean;
+}
+const { caption, hideMobile = false } = Astro.props;
+---
+
+<figure class:list={['arch', hideMobile && 'bp-desktop']}>
+  <ScrollRegion label="Architecture diagram" class="arch__panel">
+    <slot />
+  </ScrollRegion>
+  <figcaption class="arch__caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .arch {
+    margin-top: var(--space-8);
+  }
+
+  .arch :global(.arch__panel) {
+    padding: var(--space-8);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .arch :global(.arch__panel svg) {
+    display: block;
+    width: 100%;
+    min-width: 760px;
+    height: auto;
+    font-family: var(--font-body);
+  }
+
+  .arch__caption {
+    margin-top: var(--space-3);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+</style>

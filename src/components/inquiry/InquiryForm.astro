@@ -1,0 +1,280 @@
+---
+/**
+ * Inquiry form (content/home.md, Inquiry; 02-architecture.md, Inquiry form handling;
+ * 04-interactions-and-responsive.md, Inquiry form states).
+ * Posts to Formspree without JavaScript (OI-01). No `_next` field: the Free plan has no custom
+ * redirect. No `novalidate` in the markup, so browsers without JS keep native validation;
+ * src/scripts/inquiry-form.ts sets noValidate and takes over.
+ * The error summary, failure banner and success panel start hidden; only the script shows them.
+ */
+import FormField from './FormField.astro';
+import Button from '../ui/Button.astro';
+import HexMarker from '../ui/HexMarker.astro';
+import { inquiry } from '../../data/home';
+import { site } from '../../config/site';
+
+const [name, email, process, tools, freq] = inquiry.fields;
+const st = inquiry.states;
+// Strings the script needs at runtime (no inline scripts under the CSP, so they travel as data).
+const scriptStrings = JSON.stringify({
+  sending: st.sending,
+  sendingStatus: st.sendingStatus,
+  retry: st.retry,
+  submit: inquiry.submit,
+  summaryOne: st.errorSummaryOne,
+  summaryMany: st.errorSummaryMany,
+  errors: st.errors,
+  labels: st.summaryLabels,
+  heading: st.successHeading,
+  nameFallback: st.successNameFallback,
+});
+---
+
+<form
+  id="inquiry-form"
+  class="iform"
+  method="POST"
+  action={site.formEndpoint}
+  aria-labelledby="form-h"
+  data-strings={scriptStrings}
+>
+  <h3 id="form-h" class="iform__h3">
+    {inquiry.formH3}
+  </h3>
+  <input type="hidden" name="_subject" value={inquiry.subject} />
+  <div class="iform__hp" aria-hidden="true">
+    <label>
+      Leave blank <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+
+  <div class="iform__summary" id="form-errors" role="alert" tabindex="-1" hidden>
+    <h4 class="iform__summary-h" id="form-errors-h">
+      {st.errorSummaryOne}
+    </h4>
+    <ul class="iform__summary-list"></ul>
+  </div>
+
+  <div class="iform__failure" id="form-failure" role="alert" tabindex="-1" hidden>
+    <p class="iform__failure-title">{st.failureTitle}</p>
+    <p>{st.failureBody}</p>
+  </div>
+
+  <div class="iform__fields">
+    <FormField {...name} />
+    <FormField {...email} />
+    <FormField {...process} />
+    <div class="iform__pair">
+      <FormField {...tools} />
+      <FormField {...freq} />
+    </div>
+  </div>
+
+  <div class="iform__actions">
+    <Button type="submit" block="mobile" class="iform__submit">
+      {inquiry.submit}
+    </Button>
+    <p class="iform__status" id="form-status" role="status" aria-live="polite"></p>
+  </div>
+
+  <p class="iform__privacy">
+    <span class="bp-desktop">
+      {inquiry.privacy.before} <a href={inquiry.privacy.href}>{inquiry.privacy.link}</a>{' '}
+      {inquiry.privacy.after}
+    </span>
+    <span class="bp-mobile">
+      {inquiry.privacy.mobileBefore} <a href={inquiry.privacy.href}>{inquiry.privacy.mobileLink}</a>
+    </span>
+  </p>
+</form>
+
+<div class="isuccess" id="inquiry-success" role="status" hidden>
+  <p class="isuccess__label mono">
+    <HexMarker size="sm" />
+    {st.successLabel}
+  </p>
+  <h3 class="isuccess__h" id="inquiry-success-h" tabindex="-1">
+    {st.successHeading.replace('{name}', st.successNameFallback)}
+  </h3>
+  <p class="isuccess__body">
+    {`${st.successBodyBefore} `}
+    <strong id="inquiry-success-email"></strong>
+    {st.successBodyAfter}
+  </p>
+  <p class="isuccess__booking">
+    {`${st.bookingPrefix} `}
+    <a href={site.bookingUrl} target="_blank" rel="noopener">
+      {st.bookingLink}
+      <span class="visually-hidden"> (opens in a new tab)</span>
+    </a>
+    .
+  </p>
+  <Button type="button" variant="secondary" class="isuccess__again">
+    {st.another}
+  </Button>
+</div>
+
+<script>
+  import '../../scripts/inquiry-form';
+</script>
+
+<style>
+  .iform__h3 {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  /* Honeypot: off-screen, out of the tab order and hidden from assistive tech. */
+  .iform__hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .iform__summary,
+  .iform__failure {
+    margin-top: 20px;
+    padding: var(--space-4) 20px;
+    background: var(--error-bg);
+    border: 1.5px solid var(--error-border);
+    border-radius: var(--radius-md);
+    color: var(--error-text);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .iform__summary[hidden],
+  .iform__failure[hidden] {
+    display: none;
+  }
+
+  .iform__summary-h,
+  .iform__failure-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--error-text);
+  }
+
+  .iform__summary-list {
+    margin-top: var(--space-2);
+    padding-left: 20px;
+  }
+
+  .iform__summary-list :global(a) {
+    color: var(--error-text);
+    font-weight: 600;
+  }
+
+  .iform__failure p + p {
+    margin-top: var(--space-1);
+  }
+
+  .iform__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .iform__pair {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px 22px;
+    align-items: start;
+  }
+
+  .iform__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+    margin-top: var(--space-6);
+  }
+
+  .iform__status:empty {
+    display: none;
+  }
+
+  .iform__status {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .iform__privacy {
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  /* Success panel */
+  .isuccess[hidden] {
+    display: none;
+  }
+
+  .isuccess__label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--electric);
+  }
+
+  .isuccess__h {
+    margin-top: var(--space-3);
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .isuccess__body,
+  .isuccess__booking {
+    margin-top: var(--space-3);
+  }
+
+  .isuccess :global(.isuccess__again) {
+    margin-top: var(--space-6);
+  }
+
+  @media (max-width: 767px) {
+    /* The H3 stays for aria-labelledby but is not shown on phones (home-mobile.md). */
+    .iform__h3 {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .iform__fields {
+      margin-top: 0;
+    }
+
+    .iform__summary + .iform__failure,
+    .iform__summary:not([hidden]) ~ .iform__fields,
+    .iform__failure:not([hidden]) ~ .iform__fields {
+      margin-top: 20px;
+    }
+
+    .iform__pair {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .iform__privacy {
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .isuccess__h {
+      font-size: 21px;
+      line-height: 28px;
+    }
+  }
+</style>

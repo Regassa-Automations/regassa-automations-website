@@ -1,0 +1,35 @@
+---
+/**
+ * Renders text segments (src/data/types.ts). Link segments become <a>; external links open in a
+ * new tab and say so. `strong` and `mono` segments get <strong> / <span class="mono">.
+ */
+import type { Segment } from '../../data/types';
+
+interface Props {
+  segments: Segment[] | string;
+}
+const { segments } = Astro.props;
+const list = typeof segments === 'string' ? [segments] : segments;
+---
+
+{list.map((seg) => {
+  if (typeof seg === 'string') return seg;
+  const inner = seg.strong ? (
+    <strong>{seg.text}</strong>
+  ) : seg.mono ? (
+    <span class="mono-inline tabular">{seg.text}</span>
+  ) : seg.muted ? (
+    <span class="muted-inline">{seg.text}</span>
+  ) : (
+    seg.text
+  );
+  if (!seg.href) return inner;
+  return seg.href.startsWith('http') ? (
+    <a href={seg.href} target="_blank" rel="noopener">
+      {inner}
+      <span class="visually-hidden"> (opens in a new tab)</span>
+    </a>
+  ) : (
+    <a href={seg.href}>{inner}</a>
+  );
+})}

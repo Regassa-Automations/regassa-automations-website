@@ -1,0 +1,13 @@
+---
+/** Eyebrow label: Montserrat 500, 12/16, .3em, uppercase, accent text. */
+interface Props {
+  as?: 'p' | 'span' | 'div';
+  class?: string;
+  id?: string;
+}
+const { as: Tag = 'p', class: className, id } = Astro.props;
+---
+
+<Tag class:list={['eyebrow', className]} id={id}>
+  <slot />
+</Tag>

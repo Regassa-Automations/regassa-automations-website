@@ -1,0 +1,147 @@
+---
+/**
+ * Full-width navy client review (03-design-system.md, Review band). Quote text comes from
+ * projects.yaml and is reproduced exactly. Section labelled "Client review".
+ */
+import StarRating from '../../ui/StarRating.astro';
+
+interface Props {
+  id?: string;
+  quote: string;
+  /** Optional second paragraph (the rest of a long review). */
+  rest?: string;
+  attribution?: string;
+  /** Phone design wraps the whole review in one pair of curly quotes (decorative). */
+  wrapQuotesMobile?: boolean;
+}
+const {
+  id = 'review',
+  quote,
+  rest,
+  attribution = 'Client, verified Upwork review',
+  wrapQuotesMobile = false,
+} = Astro.props;
+---
+
+<section id={id} class="rband on-navy" aria-label="Client review" tabindex="-1">
+  <div class="container container--case">
+    <figure class="rband__fig">
+      <svg
+        class="rband__mark bp-desktop"
+        aria-hidden="true"
+        focusable="false"
+        viewBox="0 0 40 32"
+        width="40"
+        height="32"
+      >
+        <path
+          d="M0 32V19.2C0 8.8 5.6 2.4 16 0l2 4.4C11.6 6.4 8.8 10 8.4 15.2H16V32H0zm22 0V19.2C22 8.8 27.6 2.4 38 0l2 4.4c-6.4 2-9.2 5.6-9.6 10.8H38V32H22z"
+          fill="currentColor"
+        ></path>
+      </svg>
+      <blockquote class="rband__quote">
+        <p class="rband__lead">
+          {wrapQuotesMobile && (
+            <span class="bp-mobile" aria-hidden="true">
+              “
+            </span>
+          )}
+          {quote}
+          {wrapQuotesMobile && !rest && (
+            <span class="bp-mobile" aria-hidden="true">
+              ”
+            </span>
+          )}
+        </p>
+        {rest && (
+          <p class="rband__rest">
+            {rest}
+            {wrapQuotesMobile && (
+              <span class="bp-mobile" aria-hidden="true">
+                ”
+              </span>
+            )}
+          </p>
+        )}
+      </blockquote>
+      <figcaption class="rband__caption">
+        <StarRating class="rband__stars" />
+        <span>{attribution}</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .rband {
+    padding-block: var(--space-18);
+    background: var(--navy);
+    color: var(--on-navy);
+  }
+
+  .rband__fig {
+    max-width: 860px;
+  }
+
+  .rband__mark {
+    color: var(--on-navy-muted);
+  }
+
+  .rband__quote {
+    margin-top: 20px;
+  }
+
+  .rband__lead {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 40px;
+  }
+
+  .rband__rest {
+    margin-top: var(--space-4);
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--footer-text);
+  }
+
+  .rband__caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    margin-top: var(--space-6);
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--on-navy-muted);
+  }
+
+  .rband__caption :global(.rband__stars) {
+    color: var(--on-navy);
+  }
+
+  @media (max-width: 767px) {
+    .rband {
+      padding-block: 40px;
+    }
+
+    .rband__quote {
+      margin-top: 0;
+    }
+
+    .rband__lead {
+      font-size: 20px;
+      line-height: 29px;
+    }
+
+    .rband__rest {
+      font-size: 15px;
+      line-height: 24px;
+    }
+
+    .rband__caption {
+      margin-top: var(--space-4);
+      font-size: 13px;
+    }
+  }
+</style>

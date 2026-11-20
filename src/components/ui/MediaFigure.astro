@@ -1,0 +1,133 @@
+---
+/**
+ * Image figure (03-design-system.md, Media figure): bordered, radius 8, caption 14/22 muted.
+ * `ratio` crops with object-fit: cover; `ratioMobile` overrides it below 768 px.
+ * No inline styles (CSP style-src 'self'): ratios and positions are data attributes.
+ * The caption slot carries the text; `tag` adds the "Fictional demo data" chip before it.
+ */
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+import Tag from './Tag.astro';
+
+type Ratio = '16/10' | '16/9' | '4/3' | '4/5';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  widths: number[];
+  sizes: string;
+  ratio?: Ratio;
+  ratioMobile?: Ratio;
+  position?: 'top-left' | 'top' | 'center';
+  tag?: string;
+  eager?: boolean;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  widths,
+  sizes,
+  ratio,
+  ratioMobile,
+  position = 'top-left',
+  tag,
+  eager = false,
+  class: className,
+} = Astro.props;
+const hasCaption = Astro.slots.has('default') || Boolean(tag);
+---
+
+<figure
+  class:list={['media-figure', className]}
+  data-ratio={ratio}
+  data-ratio-m={ratioMobile ?? ratio}
+  data-pos={position}
+>
+  <div class="media-figure__frame">
+    <Picture
+      src={src}
+      alt={alt}
+      formats={['avif', 'webp']}
+      widths={widths}
+      sizes={sizes}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+    />
+  </div>
+  {hasCaption && (
+    <figcaption class="media-figure__caption">
+      {tag && (
+        <Tag hex class="media-figure__tag">
+          {tag}
+        </Tag>
+      )}{' '}
+      <slot />
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .media-figure__frame {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+  }
+
+  .media-figure[data-ratio] .media-figure__frame :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .media-figure[data-ratio] .media-figure__frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  [data-ratio='16/10'] .media-figure__frame {
+    aspect-ratio: 16 / 10;
+  }
+  [data-ratio='16/9'] .media-figure__frame {
+    aspect-ratio: 16 / 9;
+  }
+  [data-ratio='4/3'] .media-figure__frame {
+    aspect-ratio: 4 / 3;
+  }
+  [data-ratio='4/5'] .media-figure__frame {
+    aspect-ratio: 4 / 5;
+  }
+
+  [data-pos='top-left'] .media-figure__frame :global(img) {
+    object-position: left top;
+  }
+  [data-pos='top'] .media-figure__frame :global(img) {
+    object-position: center top;
+  }
+
+  .media-figure__caption {
+    margin-top: var(--space-3);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .media-figure__caption :global(.media-figure__tag) {
+    margin-right: var(--space-2);
+    vertical-align: middle;
+  }
+
+  @media (max-width: 767px) {
+    [data-ratio-m='16/10'] .media-figure__frame {
+      aspect-ratio: 16 / 10;
+    }
+    [data-ratio-m='16/9'] .media-figure__frame {
+      aspect-ratio: 16 / 9;
+    }
+    [data-ratio-m='4/3'] .media-figure__frame {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>

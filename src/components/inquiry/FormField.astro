@@ -1,0 +1,117 @@
+---
+/**
+ * Labelled form field (03-design-system.md, Inquiry section; 05-accessibility.md, Form).
+ * "(required)" / "(optional)" sit in the label text. The hint is linked by aria-describedby;
+ * the inline error (`${id}-err`) starts hidden and is filled by src/scripts/inquiry-form.ts.
+ */
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  hint?: string;
+  required: boolean;
+  type: 'text' | 'email' | 'textarea';
+  autocomplete: string;
+  class?: string;
+}
+const { id, name, label, hint, required, type, autocomplete, class: className } = Astro.props;
+const hintId = hint ? `${id}-hint` : undefined;
+---
+
+<div class:list={['field', className]}>
+  <label class="field__label" for={id}>
+    {label} <span class="field__req">{required ? '(required)' : '(optional)'}</span>
+  </label>
+  {hint && (
+    <p class="field__hint" id={hintId}>
+      {hint}
+    </p>
+  )}
+  <p class="field__error" id={`${id}-err`} hidden></p>
+  {type === 'textarea' ? (
+    <textarea
+      class="field__input field__input--area"
+      id={id}
+      name={name}
+      rows="5"
+      required={required}
+      aria-required={required ? 'true' : undefined}
+      aria-describedby={hintId}
+      autocomplete={autocomplete as 'off'}
+    />
+  ) : (
+    <input
+      class="field__input"
+      id={id}
+      name={name}
+      type={type}
+      inputmode={type === 'email' ? 'email' : undefined}
+      required={required}
+      aria-required={required ? 'true' : undefined}
+      aria-describedby={hintId}
+      autocomplete={autocomplete as 'off'}
+    />
+  )}
+</div>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .field__label {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--ink);
+  }
+
+  .field__req {
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .field__hint {
+    margin-top: var(--space-1);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .field__error {
+    margin-top: var(--space-1);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--error-inline);
+  }
+
+  .field__input {
+    width: 100%;
+    margin-top: var(--space-2);
+    padding: 12px 14px;
+    border: 1.5px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--text);
+  }
+
+  .field__input--area {
+    min-height: 146px;
+    resize: vertical;
+  }
+
+  .field__input[aria-invalid='true'] {
+    border-color: var(--error-border);
+  }
+
+  @media (prefers-contrast: more) {
+    .field__input {
+      border-width: 2px;
+    }
+  }
+</style>

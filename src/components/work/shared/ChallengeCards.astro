@@ -1,0 +1,88 @@
+---
+/** Three challenge cards: mono label, H3 and a short body (phone: short body). */
+import Responsive from '../../ui/Responsive.astro';
+
+interface Item {
+  label: string;
+  title: string;
+  titleMobile?: string;
+  text: string;
+  textMobile?: string;
+}
+interface Props {
+  items: Item[];
+  /** Phone design drops the mono labels. */
+  labelsMobile?: boolean;
+}
+const { items, labelsMobile = true } = Astro.props;
+---
+
+<ul class="ccards" role="list">
+  {items.map((i) => (
+    <li class="ccard">
+      <p class:list={['ccard__label mono', !labelsMobile && 'bp-desktop']}>{i.label}</p>
+      <h3 class="ccard__title">
+        <Responsive text={i.title} textMobile={i.titleMobile} />
+      </h3>
+      <Responsive as="p" class="ccard__text" text={i.text} textMobile={i.textMobile} />
+    </li>
+  ))}
+</ul>
+
+<style>
+  .ccards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
+    margin-top: 40px;
+  }
+
+  .ccard {
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .ccard__label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--electric);
+  }
+
+  .ccard__title {
+    margin-top: var(--space-3);
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+
+  .ccard :global(.ccard__text) {
+    margin-top: var(--space-2);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-strong-muted);
+  }
+
+  @media (max-width: 767px) {
+    .ccards {
+      margin-top: var(--space-6);
+      gap: var(--space-3);
+    }
+
+    .ccard {
+      padding: var(--space-4);
+    }
+
+    .ccard__title {
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    .ccard :global(.ccard__text) {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+</style>

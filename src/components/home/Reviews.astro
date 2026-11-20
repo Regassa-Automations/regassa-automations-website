@@ -1,0 +1,123 @@
+---
+/**
+ * Home "What clients say" (#reviews). Review text comes from projects.yaml and is quoted exactly.
+ * No Review or AggregateRating structured data (06-content-rules.md).
+ */
+import { getCollection } from 'astro:content';
+import SectionHeading from '../ui/SectionHeading.astro';
+import ReviewFeatured from './ReviewFeatured.astro';
+import ReviewCard from './ReviewCard.astro';
+import { reviews } from '../../data/home';
+import { site } from '../../config/site';
+
+const all = await getCollection('reviews');
+const byId = new Map(all.map((r) => [r.data.id, r.data]));
+const featuredReview = byId.get(reviews.featuredId);
+const cards = reviews.cardIds.map((id) => byId.get(id)).filter((r) => r !== undefined);
+if (!featuredReview || cards.length !== reviews.cardIds.length) {
+  throw new Error('Home reviews: missing review in projects.yaml');
+}
+
+const upworkLink = { href: site.upworkReviewsUrl, label: reviews.upworkLinkLabel };
+---
+
+<section
+  id="reviews"
+  class="section section--home section--paper section--ruled"
+  aria-labelledby="reviews-h"
+>
+  <div class="container">
+    <div class="reviews__head">
+      <SectionHeading id="reviews-h" eyebrow={reviews.eyebrow} focusTarget>
+        {reviews.h2}
+      </SectionHeading>
+      <a
+        class="arrow-link reviews__upwork bp-desktop"
+        href={upworkLink.href}
+        target="_blank"
+        rel="noopener"
+      >
+        {upworkLink.label}
+        <span aria-hidden="true">↗</span>
+        <span class="visually-hidden">(opens in a new tab)</span>
+      </a>
+    </div>
+
+    <ReviewFeatured
+      quote={featuredReview.excerpt}
+      attribution={reviews.attribution}
+      projectLabel={featuredReview.projectLabel}
+      projectLabelMobile={reviews.featuredProjectLabelMobile}
+      link={reviews.fullReviewLink}
+    />
+
+    <ul class="reviews__cards" role="list">
+      {cards.map((r) => (
+        <li>
+          <ReviewCard
+            quote={r.excerpt}
+            attribution={reviews.attribution}
+            attributionMobile={reviews.attributionMobile}
+            projectLabel={r.projectLabel}
+            projectHref={r.project ? `/work/${r.project}/` : undefined}
+          />
+        </li>
+      ))}
+    </ul>
+
+    <a
+      class="arrow-link reviews__upwork bp-mobile"
+      href={upworkLink.href}
+      target="_blank"
+      rel="noopener"
+    >
+      {upworkLink.label}
+      <span aria-hidden="true">↗</span>
+      <span class="visually-hidden">(opens in a new tab)</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .reviews__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4) var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  .reviews__upwork {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .reviews__cards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  .reviews__cards > li {
+    display: flex;
+  }
+
+  @media (max-width: 767px) {
+    .reviews__head {
+      margin-bottom: var(--space-6);
+    }
+
+    .reviews__cards {
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    .reviews__upwork {
+      margin-top: var(--space-4);
+    }
+  }
+</style>

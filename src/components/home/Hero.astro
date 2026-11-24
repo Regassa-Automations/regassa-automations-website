@@ -17,7 +17,7 @@ import { hero } from '../../data/home';
         {hero.h1}
       </h1>
       <p class="hero__lede">{hero.lede}</p>
-      <div class="hero__ctas">
+      <div class="hero__ctas" data-mobile-cta-hide-while-visible>
         <Button href={hero.primary.href} block="mobile">
           {hero.primary.label}
         </Button>

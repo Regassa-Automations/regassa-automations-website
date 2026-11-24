@@ -25,7 +25,7 @@ export interface NavItem {
 
 export const primaryNav: NavItem[] = [
   { key: 'home', label: 'Home', href: '/' },
-  { key: 'services', label: 'Services', href: '/#services', homeHref: '#services' },
+  { key: 'services', label: 'Services', href: '/services/' },
   { key: 'portfolio', label: 'Portfolio', href: '/work/' },
   { key: 'about', label: 'About', href: '/about/' },
 ];
@@ -39,7 +39,7 @@ export const primaryCta = {
 
 /** Footer "Site" links (full footer) and compact footer links. */
 export const footerSiteLinks = [
-  { label: 'Services', href: '/#services', homeHref: '#services' },
+  { label: 'Services', href: '/services/' },
   { label: 'Portfolio', href: '/work/' },
   { label: 'About', href: '/about/' },
   { label: 'Privacy', href: '/privacy/' },

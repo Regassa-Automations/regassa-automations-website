@@ -9,6 +9,7 @@ const INDEXABLE = [
   '/',
   '/work/',
   '/about/',
+  '/services/',
   '/privacy/',
   '/work/freight-rate-sheet-generator/',
   '/work/gridbloom/',

@@ -35,6 +35,9 @@ import { approach, pricing } from '../../data/home';
       <p class="pricing__body">
         <Responsive text={pricing.body} textMobile={pricing.bodyMobile} />
       </p>
+      <a class="arrow-link pricing__link" href={pricing.link.href}>
+        {pricing.link.label} <span aria-hidden="true">→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -92,6 +95,14 @@ import { approach, pricing } from '../../data/home';
     font-size: 20px;
     line-height: 28px;
     color: var(--ink);
+  }
+
+  .pricing__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    margin-top: var(--space-2);
   }
 
   .pricing__body {

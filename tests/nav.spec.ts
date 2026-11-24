@@ -17,7 +17,7 @@ test.describe('desktop nav', () => {
     await expect(nav).toBeVisible();
     await expect(details(page)).toBeHidden();
     await expect(nav.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
-    await expect(nav.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '#services');
+    await expect(nav.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '/services/');
     await expect(nav.getByRole('link', { name: 'Discuss your workflow' })).toHaveAttribute(
       'href',
       '#inquiry',
@@ -29,7 +29,7 @@ test.describe('desktop nav', () => {
   test('uses root-relative hash links off Home', async ({ page }) => {
     await page.goto('/about/');
     const nav = page.locator('.nav-desktop');
-    await expect(nav.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '/#services');
+    await expect(nav.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '/services/');
     await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
   });
 });
@@ -66,9 +66,9 @@ test.describe('mobile menu', () => {
   test('activating a link closes the menu (same-page hash link)', async ({ page }) => {
     await page.goto('/');
     await summary(page).click();
-    await page.locator('.menu__panel').getByRole('link', { name: 'Services' }).click();
+    await page.locator('.menu__panel').getByRole('link', { name: 'Discuss your workflow' }).click();
     await expect(details(page)).not.toHaveAttribute('open', '');
-    await expect(page).toHaveURL(/#services$/);
+    await expect(page).toHaveURL(/#inquiry$/);
   });
 
   test('a click outside the header closes the menu', async ({ page }) => {
@@ -128,7 +128,7 @@ test.describe('sticky mobile CTA bar', () => {
   });
 
   test('is not rendered on other pages', async ({ page }) => {
-    for (const path of ['/about/', '/work/', '/privacy/', '/work/gridbloom/']) {
+    for (const path of ['/about/', '/services/', '/work/', '/privacy/', '/work/gridbloom/']) {
       await page.goto(path);
       await expect(page.locator('[data-mobile-cta]')).toHaveCount(0);
     }

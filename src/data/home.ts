@@ -181,6 +181,7 @@ export const services = {
   h2: 'Three kinds of work, built around how your team already operates',
   addressesLabel: 'Addresses',
   relatedLabel: 'Examples:',
+  moreLink: { label: 'Services, pricing and how a project runs', href: '/services/' },
   items: [
     {
       title: 'Tools that run your process',
@@ -272,6 +273,7 @@ export const approach = {
 /** OI-23, pricing Option A (transparent ranges), approved by Ayu 2026-11-24. */
 export const pricing = {
   h3: 'How pricing works',
+  link: { label: 'Discovery options, support plans and full pricing', href: '/services/#pricing' },
   body: "Every project starts with a free 30-minute consultation. Small, clearly defined projects get a written fixed quote, typically $1,500 to $5,000. For larger or more complex workflows, we start with a paid discovery phase (from $750), and the full discovery fee is credited toward your build if you go ahead. Most multi-step automation projects fall between $5,000 and $15,000. You'll always know the price before work begins.",
   bodyMobile:
     "Free 30-minute consultation. Small projects get a written fixed quote, typically $1,500 to $5,000. Larger ones start with a paid discovery phase from $750, credited in full toward your build. You'll always know the price before work begins.",

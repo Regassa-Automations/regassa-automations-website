@@ -30,6 +30,7 @@ const cardSizes = '(min-width: 1232px) 384px, (min-width: 768px) 45vw, calc(100v
         {selectedWork.allLink.label} <span aria-hidden="true">→</span>
       </a>
     </div>
+    <p class="work__intro bp-desktop">{selectedWork.intro}</p>
 
     <ul class="work__grid" role="list">
       {projects.map((p) => {
@@ -42,7 +43,7 @@ const cardSizes = '(min-width: 1232px) 384px, (min-width: 768px) 45vw, calc(100v
               tag={p.data.tags[0] ?? ''}
               tagMobile={extra.tagMobile}
               own={p.data.ownProject}
-              summary={p.data.cardSummary ?? ''}
+              summary={extra.summary ?? p.data.cardSummary ?? ''}
               summaryMobile={extra.summaryMobile}
               linkLine={selectedWork.cardLinkLine}
               mediaMobile={p.data.homeCard === 1}
@@ -94,6 +95,14 @@ const cardSizes = '(min-width: 1232px) 384px, (min-width: 768px) 45vw, calc(100v
 
   .work__head :global(.section-heading) {
     max-width: 640px;
+  }
+
+  .work__intro {
+    max-width: 46em;
+    margin-top: var(--space-4);
+    font-size: 17px;
+    line-height: 26px;
+    color: var(--text-muted);
   }
 
   .work__all {

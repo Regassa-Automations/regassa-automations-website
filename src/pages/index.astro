@@ -1,10 +1,9 @@
 ---
-/** Home (content/home.md; phone: content/mobile/home-mobile.md). */
+/** Home (content/home.md; phone: content/mobile/home-mobile.md). Section order revised for OI-22. */
 import Base from '../layouts/Base.astro';
 import Hero from '../components/home/Hero.astro';
 import SelectedWork from '../components/home/SelectedWork.astro';
 import Problems from '../components/home/Problems.astro';
-import Featured from '../components/home/Featured.astro';
 import Services from '../components/home/Services.astro';
 import Approach from '../components/home/Approach.astro';
 import Reviews from '../components/home/Reviews.astro';
@@ -27,10 +26,9 @@ import { professionalService } from '../lib/jsonld';
   jsonLd={[professionalService()]}
 >
   <Hero />
-  <SelectedWork />
   <Problems />
-  <Featured />
   <Services />
+  <SelectedWork />
   <Approach />
   <Reviews />
   <FounderBlock />

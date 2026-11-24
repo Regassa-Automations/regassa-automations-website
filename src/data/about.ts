@@ -2,6 +2,7 @@
  * About copy, transcribed verbatim from _handoff/content/about.md and
  * _handoff/content/mobile/about-mobile.md (`...Mobile`, below 768 px).
  * Tools list is the confirmed 11-item list (OI-06 resolved); the canvas review note is never shown.
+ * Background items revised for OI-22 (industries worked with; law firm context), 2026-11-24.
  */
 
 export const meta = {
@@ -38,13 +39,13 @@ export const background = {
     },
     {
       title: 'Software development',
-      text: 'I have more than seven years of software engineering experience, much of it building workflow automation in Python and Google Apps Script for real teams with real constraints.',
+      text: "I have more than seven years of software engineering experience, much of it building workflow automation in Python and Google Apps Script. I've built systems for teams in freight logistics, PR and communications, and community programs. The industries differ, but the problems are the same: information typed in twice, rules that live in one person's head, and documents rebuilt by hand.",
       textMobile:
         'More than seven years of software engineering, much of it workflow automation in Python and Google Apps Script.',
     },
     {
       title: 'Patent technical work',
-      text: 'As a patent technical specialist, I read dense technical material and described exactly what a system does and does not do. I apply the same precision to your business rules and their exceptions.',
+      text: 'As a patent technical specialist at a law firm, I read dense technical material and described exactly what a system does and does not do, under strict accuracy and deadline standards. I apply the same precision to your business rules and their exceptions.',
       textMobile:
         'Describing exactly what a system does and does not do. I apply the same precision to your rules and exceptions.',
     },

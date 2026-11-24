@@ -107,14 +107,24 @@ test.describe('without JavaScript', () => {
 test.describe('sticky mobile CTA bar', () => {
   onlyIn('mobile');
 
-  test('shows on Home and hides while #inquiry is in view', async ({ page }) => {
+  test('stays hidden while the hero CTAs are on screen (OI-21)', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.hero__ctas')).toBeInViewport();
+    await expect(page.locator('[data-mobile-cta]')).toBeHidden();
+  });
+
+  test('shows once past the hero and hides while #inquiry is in view', async ({ page }) => {
     await page.goto('/');
     const bar = page.locator('[data-mobile-cta]');
+    await page.locator('#services').scrollIntoViewIfNeeded();
+    await expect(page.locator('.hero__ctas')).not.toBeInViewport();
     await expect(bar).toBeVisible();
     await page.locator('#inquiry').scrollIntoViewIfNeeded();
     await expect(bar).toBeHidden();
-    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.locator('#services').scrollIntoViewIfNeeded();
     await expect(bar).toBeVisible();
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(bar).toBeHidden();
   });
 
   test('is not rendered on other pages', async ({ page }) => {

@@ -153,6 +153,7 @@ import { meta, intro, whatIBuild, howItWorks, pricing, faq, next } from '../data
           </li>
         ))}
       </ul>
+      <p class="sv-fineprint">{pricing.support.fairUse}</p>
     </div>
   </section>
 
@@ -399,6 +400,14 @@ import { meta, intro, whatIBuild, howItWorks, pricing, faq, next } from '../data
     margin-top: var(--space-3);
     font-size: 16px;
     line-height: 26px;
+  }
+
+  .sv-fineprint {
+    max-width: 52em;
+    margin-top: var(--space-4);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
   }
 
   .sv-faq {

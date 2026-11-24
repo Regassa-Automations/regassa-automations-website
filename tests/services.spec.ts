@@ -24,6 +24,7 @@ test.describe('Services page, desktop', () => {
       ...pricing.builds.rows.flatMap((r) => [r.label, r.price, r.detail]),
       ...pricing.factors.items,
       pricing.support.text,
+      pricing.support.fairUse,
       ...pricing.support.plans.flatMap((p) => [p.name, p.price, p.includes]),
       ...faq.items.flatMap((i) => [i.q, i.a]),
     ];

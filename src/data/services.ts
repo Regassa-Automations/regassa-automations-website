@@ -144,28 +144,29 @@ export const pricing = {
   },
   support: {
     h3: 'Ongoing support plans',
-    text: 'Optional, month to month unless noted. Plans cover keeping your system running: fixes, and updates when the tools it relies on change. New features are quoted separately.',
+    text: 'Optional, month to month unless noted. On every plan, fixes are covered: if something I built breaks, or a tool it relies on changes, I fix it at no extra cost. Higher plans add time each month for changes and improvements. New features are quoted separately.',
+    fairUse:
+      'Covered fixes apply to systems I built, under normal use. Work caused by changes someone else makes to the system is quoted separately. Unused hours do not roll over.',
     plans: [
       {
         name: 'Care',
         price: '$175 a month',
         fit: 'One or two small automations.',
-        includes:
-          'Fixes when something breaks or a connected tool changes, up to about 1 hour a month.',
+        includes: 'Monitoring and covered fixes. Small changes are quoted separately.',
       },
       {
         name: 'Standard',
         price: '$450 a month',
         fit: 'Mid-size systems.',
         includes:
-          'Up to about 3 hours a month of fixes and small adjustments, priority scheduling, and a quarterly check-in.',
+          'Covered fixes, plus up to 4 hours a month for changes and adjustments, and a quarterly check-in.',
       },
       {
         name: 'Partner',
         price: '$1,100 a month',
         fit: 'Larger systems your team relies on every day.',
         includes:
-          'Up to about 8 hours a month, including small improvements, and a monthly review. Three-month minimum.',
+          'Covered fixes, plus up to 10 hours a month for improvements, and a monthly review. Three-month minimum.',
       },
     ],
   },

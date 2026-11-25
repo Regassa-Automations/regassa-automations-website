@@ -64,9 +64,9 @@ export const selectedWork = {
       // OI-18: sample PDF page 1 placement approved by Ayu, 2026-11-20.
       alt: 'First page of a generated rate sheet for a fictional customer, with validity dates and container prices.',
       summary:
-        "A freight forwarder's client rate sheets, built from route and cost data with the pricing rules applied automatically. A person approves every flagged route before the PDF is created.",
+        "A freight forwarder's client rate sheets are now built from route and cost data, with the pricing rules applied automatically. A person approves every flagged route before the PDF is created.",
       summaryMobile:
-        'Client rate sheets built with the pricing rules applied automatically, and a person approving every exception.',
+        'Client rate sheets are built with the pricing rules applied automatically, and a person approves every exception.',
     },
     'pr-pipeline-sync': {
       summary:
@@ -76,9 +76,9 @@ export const selectedWork = {
     gridbloom: {
       alt: 'GridBloom dashboard with headline electricity figures above demand and generation charts.',
       summary:
-        'A weekly report and dashboard that build themselves from public data, leave out figures the data cannot support, and include an AI-drafted briefing whose numbers are checked.',
+        'A weekly report and dashboard build themselves from public data, leave out figures the data cannot support, and include an AI-drafted briefing whose numbers are checked.',
       summaryMobile:
-        'A weekly report and dashboard that build themselves, with an AI briefing whose numbers are checked.',
+        'A weekly report and dashboard build themselves, with an AI briefing whose numbers are checked.',
       tagMobile: 'Reporting and AI-assisted',
     },
   } as Record<
@@ -131,7 +131,7 @@ export const problems = {
     },
     {
       title: "The weekly report takes most of someone's day.",
-      detail: 'Exports, pasting, reformatting, then writing the summary.',
+      detail: 'Someone exports, pastes and reformats the data, then writes the summary.',
       links: [
         { label: 'Reports and documents that build themselves', href: '#services' },
         { label: 'GridBloom example', href: '/work/gridbloom/' },
@@ -190,7 +190,7 @@ export const services = {
       description:
         "When the rules for pricing, intake or approvals live in one person's head or spreadsheet, I turn them into a simple tool the whole team can use. Unusual cases are flagged for a person to check.",
       descriptionMobile:
-        'Your pricing, intake or approval rules in a simple tool the whole team can use, with unusual cases flagged for a person.',
+        'I turn your pricing, intake or approval rules into a simple tool the whole team can use, with unusual cases flagged for a person.',
       addresses: [
         'Rules kept in personal spreadsheets',
         'Work that stops when one person is out',
@@ -205,7 +205,7 @@ export const services = {
       description:
         'Your tools update each other, so information is entered once and every copy stays current. You can see what changed and when.',
       descriptionMobile:
-        'Information entered once and kept current everywhere it is used, with a record of what changed.',
+        'Information is entered once and kept current everywhere it is used, with a record of what changed.',
       addresses: [
         'Repeated data entry between systems',
         'Records that drift out of sync',
@@ -221,9 +221,9 @@ export const services = {
       title: 'Reports and documents that build themselves',
       tag: 'Reporting and AI-assisted workflows',
       description:
-        'Weekly reports, client documents and summaries generated from your data in a consistent format. Where AI drafts anything, a person reviews it before it is used.',
+        'Weekly reports, client documents and summaries are generated from your data in a consistent format. Where AI drafts anything, a person reviews it before it is used.',
       descriptionMobile:
-        'Reports and client documents generated from your data, with a person reviewing anything AI drafts.',
+        'Reports and client documents are generated from your data, and a person reviews anything AI drafts.',
       addresses: [
         'Reports rebuilt by hand each week',
         'Documents assembled by copy and paste',
@@ -246,25 +246,25 @@ export const approach = {
       num: '01',
       title: 'Understand the process',
       text: 'I learn how the work actually runs today, who touches it, and where it slows down.',
-      textMobile: 'How the work really runs, and where it slows down.',
+      textMobile: 'I learn how the work really runs and where it slows down.',
     },
     {
       num: '02',
       title: 'Define rules and exceptions',
       text: 'We write down the rules, the edge cases, and which decisions stay with your staff.',
-      textMobile: 'Which decisions stay with your staff.',
+      textMobile: 'We agree which decisions stay with your staff.',
     },
     {
       num: '03',
       title: 'Build and review',
       text: 'I build in stages and review each one with you against real or realistic cases.',
-      textMobile: 'In stages, against realistic cases.',
+      textMobile: 'I build in stages and test against realistic cases.',
     },
     {
       num: '04',
       title: 'Document and hand off',
       text: 'You get written documentation of how it works and how to change it.',
-      textMobile: 'Written documentation of how to run and change it.',
+      textMobile: 'You get written documentation of how to run and change it.',
     },
   ],
   note: 'Scope, deliverables and any ongoing support are agreed in writing for each engagement before work begins.',
@@ -277,7 +277,7 @@ export const pricing = {
   link: { label: 'Discovery options, support plans and full pricing', href: '/services/#pricing' },
   body: "Every project starts with a free 30-minute consultation. Small, clearly defined projects get a written fixed quote, typically $1,500 to $5,000. For larger or more complex workflows, we start with a paid discovery phase (from $750), and the full discovery fee is credited toward your build if you go ahead. Most multi-step automation projects fall between $5,000 and $15,000. You'll always know the price before work begins.",
   bodyMobile:
-    "Free 30-minute consultation. Small projects get a written fixed quote, typically $1,500 to $5,000. Larger ones start with a paid discovery phase from $750, credited in full toward your build. You'll always know the price before work begins.",
+    "Every project starts with a free 30-minute consultation. Small projects get a written fixed quote, typically $1,500 to $5,000. Larger ones start with a paid discovery phase from $750, credited in full toward your build. You'll always know the price before work begins.",
 };
 
 export const reviews = {
@@ -303,7 +303,7 @@ export const founder = {
     'Regassa Automations is just me. You work with me directly, from the first conversation to the handoff.',
   ],
   bodyMobile:
-    'An engineer and software developer who previously worked in patent drafting and prosecution at a law firm. I learn your process, including its exceptions, before I write any code. You work with me directly, from first conversation to handoff.',
+    'I am an engineer and software developer who previously worked in patent drafting and prosecution at a law firm. I learn your process, including its exceptions, before I write any code. You work with me directly, from first conversation to handoff.',
   link: { label: 'More about my background and approach', href: '/about/' },
   linkMobile: 'More about my background',
 };
@@ -354,7 +354,7 @@ export const inquiry = {
       id: 'f-tools',
       name: 'tools',
       label: 'Which tools or systems are involved?',
-      hint: 'For example Google Sheets, a CRM, email.',
+      hint: 'For example, Google Sheets, a CRM or email.',
       required: false,
       type: 'text',
       autocomplete: 'off',
@@ -363,7 +363,7 @@ export const inquiry = {
       id: 'f-freq',
       name: 'frequency',
       label: 'How often does it happen, or who is involved?',
-      hint: 'For example weekly, two people in operations.',
+      hint: 'For example, weekly, or two people in operations.',
       required: false,
       type: 'text',
       autocomplete: 'off',

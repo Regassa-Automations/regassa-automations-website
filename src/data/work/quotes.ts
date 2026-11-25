@@ -266,7 +266,7 @@ export const document = {
     },
     {
       title: 'Sorted by last name',
-      text: "So it reads like a reference book, not the spreadsheet's row order.",
+      text: "It reads like a reference book instead of following the spreadsheet's row order.",
       textMobile: 'Reads like a reference book.',
     },
     {
@@ -344,11 +344,11 @@ export const elsewhere = {
   num: '06',
   h2: 'The same pattern, other industries',
   intro: [
-    'Any organization with ',
-    { text: 'a spreadsheet that grew messy', strong: true },
+    'The same approach works for any organization with ',
+    { text: 'a spreadsheet that has grown messy', strong: true },
     ' and needs ',
     { text: 'a polished document', strong: true },
-    ' from it.',
+    ' made from it.',
   ] satisfies Segment[],
   cards: [
     {

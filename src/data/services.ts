@@ -23,7 +23,7 @@ export const intro = {
   h1: 'What I build, how it works, and what it costs.',
   lede: 'I build practical tools for small teams that run on spreadsheets, email and a few key people. Every project starts with a free consultation, and you always know the price before work begins.',
   ledeMobile:
-    'Practical tools for small teams. Every project starts with a free consultation, and you always know the price before work begins.',
+    'I build practical tools for small teams. Every project starts with a free consultation, and you always know the price before work begins.',
   jump: [
     { label: 'What I build', href: '#what' },
     { label: 'How it works', href: '#how' },
@@ -35,7 +35,7 @@ export const intro = {
 export const whatIBuild = {
   h2: 'What I build',
   intro:
-    'Three kinds of work, often combined in one project, and always built around the tools your team already uses.',
+    'I do three kinds of work, often combined in one project and always built around the tools your team already uses.',
 };
 
 export const howItWorks = {
@@ -144,7 +144,7 @@ export const pricing = {
   },
   support: {
     h3: 'Ongoing support plans',
-    text: 'Optional, month to month unless noted. On every plan, fixes are covered: if something I built breaks, or a tool it relies on changes, I fix it at no extra cost. Higher plans add time each month for changes and improvements. New features are quoted separately.',
+    text: 'Support plans are optional and month to month unless noted. On every plan, fixes are covered: if something I built breaks, or a tool it relies on changes, I fix it at no extra cost. Higher plans add time each month for changes and improvements. New features are quoted separately.',
     fairUse:
       'Covered fixes apply to systems I built, under normal use. Work caused by changes someone else makes to the system is quoted separately. Unused hours do not roll over.',
     plans: [

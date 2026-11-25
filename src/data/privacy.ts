@@ -60,7 +60,7 @@ export const sections: PrivacySection[] = [
     h2: 'Why it is collected',
     paragraphs: [
       [
-        'Only to read your inquiry or booking, reply to you, and, if you choose to continue, prepare for a first conversation. It is not added to a mailing list and is not sold or shared for marketing.',
+        'It is used only to read your inquiry or booking, reply to you, and, if you choose to continue, prepare for a first conversation. It is not added to a mailing list and is not sold or shared for marketing.',
       ],
     ],
   },

@@ -43,11 +43,11 @@ export const hero = {
     { k: 'Built with', v: 'Node.js, Google Cloud Run, Google Sheets and Drive' },
     {
       k: 'About the demo',
-      v: 'A real client project, shown through a separate demo. Every company, customer and rate on this page is fictional.',
+      v: 'This is a real client project, shown through a separate demo. Every company, customer and rate on this page is fictional.',
     },
   ] satisfies Pair[],
   factsNoteMobile:
-    'A real client project for a freight forwarder, shown through a separate demo. Every company, customer and rate on this page is fictional.',
+    'This is a real client project for a freight forwarder, shown through a separate demo. Every company, customer and rate on this page is fictional.',
 };
 
 export const jumps = [
@@ -64,7 +64,7 @@ export const overview = {
   num: '01',
   h2: 'The challenge and my role',
   body: [
-    "A freight forwarder prepared customer rate sheets from recurring Excel rate workbooks, customer route lists and pricing rules spread across files. Each sheet had to bring together the available rates, the routes a customer needs, the container sizes or service required and that customer's commercial terms, and those inputs all change on different schedules.",
+    "A freight forwarder prepared customer rate sheets from recurring Excel rate workbooks, customer route lists and pricing rules spread across files. Each sheet had to combine the available rates, the routes a customer needed, the container sizes or service required, and that customer's commercial terms, and each of those inputs changed on its own schedule.",
     'I analyzed the workbooks and their pricing logic, structured the customer and route data, and built the application end to end: matching and pricing services, browser workflows, Google Workspace integrations, PDF output and cloud deployment.',
   ],
   bodyMobile:
@@ -100,7 +100,7 @@ export const walkthrough = {
   monoLabel: 'Walkthrough',
   monoLabelMobile: 'Walkthrough · 2:42',
   h2: "See one customer's rate sheet come together",
-  body: 'Customer routes, carrier-rate matching and a pricing exception, followed through to a finished PDF. Recorded in the separate demo with email delivery turned off.',
+  body: 'The video follows customer routes, carrier-rate matching and a pricing exception through to a finished PDF. It was recorded in the separate demo with email delivery turned off.',
   meta: {
     duration: '2:42',
     captions: 'Captions on by default',
@@ -166,8 +166,8 @@ export const journey = {
   num: '02',
   h2: 'One route, start to finish',
   intro:
-    'How a single customer route becomes a priced line on a rate sheet. The route shown is taken from the sample rate sheet.',
-  introMobile: 'A route from the sample rate sheet, followed through the application.',
+    'This follows a single customer route until it becomes a priced line on a rate sheet. The route shown is taken from the sample rate sheet.',
+  introMobile: 'This follows one route from the sample rate sheet through the application.',
   label: 'One route, start to finish',
   steps: [
     {
@@ -244,7 +244,7 @@ export const application = {
     "A route can follow the customer's standard pricing, add an adjustment on top, or use its own formula on the matched rate. Previews and PDFs use the same server calculation, so what the operator reviews is what the customer receives.",
   ],
   bodyMobile:
-    "Workspaces for clients, routes, generation, notes and audit history. Previews and PDFs share one calculation, so what's reviewed is what's sent.",
+    "Operators get workspaces for clients, routes, generation, notes and audit history. Previews and PDFs share one calculation, so what's reviewed is what's sent.",
   galleryLabel: 'Application screenshots',
   gallery: [
     {
@@ -419,7 +419,7 @@ export const elsewhere = {
     ' that has to be right every time. That combination turns up in many businesses.',
   ] satisfies Segment[],
   introMobile:
-    'Spreadsheet data, customer-specific rules and a recurring document that has to be right every time.',
+    'The pattern is spreadsheet data, customer-specific rules and a recurring document that has to be right every time.',
   cards: [
     {
       label: 'Accounting firms',

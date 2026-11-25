@@ -117,7 +117,7 @@ export const paths = {
         'Match each volunteer to the roster, then update their row or add a new one.',
       ],
       textMobile:
-        'Reports pulled through the API, routed by the location in the sign-up title, tidied, matched to the roster, then updated or added.',
+        'Reports are pulled through the API, routed by the location in the sign-up title, tidied, matched to the roster, then updated or added.',
       scheduled: true,
     },
   ],
@@ -307,7 +307,7 @@ export const adoption = {
     },
     {
       title: 'Hand over',
-      text: 'Including how to tell a source, form, mapping or access problem from an automation one.',
+      text: 'This included how to tell a source, form, mapping or access problem from an automation problem.',
       hideMobile: true,
     },
   ],
@@ -384,7 +384,8 @@ export const elsewhere = {
     { text: 'a list they rely on', strong: true },
     ', the same matching and merge rules apply.',
   ] satisfies Segment[],
-  introMobile: 'People arriving through more than one tool, and a list someone relies on.',
+  introMobile:
+    'The pattern is people arriving through more than one tool, and a list someone relies on.',
   cards: [
     {
       label: 'Law firms',

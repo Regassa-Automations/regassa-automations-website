@@ -433,7 +433,7 @@ export const elsewhere = {
       label: 'Accounting firms',
       labelMobile: 'Accounting',
       title: 'Monthly client dashboards',
-      text: 'Figures from practice and bookkeeping software, with a figure held back until the month is actually closed.',
+      text: 'Figures from practice and bookkeeping software, with each figure held back until the month is actually closed.',
     },
     {
       label: 'Insurance agencies',

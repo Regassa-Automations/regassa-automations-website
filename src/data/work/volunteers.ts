@@ -55,8 +55,8 @@ export const overview = {
   num: '01',
   h2: 'The challenge and my role',
   body: [
-    'A volunteer program running in four locations collected volunteers two ways: registration forms for each location, and role sign-ups in SignUpGenius. The two produced differently shaped data, and coordinators needed it all in one organized roster for their location, without losing details they had already added by hand.',
-    'I designed the registration forms, connected SignUpGenius through its API, wrote the routing, matching and merge rules in Google Apps Script, documented the system, and trained coordinators with very different levels of comfort with technology.',
+    'A volunteer program running in four locations collected sign-ups two ways: registration forms for each location, and role sign-ups in SignUpGenius. The two produced differently shaped data, and coordinators needed it all in one organized roster for their location, without losing details they had already added by hand.',
+    'I designed the registration forms, connected SignUpGenius through its API, wrote the routing, matching and merge rules in Google Apps Script, documented the system, and trained coordinators whose comfort with technology varied widely.',
   ],
   bodyMobile:
     "Volunteers came in through location forms and SignUpGenius, in different shapes. Coordinators needed one organized roster per location without losing details they'd added. I designed the forms, connected the API, wrote the matching and merge rules, documented it and trained the coordinators.",
@@ -247,7 +247,7 @@ export const coordinators = {
   num: '04',
   h2: 'Built around the coordinators',
   intro:
-    'The rosters stayed the spreadsheets coordinators already used. The automation fitted around them rather than the other way round.',
+    'The rosters stayed the spreadsheets coordinators already used. The automation fit around them rather than the other way around.',
   cards: [
     {
       label: 'See what changed',

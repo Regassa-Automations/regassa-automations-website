@@ -19,7 +19,7 @@ export const meta = {
 export const intro = {
   eyebrow: 'About',
   h1: 'You work directly with me, start to finish.',
-  lede: "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: there is no account manager or hand-off to a junior team. The person who asks about your process is the person who builds and documents the system.",
+  lede: "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: there is no account manager or handoff to a junior team. The person who asks about your process is the person who builds and documents the system.",
   ledeMobile:
     "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: the person who asks about your process is the person who builds and documents the system.",
   primary: { label: 'Discuss your workflow', href: '/#inquiry' },
@@ -86,7 +86,7 @@ export const approach = {
 export const tools = {
   h2: 'Tools and capabilities',
   intro:
-    'Listed separately so it is clear what I have used in delivered work and what would be new for a given project.',
+    'I list these separately so it is clear what I have used in delivered work and what would be new for a given project.',
   used: {
     title: 'Used in delivered work',
     tags: [

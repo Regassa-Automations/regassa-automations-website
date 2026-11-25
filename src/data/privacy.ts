@@ -40,7 +40,7 @@ export const sections: PrivacySection[] = [
     ],
     after: [
       [
-        'Please do not include confidential client records, passwords or financial details in the form. If a project needs them, we will agree a safer way to share them.',
+        'Please do not include confidential client records, passwords or financial details in the form. If a project needs them, we will agree on a safer way to share them.',
       ],
     ],
   },

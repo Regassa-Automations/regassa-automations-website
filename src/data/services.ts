@@ -54,7 +54,7 @@ export const howItWorks = {
       textMobile: 'I map the process, rules and exceptions; you get a written plan and quote.',
     },
     {
-      label: '03 · Quoted',
+      label: '03 · Priced up front',
       title: 'Build and review',
       text: 'Built in stages and reviewed with you against realistic cases before anything goes live.',
       textMobile: 'In stages, reviewed against realistic cases.',

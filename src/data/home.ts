@@ -98,7 +98,7 @@ export const problems = {
   eyebrow: 'Sound familiar?',
   h2: 'Does any of this sound like your office?',
   intro:
-    'If so, there is probably a simpler way. Each of these is a process that works, but only because people keep it working by hand. Each links to the kind of work that fixes it and, where there is one, a project that did.',
+    'If so, there is probably a simpler way. Each of these processes works only because someone keeps it working by hand. Under each one is the kind of work that fixes it and, where there is one, a project that already did.',
   items: [
     {
       title: 'The same client details get typed into three different places.',
@@ -179,7 +179,7 @@ export interface Service {
 export const services = {
   eyebrow: 'What I build',
   h2: 'Three kinds of work, built around how your team already operates',
-  addressesLabel: 'Addresses',
+  addressesLabel: 'Solves',
   relatedLabel: 'Examples:',
   moreLink: { label: 'Services, pricing and how a project runs', href: '/services/' },
   items: [
@@ -386,7 +386,7 @@ export const inquiry = {
     summaryLabels: { name: 'Name', email: 'Email', process: 'Process' },
     failureTitle: 'Your inquiry was not sent.',
     failureBody:
-      'Something went wrong on our side. Everything you wrote is still here; please try again in a moment.',
+      'Something went wrong while sending. Everything you wrote is still here; please try again in a moment.',
     successLabel: 'Inquiry sent',
     successHeading: 'Thank you, {name}. Your note is on its way to me.',
     successNameFallback: 'there',

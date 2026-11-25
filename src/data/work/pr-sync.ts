@@ -67,14 +67,14 @@ export const overview = {
     },
     {
       label: 'Long-lived records',
-      title: 'An opportunity changes for weeks',
+      title: 'An opportunity keeps changing for weeks',
       text: 'Next steps get updated again and again, and a pitch eventually moves from Pipeline to Secured. Appending a new row each time would bury the client in duplicates.',
       textMobile: 'Updated many times, then moved from Pipeline to Secured.',
     },
     {
       label: 'Shared spreadsheets',
       title: 'Many people, many files',
-      text: 'About 20 staff working at once, client names typed slightly differently, headers moved, and the occasional file nobody had shared edit access to.',
+      text: 'About 20 staff working at once, client names typed slightly differently, headers moved, and the occasional client file the script had not been given edit access to.',
       textMobile: 'About 20 staff, varied client names, moved headers, missing access.',
     },
   ],
@@ -527,7 +527,7 @@ export const results = {
     {
       title: 'Status changes',
       before: 'moved between tabs manually',
-      after: 'follow the record to Secured',
+      after: 'follows the record to Secured',
     },
     {
       title: 'Failures',

@@ -75,7 +75,10 @@ export const hero = {
     { k: 'Client', v: 'Upwork client; identity private' },
     { k: 'Built with', v: 'Python, pandas and python-docx' },
     { k: 'Timeline', v: 'Three days, August 2025' },
-    { k: 'Delivered', v: 'Cleaned workbook, 400+ page Word document, duplicates report and the code' },
+    {
+      k: 'Delivered',
+      v: 'Cleaned workbook, 400+ page Word document, duplicates report and the code',
+    },
   ] satisfies Pair[],
   factsNoteMobile:
     'An Upwork client; identity private. Built in three days in August 2025 with Python, pandas and python-docx.',
@@ -105,7 +108,7 @@ export const overview = {
       label: 'Categories',
       title: 'Worksheets were the categories',
       text: "A quote's category was only recorded by which sheet it sat in. Merging copies risked losing that information.",
-      textMobile: 'Merging copies risked losing them.',
+      textMobile: 'Merging copies risked losing categories.',
     },
     {
       label: 'Duplicates',

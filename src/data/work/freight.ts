@@ -574,7 +574,7 @@ export const technical = {
 };
 
 export const next = {
-  h2: 'Have a workflow that needs to work together?',
+  h2: 'Have a workflow with this many moving parts?',
   body: 'Tell me where information enters your process, which rules need to apply, and what your team needs at the end. We can discuss an automation that fits the way your business operates.',
   bodyMobile:
     'Tell me where information enters your process, which rules apply, and what your team needs at the end.',

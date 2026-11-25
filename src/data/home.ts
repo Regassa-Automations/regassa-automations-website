@@ -27,7 +27,7 @@ export const meta = {
 export const hero = {
   eyebrow: 'Workflow automation consulting',
   h1: 'Stop doing the same work twice.',
-  lede: 'I build practical tools that take over repetitive office work: retyping information between systems, assembling documents by copy and paste, and rebuilding the same report every week. For small teams that run on spreadsheets, email and a few key people.',
+  lede: 'I build practical tools for small teams that run on spreadsheets, email and a few key people. They take over repetitive office work: retyping information between systems, assembling documents by copy and paste, and rebuilding the same report every week.',
   ledeMobile:
     'I build practical tools that take over repetitive office work, so your team stops retyping, copying and rebuilding the same things every week.',
   primary: { label: 'Discuss your workflow', href: '#inquiry' },

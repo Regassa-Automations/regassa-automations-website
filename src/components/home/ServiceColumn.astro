@@ -9,6 +9,7 @@ interface Props extends Service {
 }
 const {
   title,
+  tag,
   description,
   descriptionMobile,
   addresses,
@@ -20,6 +21,7 @@ const {
 ---
 
 <li class:list={['service', `service--${rule}`]}>
+  <p class="service__tag">{tag}</p>
   <h3 class="service__title">{title}</h3>
   <p class="service__desc">
     <span class="bp-desktop">{description}</span>
@@ -61,7 +63,14 @@ const {
     border-top-color: var(--accent-text);
   }
 
+  .service__tag {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--text-muted);
+  }
+
   .service__title {
+    margin-top: var(--space-1);
     font-size: 22px;
     line-height: 30px;
   }

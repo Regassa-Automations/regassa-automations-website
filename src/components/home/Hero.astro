@@ -1,5 +1,5 @@
 ---
-/** Home hero (content/home.md, Hero; mobile: hex list dropped, 4:3 figure, short caption). */
+/** Home hero (content/home.md, Hero; mobile: hex list dropped, short lede and proof line, 4:3 figure, short caption). */
 import Eyebrow from '../ui/Eyebrow.astro';
 import Button from '../ui/Button.astro';
 import HexMarker from '../ui/HexMarker.astro';
@@ -16,7 +16,9 @@ import { hero } from '../../data/home';
       <h1 id="hero-h" class="hero__h1">
         {hero.h1}
       </h1>
-      <p class="hero__lede">{hero.lede}</p>
+      <p class="hero__lede">
+        <Responsive text={hero.lede} textMobile={hero.ledeMobile} />
+      </p>
       <div class="hero__ctas" data-mobile-cta-hide-while-visible>
         <Button href={hero.primary.href} block="mobile">
           {hero.primary.label}
@@ -25,6 +27,9 @@ import { hero } from '../../data/home';
           {hero.secondary.label}
         </Button>
       </div>
+      <p class="hero__proof">
+        <Responsive text={hero.proof} textMobile={hero.proofMobile} />
+      </p>
       <ul class="hero__hexes bp-desktop">
         {hero.hexList.map((item) => (
           <li>
@@ -86,6 +91,14 @@ import { hero } from '../../data/home';
     margin-top: var(--space-8);
   }
 
+  .hero__proof {
+    margin-top: var(--space-4);
+    max-width: 38em;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
   .hero__hexes {
     list-style: none;
     display: flex;
@@ -134,6 +147,10 @@ import { hero } from '../../data/home';
     .hero__ctas {
       flex-direction: column;
       margin-top: var(--space-6);
+    }
+
+    .hero__proof {
+      margin-top: var(--space-3);
     }
   }
 </style>

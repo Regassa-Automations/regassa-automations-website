@@ -18,22 +18,20 @@ const yaml = load(readFileSync('src/content/work/projects.yaml', 'utf8')) as Yam
 const desktopStrings = [
   home.hero.h1,
   home.hero.lede,
+  home.hero.proof,
   ...home.hero.hexList,
   home.hero.figure.caption,
   home.selectedWork.h2,
-  ...yaml.projects.filter((p) => p.homeCard !== null).map((p) => p.cardSummary ?? ''),
+  home.selectedWork.intro,
+  ...Object.values(home.selectedWork.cards).map((c) => c.summary ?? ''),
   home.problems.intro,
   ...home.problems.items.flatMap((i) => [i.title, i.detail, ...i.links.map((l) => l.label)]),
-  home.featured.h2,
-  home.featured.intro,
-  home.featured.tag,
-  ...home.featured.steps.flatMap((s) => [s.title, s.description]),
-  ...home.featured.figures.map((f) => f.caption),
-  'Generated rate sheet with sample rates. View the full sample PDF in the case study',
-  ...home.services.items.flatMap((s) => [s.title, s.description, ...s.addresses]),
-  'Related: Logistics rate sheets, Quotes library',
+  ...home.services.items.flatMap((s) => [s.tag, s.title, s.description, ...s.addresses]),
+  'Examples: Quotes library, GridBloom',
   ...home.approach.steps.flatMap((s) => [s.title, s.text]),
   home.approach.note,
+  home.pricing.h3,
+  home.pricing.body,
   home.reviews.h2,
   'See all five projects →',
   ...home.founder.body,
@@ -46,13 +44,14 @@ const desktopStrings = [
 
 /** Phone strings that must be visible at 390 px. */
 const mobileStrings = [
+  home.hero.ledeMobile,
+  home.hero.proofMobile,
   home.hero.figure.captionMobile,
   ...Object.values(home.selectedWork.cards).map((c) => c.summaryMobile ?? ''),
-  home.featured.tagMobile,
-  ...home.featured.steps.map((s) => s.titleMobile),
   ...home.services.items.map((s) => s.descriptionMobile),
   ...home.approach.steps.map((s) => s.textMobile),
   home.approach.noteMobile,
+  home.pricing.bodyMobile,
   home.founder.eyebrowMobile.toUpperCase(),
   home.founder.bodyMobile,
   home.founder.linkMobile,
@@ -60,8 +59,8 @@ const mobileStrings = [
   'Used only to reply to you. Privacy',
   'Client · Lead intake dashboards',
   'Client, verified Upwork review · Volunteer rosters',
-  'Integrations · PR pipeline example',
-  'Operational apps · Rate-sheet example',
+  'Sync · PR pipeline example',
+  'Documents · Rate-sheet example',
 ];
 
 /** Desktop-only content that the phone design drops. */
@@ -69,7 +68,9 @@ const droppedOnMobile = [
   home.problems.intro,
   home.problems.items[0]!.detail,
   'Word reference example',
-  home.featured.intro,
+  home.hero.lede,
+  home.selectedWork.intro,
+  home.pricing.body,
   home.services.items[0]!.addresses[0]!,
   home.inquiry.next[0]!,
 ];
@@ -83,7 +84,12 @@ test.describe('Home copy, desktop', () => {
     for (const s of desktopStrings) expect(text, s).toContain(norm(s));
     // Eyebrows render uppercase via CSS; check the DOM text instead.
     const dom = norm((await page.locator('main').textContent()) ?? '');
-    for (const s of [home.selectedWork.eyebrow, home.problems.eyebrow, home.founder.eyebrow])
+    for (const s of [
+      home.selectedWork.eyebrow,
+      home.problems.eyebrow,
+      home.services.eyebrow,
+      home.founder.eyebrow,
+    ])
       expect(dom).toContain(s);
   });
 
@@ -91,10 +97,9 @@ test.describe('Home copy, desktop', () => {
     await page.goto('/');
     await expect(page.locator('h1')).toHaveCount(1);
     for (const id of [
-      'work',
       'problems',
-      'featured',
       'services',
+      'work',
       'approach',
       'reviews',
       'founder',
@@ -105,6 +110,21 @@ test.describe('Home copy, desktop', () => {
       const labelledby = await section.getAttribute('aria-labelledby');
       await expect(page.locator(`#${labelledby}`)).toHaveCount(1);
     }
+  });
+
+  test('sections run in the OI-22 order, with no featured section', async ({ page }) => {
+    await page.goto('/');
+    const ids = await page.locator('main section[id]').evaluateAll((els) => els.map((e) => e.id));
+    expect(ids).toEqual([
+      'problems',
+      'services',
+      'work',
+      'approach',
+      'reviews',
+      'founder',
+      'inquiry',
+    ]);
+    await expect(page.locator('#featured')).toHaveCount(0);
   });
 
   test('selected work cards: three, one link each, GridBloom tagged independent', async ({

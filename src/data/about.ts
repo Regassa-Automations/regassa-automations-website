@@ -2,6 +2,7 @@
  * About copy, transcribed verbatim from _handoff/content/about.md and
  * _handoff/content/mobile/about-mobile.md (`...Mobile`, below 768 px).
  * Tools list is the confirmed 11-item list (OI-06 resolved); the canvas review note is never shown.
+ * Background items revised for OI-22 (industries worked with; law firm context), 2026-11-24.
  */
 
 export const meta = {
@@ -18,7 +19,7 @@ export const meta = {
 export const intro = {
   eyebrow: 'About',
   h1: 'You work directly with me, start to finish.',
-  lede: "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: there is no account manager or hand-off to a junior team. The person who asks about your process is the person who builds and documents the system.",
+  lede: "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: there is no account manager or handoff to a junior team. The person who asks about your process is the person who builds and documents the system.",
   ledeMobile:
     "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: the person who asks about your process is the person who builds and documents the system.",
   primary: { label: 'Discuss your workflow', href: '/#inquiry' },
@@ -34,19 +35,19 @@ export const background = {
       title: 'Engineering',
       text: 'I trained as an engineer at MIT. That training shows up as a habit of mapping a system completely, including the inputs nobody mentions, before changing any part of it.',
       textMobile:
-        'MIT-trained. I map a system completely, including inputs nobody mentions, before changing any part of it.',
+        'I trained as an engineer at MIT, and I map a system completely, including inputs nobody mentions, before changing any part of it.',
     },
     {
       title: 'Software development',
-      text: 'I have more than seven years of software engineering experience, much of it building workflow automation in Python and Google Apps Script for real teams with real constraints.',
+      text: "I have more than seven years of software engineering experience, much of it building workflow automation in Python and Google Apps Script. I've built systems for logistics companies, PR agencies and nonprofit programs. The industries differ, but the problems are the same: information typed in twice, rules that live in one person's head, and documents rebuilt by hand.",
       textMobile:
-        'More than seven years of software engineering, much of it workflow automation in Python and Google Apps Script.',
+        'I have more than seven years of software engineering experience, much of it in workflow automation with Python and Google Apps Script.',
     },
     {
       title: 'Patent technical work',
-      text: 'As a patent technical specialist, I read dense technical material and described exactly what a system does and does not do. I apply the same precision to your business rules and their exceptions.',
+      text: 'As a patent technical specialist at a law firm, I read dense technical material and described exactly what a system does and does not do, under strict accuracy and deadline standards. I apply the same precision to your business rules and their exceptions.',
       textMobile:
-        'Describing exactly what a system does and does not do. I apply the same precision to your rules and exceptions.',
+        'As a patent technical specialist, I described exactly what a system does and does not do. I apply the same precision to your rules and exceptions.',
     },
   ],
 };
@@ -85,7 +86,7 @@ export const approach = {
 export const tools = {
   h2: 'Tools and capabilities',
   intro:
-    'Listed separately so it is clear what I have used in delivered work and what would be new for a given project.',
+    'I list these separately so it is clear what I have used in delivered work and what would be new for a given project.',
   used: {
     title: 'Used in delivered work',
     tags: [

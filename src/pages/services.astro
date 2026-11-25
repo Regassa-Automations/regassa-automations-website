@@ -1,0 +1,523 @@
+---
+/**
+ * Services and pricing (OI-25). Service columns reuse the Home data and ServiceColumn so the
+ * two pages stay in step. Pricing per OI-23. Container 1100 px, like About.
+ */
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import Responsive from '../components/ui/Responsive.astro';
+import HexMarker from '../components/ui/HexMarker.astro';
+import ServiceColumn from '../components/home/ServiceColumn.astro';
+import NextStepBand from '../components/work/shared/NextStepBand.astro';
+import { services } from '../data/home';
+import { meta, intro, whatIBuild, howItWorks, pricing, faq, next } from '../data/services';
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  ogTitle={meta.ogTitle}
+  ogDescription={meta.ogDescription}
+  ogImage={meta.ogImage}
+  ogImageAlt={meta.ogImageAlt}
+  current="services"
+>
+  <section class="sv-intro" aria-labelledby="sv-h1">
+    <div class="container container--about">
+      <Eyebrow>{intro.eyebrow}</Eyebrow>
+      <h1 id="sv-h1" class="sv-intro__h1">
+        {intro.h1}
+      </h1>
+      <Responsive as="p" class="sv-intro__lede" text={intro.lede} textMobile={intro.ledeMobile} />
+      <div class="sv-intro__ctas">
+        <Button href="/#inquiry" block="mobile">
+          Discuss your workflow
+        </Button>
+      </div>
+      <nav class="sv-jump" aria-label="On this page">
+        <ul role="list">
+          {intro.jump.map((j) => (
+            <li>
+              <a href={j.href}>{j.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section id="what" class="sv-section section--paper section--ruled" aria-labelledby="sv-what-h">
+    <div class="container container--about">
+      <h2 id="sv-what-h" class="sv-h2" tabindex="-1">
+        {whatIBuild.h2}
+      </h2>
+      <p class="sv-lead">{whatIBuild.intro}</p>
+      <ul class="sv-services" role="list">
+        {services.items.map((item) => (
+          <ServiceColumn
+            {...item}
+            addressesLabel={services.addressesLabel}
+            relatedLabel={services.relatedLabel}
+          />
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="how" class="sv-section" aria-labelledby="sv-how-h">
+    <div class="container container--about">
+      <h2 id="sv-how-h" class="sv-h2" tabindex="-1">
+        {howItWorks.h2}
+      </h2>
+      <ol class="sv-steps">
+        {howItWorks.steps.map((s) => (
+          <li class="sv-card">
+            <p class="sv-card__label mono">{s.label}</p>
+            <h3 class="sv-card__title">{s.title}</h3>
+            <Responsive as="p" class="sv-card__text" text={s.text} textMobile={s.textMobile} />
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section
+    id="pricing"
+    class="sv-section section--paper section--ruled"
+    aria-labelledby="sv-pricing-h"
+  >
+    <div class="container container--about">
+      <h2 id="sv-pricing-h" class="sv-h2" tabindex="-1">
+        {pricing.h2}
+      </h2>
+      <p class="sv-lead">{pricing.intro}</p>
+
+      <h3 class="sv-h3">{pricing.discovery.h3}</h3>
+      <ul class="sv-tiers" role="list">
+        {pricing.discovery.tiers.map((t) => (
+          <li class="sv-tier">
+            <h4 class="sv-tier__name">{t.name}</h4>
+            <p class="sv-tier__price">{t.price}</p>
+            <p class="sv-tier__length">{t.length}</p>
+            <dl class="sv-tier__details">
+              <dt>{pricing.discovery.bestForLabel}</dt>
+              <dd>{t.bestFor}</dd>
+              <dt>{pricing.discovery.includesLabel}</dt>
+              <dd>{t.includes}</dd>
+            </dl>
+          </li>
+        ))}
+      </ul>
+      <p class="sv-note">{pricing.discovery.note}</p>
+
+      <div class="sv-pricing__grid">
+        <div>
+          <h3 class="sv-h3">{pricing.builds.h3}</h3>
+          <ul class="sv-builds" role="list">
+            {pricing.builds.rows.map((r) => (
+              <li class="sv-build">
+                <p class="sv-build__label">{r.label}</p>
+                <p class="sv-build__price">{r.price}</p>
+                <p class="sv-build__detail">{r.detail}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="sv-h3">{pricing.factors.h3}</h3>
+          <ul class="hex-list sv-factors">
+            {pricing.factors.items.map((f) => (
+              <li>
+                <HexMarker />
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sv-h3">{pricing.support.h3}</h3>
+      <p class="sv-support">{pricing.support.text}</p>
+      <ul class="sv-tiers sv-plans" role="list">
+        {pricing.support.plans.map((pl) => (
+          <li class="sv-tier">
+            <h4 class="sv-tier__name">{pl.name}</h4>
+            <p class="sv-tier__price">{pl.price}</p>
+            <dl class="sv-tier__details">
+              <dt>{pricing.discovery.bestForLabel}</dt>
+              <dd>{pl.fit}</dd>
+              <dt>Includes</dt>
+              <dd>{pl.includes}</dd>
+            </dl>
+          </li>
+        ))}
+      </ul>
+      <p class="sv-fineprint">{pricing.support.fairUse}</p>
+    </div>
+  </section>
+
+  <section id="faq" class="sv-section" aria-labelledby="sv-faq-h">
+    <div class="container container--about">
+      <h2 id="sv-faq-h" class="sv-h2" tabindex="-1">
+        {faq.h2}
+      </h2>
+      <dl class="sv-faq">
+        {faq.items.map((i) => (
+          <div class="sv-faq__item">
+            <dt>{i.q}</dt>
+            <dd>{i.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <NextStepBand
+    h2={next.h2}
+    body={next.body}
+    bodyMobile={next.bodyMobile}
+    ghostLabel={next.ghostLabel}
+    otherLinkMobile={next.otherLinkMobile}
+  />
+</Base>
+
+<style>
+  .sv-intro {
+    padding-block: var(--space-18) var(--space-12);
+  }
+
+  .sv-intro__h1 {
+    max-width: 18ch;
+    margin-top: var(--space-3);
+    font-size: 48px;
+    line-height: 54px;
+    letter-spacing: -0.01em;
+  }
+
+  .sv-intro :global(.sv-intro__lede) {
+    max-width: 38em;
+    margin-top: var(--space-4);
+    font-size: 19px;
+    line-height: 30px;
+  }
+
+  .sv-intro__ctas {
+    margin-top: var(--space-6);
+  }
+
+  .sv-jump ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    margin-top: var(--space-8);
+    font-size: 15px;
+  }
+
+  .sv-jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .sv-section {
+    padding-block: var(--space-18);
+  }
+
+  .sv-h2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .sv-h3 {
+    margin-top: var(--space-12);
+    font-size: 21px;
+    line-height: 29px;
+    color: var(--ink);
+  }
+
+  .sv-lead {
+    max-width: 46em;
+    margin-top: var(--space-3);
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--text-muted);
+  }
+
+  .sv-services {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+  }
+
+  .sv-steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .sv-card,
+  .sv-tier {
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .sv-card__label {
+    color: var(--electric);
+  }
+
+  .sv-card__title {
+    margin-top: var(--space-3);
+    font-size: 19px;
+    line-height: 27px;
+    color: var(--ink);
+  }
+
+  .sv-section :global(.sv-card__text) {
+    margin-top: var(--space-2);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .sv-tiers {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .sv-tier {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sv-tier__name {
+    font-size: 19px;
+    line-height: 27px;
+    color: var(--ink);
+  }
+
+  .sv-tier__price {
+    margin-top: var(--space-2);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    color: var(--navy);
+  }
+
+  .sv-tier__length {
+    margin-top: var(--space-1);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .sv-tier__details {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .sv-tier__details dt {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .sv-tier__details dd {
+    margin: var(--space-1) 0 var(--space-3);
+  }
+
+  .sv-note {
+    max-width: 46em;
+    margin-top: var(--space-4);
+    padding-left: var(--space-4);
+    border-left: 3px solid var(--electric);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .sv-pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 64px;
+  }
+
+  .sv-builds {
+    list-style: none;
+    margin-top: var(--space-4);
+  }
+
+  .sv-build {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 var(--space-4);
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .sv-build:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sv-build__label {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .sv-build__price {
+    font-weight: 600;
+    color: var(--navy);
+    text-align: right;
+  }
+
+  .sv-build__detail {
+    grid-column: 1 / -1;
+    margin-top: var(--space-1);
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--text-muted);
+  }
+
+  .sv-factors {
+    margin-top: var(--space-4);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .sv-support {
+    max-width: 46em;
+    margin-top: var(--space-3);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .sv-fineprint {
+    max-width: 52em;
+    margin-top: var(--space-4);
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-muted);
+  }
+
+  .sv-faq {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-8) 64px;
+    margin-top: var(--space-8);
+  }
+
+  .sv-faq dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+
+  .sv-faq dd {
+    margin: var(--space-2) 0 0;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  @media (max-width: 1023px) {
+    .sv-steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sv-services,
+    .sv-tiers {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 899px) {
+    .sv-pricing__grid,
+    .sv-faq {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .sv-intro {
+      padding-block: 40px var(--space-6);
+    }
+
+    .sv-intro__h1 {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    .sv-intro :global(.sv-intro__lede) {
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .sv-jump ul {
+      margin-top: var(--space-4);
+      gap: 0 var(--space-4);
+    }
+
+    .sv-section {
+      padding-block: 40px;
+    }
+
+    .sv-h2 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .sv-h3 {
+      margin-top: var(--space-8);
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    .sv-lead {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .sv-services {
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+
+    .sv-steps {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .sv-card,
+    .sv-tier {
+      padding: var(--space-4);
+    }
+
+    .sv-tier__price {
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    .sv-faq {
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+
+    .sv-faq dt {
+      font-size: 17px;
+      line-height: 24px;
+    }
+  }
+</style>

@@ -1,11 +1,15 @@
 ---
-/** Home "Problems" (#problems). Phone: intro and detail lines dropped, short link labels. */
+/** Home "Sound familiar?" (#problems), second on the page (OI-22). Phone: intro and detail lines dropped, short link labels. */
 import SectionHeading from '../ui/SectionHeading.astro';
 import ProblemItem from './ProblemItem.astro';
 import { problems } from '../../data/home';
 ---
 
-<section id="problems" class="section section--home" aria-labelledby="problems-h">
+<section
+  id="problems"
+  class="section section--home section--paper section--ruled"
+  aria-labelledby="problems-h"
+>
   <div class="container problems">
     <div class="problems__intro">
       <SectionHeading id="problems-h" eyebrow={problems.eyebrow} focusTarget>

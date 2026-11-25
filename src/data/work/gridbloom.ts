@@ -21,9 +21,9 @@ export const hero = {
   tags: ['Data pipeline', 'Reporting and AI-assisted workflow'],
   tagsMobile: ['Data pipeline', 'AI-assisted reporting'],
   h1: 'GridBloom: electricity data you can check',
-  lede: "A data pipeline, dashboard and weekly report built on public U.S. grid data. It checks every figure before showing it, says plainly when the data can't support a number, and adds an AI briefing whose every figure is verified against its sources.",
+  lede: "GridBloom is a data pipeline, dashboard and weekly report built on public U.S. grid data. It checks every figure before showing it, says plainly when the data can't support a number, and adds an AI briefing whose every figure is verified against its sources.",
   ledeMobile:
-    "A data pipeline, dashboard and weekly report on public U.S. grid data. It checks every figure, says plainly when the data can't support a number, and verifies every figure in its AI briefing.",
+    "GridBloom is a data pipeline, dashboard and weekly report on public U.S. grid data. It checks every figure, says plainly when the data can't support a number, and verifies every figure in its AI briefing.",
   secondary: { label: 'See how the AI is checked', href: '#ai' },
   figure: {
     alt: 'GridBloom dashboard for PJM, September 23 to October 22, 2026: renewable share of reported net generation 9.0%, average demand 86,645 MW, reported net generation 62,989 GWh, a daily demand chart and an hourly generation-by-fuel chart.',
@@ -41,11 +41,11 @@ export const hero = {
     { k: 'Built with', v: 'Python, SQLite, FastAPI, React and the OpenAI API' },
     {
       k: 'About the data',
-      v: 'Real historical observations, not live. No client data is involved.',
+      v: 'The data is real historical observations, not live, and no client data is involved.',
     },
   ] satisfies Pair[],
   factsNoteMobile:
-    'An independent demonstration of the kind of work I do for clients whose projects stay private, built on public EIA data for ISO New England, NYISO and PJM. Real historical observations, not live, and no client data.',
+    'GridBloom is an independent demonstration of the kind of work I do for clients whose projects stay private. It uses real historical EIA data for ISO New England, NYISO and PJM, not live data, and no client data.',
 };
 
 export const jumps = [
@@ -174,7 +174,7 @@ export const dashboard = {
     "A Data pipeline panel reads the database's own import records: each source, how many runs succeeded, how many values were new, revised or unchanged, and the latest hour stored for every series.",
   ],
   bodyMobile:
-    'Demand, generation by fuel, renewable share and data quality for any period. Gaps are shaded, suspect hours hatched, and every chart has a table view.',
+    'The dashboard shows demand, generation by fuel, renewable share and data quality for any period. Gaps are shaded, suspect hours hatched, and every chart has a table view.',
   galleryLabel: 'Dashboard screenshots',
   /** Dialog items, in order. The gallery shows the first four. */
   gallery: [
@@ -294,7 +294,7 @@ export const report = {
     'When a week falls outside the audited period, the renewable share reads "Insufficient coverage" with the reason. When an import fails, the email arrives as "Action needed" instead of not arriving at all.',
   ],
   bodyMobile:
-    'A scheduled email with each region\'s week, its checked briefing and pipeline health. A failed import arrives as "Action needed" instead of silence.',
+    'A scheduled email shows each region\'s week, its checked briefing and pipeline health. A failed import arrives as "Action needed" instead of silence.',
   phone: {
     alt: 'The same report email at phone width, with headline figures stacked one per row.',
     side: 'The same email at phone width. Gmail displays the same layout.',
@@ -411,7 +411,7 @@ export const results = {
   ],
   note: "GridBloom runs locally as a demonstration. It isn't publicly hosted, and no time savings or production scale are claimed. The test counts describe the revision shown here.",
   noteMobile:
-    'A local demonstration, not publicly hosted. No time savings or production scale are claimed.',
+    'GridBloom is a local demonstration, not publicly hosted. No time savings or production scale are claimed.',
 };
 
 export const elsewhere = {
@@ -427,13 +427,13 @@ export const elsewhere = {
     '.',
   ] satisfies Segment[],
   introMobile:
-    'Data from more than one system, rules for when a figure can be trusted, and a summary someone relies on every week.',
+    'The pattern is data from more than one system, rules for when a figure can be trusted, and a summary someone relies on every week.',
   cards: [
     {
       label: 'Accounting firms',
       labelMobile: 'Accounting',
       title: 'Monthly client dashboards',
-      text: 'Figures from practice and bookkeeping software, with a figure held back until the month is actually closed.',
+      text: 'Figures from practice and bookkeeping software, with each figure held back until the month is actually closed.',
     },
     {
       label: 'Insurance agencies',

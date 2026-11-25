@@ -75,7 +75,10 @@ export const hero = {
     { k: 'Client', v: 'Upwork client; identity private' },
     { k: 'Built with', v: 'Python, pandas and python-docx' },
     { k: 'Timeline', v: 'Three days, August 2025' },
-    { k: 'Delivered', v: 'Cleaned workbook, 400+ page Word document, duplicates report and the code' },
+    {
+      k: 'Delivered',
+      v: 'Cleaned workbook, 400+ page Word document, duplicates report and the code',
+    },
   ] satisfies Pair[],
   factsNoteMobile:
     'An Upwork client; identity private. Built in three days in August 2025 with Python, pandas and python-docx.',
@@ -105,7 +108,7 @@ export const overview = {
       label: 'Categories',
       title: 'Worksheets were the categories',
       text: "A quote's category was only recorded by which sheet it sat in. Merging copies risked losing that information.",
-      textMobile: 'Merging copies risked losing them.',
+      textMobile: 'Merging copies risked losing categories.',
     },
     {
       label: 'Duplicates',
@@ -263,7 +266,7 @@ export const document = {
     },
     {
       title: 'Sorted by last name',
-      text: "So it reads like a reference book, not the spreadsheet's row order.",
+      text: "It reads like a reference book instead of following the spreadsheet's row order.",
       textMobile: 'Reads like a reference book.',
     },
     {
@@ -341,11 +344,11 @@ export const elsewhere = {
   num: '06',
   h2: 'The same pattern, other industries',
   intro: [
-    'Any organization with ',
-    { text: 'a spreadsheet that grew messy', strong: true },
+    'The same approach works for any organization with ',
+    { text: 'a spreadsheet that has grown messy', strong: true },
     ' and needs ',
     { text: 'a polished document', strong: true },
-    ' from it.',
+    ' made from it.',
   ] satisfies Segment[],
   cards: [
     {

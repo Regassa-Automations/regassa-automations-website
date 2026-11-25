@@ -19,6 +19,9 @@ import { services } from '../../data/home';
         />
       ))}
     </ul>
+    <a class="arrow-link services__more" href={services.moreLink.href}>
+      {services.moreLink.label} <span aria-hidden="true">→</span>
+    </a>
   </div>
 </section>
 
@@ -29,6 +32,14 @@ import { services } from '../../data/home';
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 40px;
     margin-top: 40px;
+  }
+
+  .services__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    margin-top: var(--space-8);
   }
 
   @media (max-width: 1119px) {

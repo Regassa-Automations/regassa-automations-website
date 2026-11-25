@@ -67,14 +67,14 @@ export const overview = {
     },
     {
       label: 'Long-lived records',
-      title: 'An opportunity changes for weeks',
+      title: 'An opportunity keeps changing for weeks',
       text: 'Next steps get updated again and again, and a pitch eventually moves from Pipeline to Secured. Appending a new row each time would bury the client in duplicates.',
       textMobile: 'Updated many times, then moved from Pipeline to Secured.',
     },
     {
       label: 'Shared spreadsheets',
       title: 'Many people, many files',
-      text: 'About 20 staff working at once, client names typed slightly differently, headers moved, and the occasional file nobody had shared edit access to.',
+      text: 'About 20 staff working at once, client names typed slightly differently, headers moved, and the occasional client file the script had not been given edit access to.',
       textMobile: 'About 20 staff, varied client names, moved headers, missing access.',
     },
   ],
@@ -84,7 +84,7 @@ export const journey = {
   num: '02',
   h2: 'One opportunity, start to finish',
   intro:
-    "How a single pitch travels from the agency's master pipeline to a client's tracker, and stays the same record the whole way. Names are invented.",
+    "This follows a single pitch from the agency's master pipeline to a client's tracker. It stays the same record the whole way. Names are invented.",
   label: 'One opportunity, start to finish',
   steps: [
     {
@@ -222,7 +222,7 @@ export const sheet = {
   h2: 'What the team works with',
   body: "The agency kept working in the spreadsheet it already knew. Three columns were added at the front: the Record ID, a Sync Status, and a Ready to Sync checkbox that publishes a record when it's ready. Dropdowns on the key fields keep entries consistent enough to route.",
   bodyMobile:
-    'The same spreadsheet as before, with a Record ID, a Sync Status and a Ready to Sync checkbox at the front, and dropdowns on key fields.',
+    'The agency kept the same spreadsheet, with a Record ID, a Sync Status and a Ready to Sync checkbox added at the front, and dropdowns on key fields.',
   mock: {
     caption: 'Master pipeline (illustration)',
     columns: [
@@ -427,7 +427,7 @@ export const rollout = {
   h2: 'Rollout and support',
   body: 'This was a migration of a workflow the agency was using every day, timed with the move to a new reporting year. The 2025 tabs stayed intact while new 2026 Pipeline and Secured tabs were prepared in every client tracker.',
   bodyMobile:
-    'A live workflow migrated at the start of a new reporting year, with 2025 tabs kept intact.',
+    'The live workflow was migrated at the start of a new reporting year, with the 2025 tabs kept intact.',
   steps: [
     {
       title: 'Build on copies',
@@ -527,7 +527,7 @@ export const results = {
     {
       title: 'Status changes',
       before: 'moved between tabs manually',
-      after: 'follow the record to Secured',
+      after: 'follows the record to Secured',
     },
     {
       title: 'Failures',
@@ -550,7 +550,8 @@ export const elsewhere = {
     { text: 'each client a view of their part', strong: true },
     ' runs into the same problem.',
   ] satisfies Segment[],
-  introMobile: 'One internal list of work, and each client owed a view of their part.',
+  introMobile:
+    'The pattern is one internal list of work, with each client owed a view of their part.',
   cards: [
     {
       label: 'Accounting firms',

@@ -1,10 +1,11 @@
 ---
-/** Home "How a project runs" (#approach). Phone: vertical list with short lines. */
+/** Home "How a project runs" (#approach), with the pricing note (#pricing, OI-23). Phone: vertical list with short lines. */
 import SectionHeading from '../ui/SectionHeading.astro';
-import { approach } from '../../data/home';
+import Responsive from '../ui/Responsive.astro';
+import { approach, pricing } from '../../data/home';
 ---
 
-<section id="approach" class="section section--home section--paper" aria-labelledby="approach-h">
+<section id="approach" class="section section--home" aria-labelledby="approach-h">
   <div class="container">
     <SectionHeading id="approach-h" eyebrow={approach.eyebrow} focusTarget>
       {approach.h2}
@@ -27,6 +28,17 @@ import { approach } from '../../data/home';
       <span class="bp-desktop">{approach.note}</span>
       <span class="bp-mobile">{approach.noteMobile}</span>
     </p>
+    <div id="pricing" class="pricing">
+      <h3 id="pricing-h" class="pricing__h3" tabindex="-1">
+        {pricing.h3}
+      </h3>
+      <p class="pricing__body">
+        <Responsive text={pricing.body} textMobile={pricing.bodyMobile} />
+      </p>
+      <a class="arrow-link pricing__link" href={pricing.link.href}>
+        {pricing.link.label} <span aria-hidden="true">→</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -70,6 +82,35 @@ import { approach } from '../../data/home';
     color: var(--text-muted);
   }
 
+  .pricing {
+    max-width: 52em;
+    margin-top: var(--space-8);
+    padding: var(--space-6) var(--space-8);
+    border-left: 3px solid var(--electric);
+    background: var(--surface-paper);
+    border-radius: var(--radius-md);
+  }
+
+  .pricing__h3 {
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--ink);
+  }
+
+  .pricing__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    margin-top: var(--space-2);
+  }
+
+  .pricing__body {
+    margin-top: var(--space-3);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
   @media (max-width: 1119px) {
     .approach__steps {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -108,6 +149,24 @@ import { approach } from '../../data/home';
       font-size: 14px;
       line-height: 22px;
       color: var(--text-strong-muted);
+    }
+
+    .pricing {
+      margin-top: var(--space-6);
+      padding: var(--space-4) var(--space-4);
+    }
+
+    .pricing__h3 {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    .pricing__body {
+      margin-top: var(--space-2);
+      font-size: 14px;
+      line-height: 22px;
     }
 
     .approach__note {

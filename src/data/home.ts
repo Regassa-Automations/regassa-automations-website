@@ -1,6 +1,8 @@
 /**
  * Home page copy, transcribed verbatim from _handoff/content/home.md (desktop) and
  * _handoff/content/mobile/home-mobile.md (phone strings, `...Mobile`, shown below 768 px).
+ * Hero, problems, services, selected-work summaries, pricing and founder copy were revised for
+ * OI-22/OI-23 (approved by Ayu 2026-11-24; see 08-homepage-clarity-and-landing-pages.md).
  * Do not edit wording here without a change to the content files.
  */
 
@@ -12,10 +14,10 @@ export interface LinkItem {
 export const meta = {
   title: 'Regassa Automations | Workflow automation for small businesses',
   description:
-    'Workflow automation consulting from Portland, Maine. I turn disconnected spreadsheets, manual handoffs and complicated business rules into reliable systems.',
+    'Workflow automation for small teams: tools that end retyping, copy-and-paste documents and hand-built reports. Free consultation and a written quote before work begins.',
   ogTitle: 'Regassa Automations',
   ogDescription:
-    'Workflow automation for complex, everyday operations: operational applications, integrations and data sync, reporting and AI-assisted workflows.',
+    'Workflow automation for small teams: tools that run your process, systems that stay in sync, and reports and documents that build themselves.',
   // Generated in Phase 6 (og-default.png).
   ogImage: '/og/og-default.png',
   ogImageAlt:
@@ -24,14 +26,20 @@ export const meta = {
 
 export const hero = {
   eyebrow: 'Workflow automation consulting',
-  h1: 'Workflow automation for complex, everyday operations.',
-  lede: 'I turn disconnected spreadsheets, manual handoffs, and complicated business rules into reliable systems, so your team spends less time moving information and more time using it.',
+  h1: 'Stop doing the same work twice.',
+  lede: 'I build practical tools for small teams that run on spreadsheets, email and a few key people. They take over repetitive office work: retyping information between systems, assembling documents by copy and paste, and rebuilding the same report every week.',
+  ledeMobile:
+    'I build practical tools that take over repetitive office work, so your team stops retyping, copying and rebuilding the same things every week.',
   primary: { label: 'Discuss your workflow', href: '#inquiry' },
-  secondary: { label: 'Explore the work', href: '#work' },
+  secondary: { label: 'See examples', href: '#work' },
+  proof:
+    "I've built systems for logistics companies, PR agencies and nonprofit programs. Every project starts with a free consultation, and you get a written quote before any build begins.",
+  proofMobile:
+    'Every project starts with a free consultation, and you get a written quote before any build begins.',
   hexList: [
-    'Operational applications',
-    'Integrations and data sync',
-    'Reporting and AI-assisted workflows',
+    'Tools that run your process',
+    'Systems that stay in sync',
+    'Reports and documents that build themselves',
   ],
   figure: {
     // OI-18: route-table screenshot placement approved by Ayu, 2026-11-20.
@@ -45,7 +53,9 @@ export const hero = {
 
 export const selectedWork = {
   eyebrow: 'Selected work',
-  h2: 'Systems built for real operational processes',
+  h2: 'Different industries, the same kinds of problems',
+  intro:
+    'The rate-sheet project is a good example of a pattern that shows up in many offices: complicated rules, a person checking the exceptions, and a client-ready document at the end. Fee schedules, quotes and engagement letters follow the same pattern.',
   allLink: { label: 'See all five projects', href: '/work/' },
   cardLinkLine: 'Read the case study',
   /** Per-card media and phone copy; titles, tags and desktop summaries come from projects.yaml. */
@@ -53,20 +63,28 @@ export const selectedWork = {
     'freight-rate-sheet-generator': {
       // OI-18: sample PDF page 1 placement approved by Ayu, 2026-11-20.
       alt: 'First page of a generated rate sheet for a fictional customer, with validity dates and container prices.',
+      summary:
+        "A freight forwarder's client rate sheets are now built from route and cost data, with the pricing rules applied automatically. A person approves every flagged route before the PDF is created.",
       summaryMobile:
-        'Matches routes to cost data, applies pricing rules, holds exceptions for review, and generates a PDF.',
+        'Client rate sheets are built with the pricing rules applied automatically, and a person approves every exception.',
     },
     'pr-pipeline-sync': {
-      summaryMobile:
-        "Publishes a PR agency's opportunities from one master pipeline to about 30 client trackers.",
+      summary:
+        "One update in a PR agency's master pipeline now reaches about 30 client trackers, instead of being copied into each one by hand.",
+      summaryMobile: "One update in the agency's master pipeline reaches about 30 client trackers.",
     },
     gridbloom: {
       alt: 'GridBloom dashboard with headline electricity figures above demand and generation charts.',
+      summary:
+        'A weekly report and dashboard build themselves from public data, leave out figures the data cannot support, and include an AI-drafted briefing whose numbers are checked.',
       summaryMobile:
-        'A pipeline, dashboard and weekly report that withhold unsupported figures, with a checked AI briefing.',
+        'A weekly report and dashboard build themselves, with an AI briefing whose numbers are checked.',
       tagMobile: 'Reporting and AI-assisted',
     },
-  } as Record<string, { alt?: string; summaryMobile?: string; tagMobile?: string }>,
+  } as Record<
+    string,
+    { alt?: string; summary?: string; summaryMobile?: string; tagMobile?: string }
+  >,
 };
 
 export interface Problem {
@@ -78,144 +96,80 @@ export interface Problem {
 }
 
 export const problems = {
-  eyebrow: 'Problems I work on',
-  h2: 'Does any of this sound like your week?',
+  eyebrow: 'Sound familiar?',
+  h2: 'Does any of this sound like your office?',
   intro:
-    'Each of these is a process that works, but only because people keep it working by hand. Each links to the service and a project that addresses it.',
+    'If so, there is probably a simpler way. Each of these processes works only because someone keeps it working by hand. Under each one is the kind of work that fixes it and, where there is one, a project that already did.',
   items: [
     {
-      title: 'The same information is typed into three places.',
+      title: 'The same client details get typed into three different places.',
       detail: 'And the copies drift apart until someone notices.',
       links: [
-        { label: 'Integrations and data sync', href: '#services' },
-        { label: 'PR pipeline example', href: '/work/pr-pipeline-sync/' },
+        { label: 'Systems that stay in sync', href: '#services' },
+        { label: 'Volunteer roster example', href: '/work/volunteer-rosters/' },
       ],
-      linksMobile: ['Integrations', 'PR pipeline example'],
+      linksMobile: ['Sync', 'Volunteer example'],
     },
     {
-      title: "Pricing rules live in one person's spreadsheet.",
+      title: "Pricing or fee rules live in one person's spreadsheet.",
       detail: 'Quotes wait when that person is out, and exceptions are handled from memory.',
       links: [
-        { label: 'Operational applications', href: '#services' },
+        { label: 'Tools that run your process', href: '#services' },
         { label: 'Logistics example', href: '/work/freight-rate-sheet-generator/' },
       ],
-      linksMobile: ['Operational apps', 'Logistics example'],
+      linksMobile: ['Process tools', 'Logistics example'],
     },
     {
-      title: 'The weekly report takes most of a day.',
-      detail: 'Exports, pasting, reformatting, then writing the summary.',
-      links: [
-        { label: 'Reporting and AI-assisted workflows', href: '#services' },
-        { label: 'GridBloom example', href: '/work/gridbloom/' },
-      ],
-      linksMobile: ['Reporting', 'GridBloom example'],
-    },
-    {
-      title: 'Client documents are assembled by copy and paste.',
+      title: 'Client documents (quotes, proposals, letters) are built by copy and paste.',
       detail: 'Every version is a chance for a stale number to slip through.',
       links: [
-        { label: 'Operational applications', href: '#services' },
+        { label: 'Reports and documents that build themselves', href: '#services' },
         { label: 'Rate-sheet PDF example', href: '/work/freight-rate-sheet-generator/#sample' },
         { label: 'Word reference example', href: '/work/quotes-library/' },
       ],
-      linksMobile: ['Operational apps', 'Rate-sheet example', null],
+      linksMobile: ['Documents', 'Rate-sheet example', null],
     },
     {
-      title: 'Two systems disagree and nobody knows which is right.',
-      detail: 'Reconciling them is a recurring chore with no record of what changed.',
+      title: "The weekly report takes most of someone's day.",
+      detail: 'Someone exports, pastes and reformats the data, then writes the summary.',
       links: [
-        { label: 'Integrations and data sync', href: '#services' },
+        { label: 'Reports and documents that build themselves', href: '#services' },
+        { label: 'GridBloom example', href: '/work/gridbloom/' },
+      ],
+      linksMobile: ['Reports', 'GridBloom example'],
+    },
+    {
+      title: 'Updates have to be copied into a separate file for every client.',
+      detail:
+        'The more clients you have, the more time it takes, and the easier it is to miss one.',
+      links: [
+        { label: 'Systems that stay in sync', href: '#services' },
         { label: 'PR pipeline example', href: '/work/pr-pipeline-sync/' },
       ],
-      linksMobile: ['Integrations', 'PR pipeline example'],
+      linksMobile: ['Sync', 'PR pipeline example'],
     },
     {
-      title: 'Sign-ups arrive from several forms with duplicates.',
-      detail: 'The roster is never quite current, and roles get merged by hand.',
+      title: 'Two systems disagree, and no one knows which is right.',
+      detail: 'Reconciling them is a recurring chore with no record of what changed.',
       links: [
-        { label: 'Operational applications', href: '#services' },
-        { label: 'Volunteer roster example', href: '/work/volunteer-rosters/' },
+        { label: 'Systems that stay in sync', href: '#services' },
+        { label: 'PR pipeline example', href: '/work/pr-pipeline-sync/' },
       ],
-      linksMobile: ['Operational apps', 'Volunteer example'],
+      linksMobile: ['Sync', 'PR pipeline example'],
+    },
+    {
+      title: "Deadlines and follow-ups live in someone's head or inbox.",
+      detail: 'Things slip when that person is busy, and no one else can see what is due.',
+      links: [{ label: 'Tools that run your process', href: '#services' }],
+      linksMobile: ['Process tools'],
     },
   ] satisfies Problem[],
 };
 
-export const featured = {
-  eyebrow: 'Featured project',
-  h2: 'From route list to rate sheet, with a person approving the exceptions',
-  intro:
-    "A logistics rate-sheet application that takes a client's requested routes and cost data, applies the pricing rules consistently, and stops for review wherever the data does not fit the rules.",
-  tag: 'Demo uses fictional routes and sample rates',
-  tagMobile: 'Fictional routes and sample rates',
-  stepsLabel: 'How the rate-sheet workflow runs',
-  steps: [
-    {
-      num: '01',
-      label: 'Input',
-      title: 'Routes and cost data',
-      titleMobile: 'Routes and cost data',
-      description: 'Client route list and carrier costs are loaded.',
-    },
-    {
-      num: '02',
-      label: 'Match',
-      title: 'Route matching',
-      titleMobile: 'Route matching',
-      description: 'Each route is matched to cost records; gaps are flagged.',
-    },
-    {
-      num: '03',
-      label: 'Price',
-      title: 'Pricing rules',
-      titleMobile: 'Pricing rules',
-      description: 'Rules are applied the same way every time.',
-    },
-    {
-      num: '04',
-      label: 'Review',
-      title: 'Exception review',
-      titleMobile: 'Exception review by a person',
-      description: 'A person approves or corrects every flagged route.',
-      highlight: true,
-    },
-    {
-      num: '05',
-      label: 'Generate',
-      title: 'Rate-sheet PDF',
-      titleMobile: 'Rate-sheet PDF and report',
-      description: 'A formatted PDF plus a generation report.',
-    },
-    {
-      num: '06',
-      label: 'Deliver',
-      title: 'Delivery',
-      titleMobile: 'Delivery',
-      description: 'Save the PDF, or generate and email it to the client.',
-    },
-  ],
-  figures: [
-    {
-      // OI-18: route-table screenshot placement approved by Ayu, 2026-11-20.
-      alt: 'Customer route table with match status for six fictional routes, one of them unmatched.',
-      caption:
-        'Route management: matched, unmatched and flagged routes side by side. Fictional data.',
-    },
-    {
-      // OI-18: sample PDF page 1 placement approved by Ayu, 2026-11-20.
-      alt: 'Page one of the generated sample rate sheet, with validity dates, container prices by size and LCL rates per cubic meter.',
-      caption: 'Generated rate sheet with sample rates.',
-      link: {
-        label: 'View the full sample PDF in the case study',
-        href: '/work/freight-rate-sheet-generator/#sample',
-      },
-    },
-  ],
-  button: { label: 'Read the logistics case study', href: '/work/freight-rate-sheet-generator/' },
-};
-
 export interface Service {
   title: string;
+  /** Category name used on case-study tags, shown small above the title. */
+  tag: string;
   description: string;
   descriptionMobile: string;
   addresses: string[];
@@ -224,54 +178,61 @@ export interface Service {
 }
 
 export const services = {
-  eyebrow: 'Services',
-  h2: 'Three kinds of work, often combined',
-  addressesLabel: 'Addresses',
-  relatedLabel: 'Related:',
+  eyebrow: 'What I build',
+  h2: 'Three kinds of work, built around how your team already operates',
+  addressesLabel: 'Solves',
+  relatedLabel: 'Examples:',
+  moreLink: { label: 'Services, pricing and how a project runs', href: '/services/' },
   items: [
     {
-      title: 'Operational applications',
+      title: 'Tools that run your process',
+      tag: 'Operational applications',
       description:
-        'Small, purpose-built tools that hold your business rules, so the process does not depend on who is in the office.',
+        "When the rules for pricing, intake or approvals live in one person's head or spreadsheet, I turn them into a simple tool the whole team can use. Unusual cases are flagged for a person to check.",
       descriptionMobile:
-        'Purpose-built tools that hold your business rules, so the process does not depend on who is in the office.',
+        'I turn your pricing, intake or approval rules into a simple tool the whole team can use, with unusual cases flagged for a person.',
       addresses: [
         'Rules kept in personal spreadsheets',
-        'Documents assembled by hand',
+        'Work that stops when one person is out',
         'Exceptions handled from memory',
       ],
-      related: [
-        { label: 'Logistics rate sheets', href: '/work/freight-rate-sheet-generator/' },
-        { label: 'Quotes library', href: '/work/quotes-library/' },
-      ],
+      related: [{ label: 'Logistics rate sheets', href: '/work/freight-rate-sheet-generator/' }],
       rule: 'navy',
     },
     {
-      title: 'Integrations and data synchronization',
+      title: 'Systems that stay in sync',
+      tag: 'Integrations and data sync',
       description:
-        'Connections between the tools you already use, with reconciliation so you can see what changed and what needs a decision.',
+        'Your tools update each other, so information is entered once and every copy stays current. You can see what changed and when.',
       descriptionMobile:
-        'Connections between the tools you use, with reconciliation so you can see what changed.',
+        'Information is entered once and kept current everywhere it is used, with a record of what changed.',
       addresses: [
         'Repeated data entry between systems',
         'Records that drift out of sync',
         'Duplicate records from several sources',
       ],
-      related: [{ label: 'PR pipeline sync', href: '/work/pr-pipeline-sync/' }],
+      related: [
+        { label: 'PR pipeline sync', href: '/work/pr-pipeline-sync/' },
+        { label: 'Volunteer rosters', href: '/work/volunteer-rosters/' },
+      ],
       rule: 'electric',
     },
     {
-      title: 'Reporting and AI-assisted workflows',
+      title: 'Reports and documents that build themselves',
+      tag: 'Reporting and AI-assisted workflows',
       description:
-        'Dashboards fed directly from your sources, and, where it helps, a language model that drafts research or summaries for a person to check.',
+        'Weekly reports, client documents and summaries are generated from your data in a consistent format. Where AI drafts anything, a person reviews it before it is used.',
       descriptionMobile:
-        'Dashboards fed from your sources, and model-drafted summaries that a person checks.',
+        'Reports and client documents are generated from your data, and a person reviews anything AI drafts.',
       addresses: [
         'Reports rebuilt by hand each week',
-        'Figures scattered across exports',
-        'Recurring research and summary writing',
+        'Documents assembled by copy and paste',
+        'Recurring summary writing',
       ],
-      related: [{ label: 'GridBloom', href: '/work/gridbloom/' }],
+      related: [
+        { label: 'Quotes library', href: '/work/quotes-library/' },
+        { label: 'GridBloom', href: '/work/gridbloom/' },
+      ],
       rule: 'accent',
     },
   ] satisfies Service[],
@@ -285,29 +246,38 @@ export const approach = {
       num: '01',
       title: 'Understand the process',
       text: 'I learn how the work actually runs today, who touches it, and where it slows down.',
-      textMobile: 'How the work really runs, and where it slows down.',
+      textMobile: 'I learn how the work really runs and where it slows down.',
     },
     {
       num: '02',
       title: 'Define rules and exceptions',
       text: 'We write down the rules, the edge cases, and which decisions stay with your staff.',
-      textMobile: 'Which decisions stay with your staff.',
+      textMobile: 'We agree which decisions stay with your staff.',
     },
     {
       num: '03',
       title: 'Build and review',
       text: 'I build in stages and review each one with you against real or realistic cases.',
-      textMobile: 'In stages, against realistic cases.',
+      textMobile: 'I build in stages and test against realistic cases.',
     },
     {
       num: '04',
       title: 'Document and hand off',
       text: 'You get written documentation of how it works and how to change it.',
-      textMobile: 'Written documentation of how to run and change it.',
+      textMobile: 'You get written documentation of how to run and change it.',
     },
   ],
   note: 'Scope, deliverables and any ongoing support are agreed in writing for each engagement before work begins.',
   noteMobile: 'Scope and any ongoing support are agreed in writing for each engagement.',
+};
+
+/** OI-23, pricing Option A (transparent ranges), approved by Ayu 2026-11-24. */
+export const pricing = {
+  h3: 'How pricing works',
+  link: { label: 'Discovery options, support plans and full pricing', href: '/services/#pricing' },
+  body: "Every project starts with a free 30-minute consultation. Small, clearly defined projects get a written fixed quote, typically $1,500 to $5,000. For larger or more complex workflows, we start with a paid discovery phase (from $750), and the full discovery fee is credited toward your build if you go ahead. Most multi-step automation projects fall between $5,000 and $15,000. You'll always know the price before work begins.",
+  bodyMobile:
+    "Every project starts with a free 30-minute consultation. Small projects get a written fixed quote, typically $1,500 to $5,000. Larger ones start with a paid discovery phase from $750, credited in full toward your build. You'll always know the price before work begins.",
 };
 
 export const reviews = {
@@ -329,11 +299,11 @@ export const founder = {
   eyebrowMobile: 'Who you work with',
   h2: "I'm Ayantu Regassa",
   body: [
-    "I'm an engineer and software developer. Earlier in my career I worked as a patent technical specialist, where the job was reading dense technical material closely and describing exactly what a system does. I bring the same care to your operations: I learn the process, including its exceptions, before I write any code.",
+    "I'm an engineer and software developer. Before automation, I worked in patent drafting and prosecution at a law firm, where accuracy, deadlines and document standards aren't optional. I bring the same care to your operations: I learn the process, including its exceptions, before I write any code.",
     'Regassa Automations is just me. You work with me directly, from the first conversation to the handoff.',
   ],
   bodyMobile:
-    'An engineer and software developer, formerly a patent technical specialist. I learn your process, including its exceptions, before I write any code. You work with me directly, from first conversation to handoff.',
+    'I am an engineer and software developer who previously worked in patent drafting and prosecution at a law firm. I learn your process, including its exceptions, before I write any code. You work with me directly, from first conversation to handoff.',
   link: { label: 'More about my background and approach', href: '/about/' },
   linkMobile: 'More about my background',
 };
@@ -384,7 +354,7 @@ export const inquiry = {
       id: 'f-tools',
       name: 'tools',
       label: 'Which tools or systems are involved?',
-      hint: 'For example Google Sheets, a CRM, email.',
+      hint: 'For example, Google Sheets, a CRM or email.',
       required: false,
       type: 'text',
       autocomplete: 'off',
@@ -393,7 +363,7 @@ export const inquiry = {
       id: 'f-freq',
       name: 'frequency',
       label: 'How often does it happen, or who is involved?',
-      hint: 'For example weekly, two people in operations.',
+      hint: 'For example, weekly, or two people in operations.',
       required: false,
       type: 'text',
       autocomplete: 'off',
@@ -417,7 +387,7 @@ export const inquiry = {
     summaryLabels: { name: 'Name', email: 'Email', process: 'Process' },
     failureTitle: 'Your inquiry was not sent.',
     failureBody:
-      'Something went wrong on our side. Everything you wrote is still here; please try again in a moment.',
+      'Something went wrong while sending. Everything you wrote is still here; please try again in a moment.',
     successLabel: 'Inquiry sent',
     successHeading: 'Thank you, {name}. Your note is on its way to me.',
     successNameFallback: 'there',

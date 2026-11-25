@@ -20,7 +20,7 @@ export const intro = {
   h1: 'Five workflows, from messy inputs to dependable outputs',
   lede: 'Each project started as a process people were holding together by hand. The case studies show the previous process, what I built, where a person stays in control, and what is measured versus what the system is designed to do.',
   ledeMobile:
-    'Each case study shows the previous process, what I built, where a person stays in control, and what is measured versus designed.',
+    'Each case study shows the previous process, what I built, where a person stays in control, and what was measured versus what it was designed to do.',
 };
 
 export const labels = {

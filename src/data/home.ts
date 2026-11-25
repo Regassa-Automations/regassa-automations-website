@@ -33,8 +33,9 @@ export const hero = {
   primary: { label: 'Discuss your workflow', href: '#inquiry' },
   secondary: { label: 'See examples', href: '#work' },
   proof:
-    'Projects for teams in logistics, PR and communications, and community programs. Free consultation, and a written quote before any build begins.',
-  proofMobile: 'Free consultation, and a written quote before any build begins.',
+    "I've built systems for logistics companies, PR agencies and nonprofit programs. Every project starts with a free consultation, and you get a written quote before any build begins.",
+  proofMobile:
+    'Every project starts with a free consultation, and you get a written quote before any build begins.',
   hexList: [
     'Tools that run your process',
     'Systems that stay in sync',

@@ -14,8 +14,7 @@ export const meta = {
   ogDescription:
     "A Google Apps Script sync that publishes each opportunity to the right client's tracker and follows it from Pipeline to Secured.",
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const hero = {

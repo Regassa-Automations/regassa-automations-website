@@ -12,8 +12,7 @@ export const meta = {
   ogTitle: 'About: Regassa Automations',
   ogDescription: 'You work directly with me, start to finish.',
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const intro = {
@@ -45,9 +44,9 @@ export const background = {
     },
     {
       title: 'Patent technical work',
-      text: 'As a patent technical specialist at a law firm, I read dense technical material and described exactly what a system does and does not do, under strict accuracy and deadline standards. I apply the same precision to your business rules and their exceptions.',
+      text: 'As a patent technical specialist at a top IP law firm, I read dense technical material and described exactly what a system does and does not do, under strict accuracy and deadline standards. I apply the same precision to your business rules and their exceptions.',
       textMobile:
-        'As a patent technical specialist, I described exactly what a system does and does not do. I apply the same precision to your rules and exceptions.',
+        'As a patent technical specialist at a top IP law firm, I described exactly what a system does and does not do. I apply the same precision to your rules and exceptions.',
     },
   ],
 };

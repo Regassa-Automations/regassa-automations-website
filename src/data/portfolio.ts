@@ -11,8 +11,7 @@ export const meta = {
   ogTitle: 'Portfolio: Regassa Automations',
   ogDescription: 'Five workflows, from messy inputs to dependable outputs.',
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const intro = {

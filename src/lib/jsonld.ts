@@ -19,7 +19,7 @@ export function professionalService() {
     url: `${SITE}/`,
     logo: abs('/og/logo-mark.png'),
     image: abs('/og/og-default.png'),
-    description: 'Workflow automation for complex, everyday operations.',
+    description: 'Practical automation for small teams.',
     founder: { '@type': 'Person', name: 'Ayantu Regassa' },
     address: {
       '@type': 'PostalAddress',

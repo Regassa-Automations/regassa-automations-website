@@ -78,7 +78,7 @@ test.describe('structured data', () => {
       name: 'Regassa Automations',
       url: `${SITE}/`,
       logo: `${SITE}/og/logo-mark.png`,
-      description: 'Workflow automation for complex, everyday operations.',
+      description: 'Practical automation for small teams.',
       founder: { name: 'Ayantu Regassa' },
       address: { addressLocality: 'Portland', addressRegion: 'ME', addressCountry: 'US' },
     });

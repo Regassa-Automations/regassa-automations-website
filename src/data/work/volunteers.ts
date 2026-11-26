@@ -15,8 +15,7 @@ export const meta = {
   ogDescription:
     "An Apps Script and SignUpGenius API integration that routes each sign-up to its location's roster and merges returning volunteers.",
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const hero = {

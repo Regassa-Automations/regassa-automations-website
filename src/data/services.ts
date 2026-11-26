@@ -14,8 +14,7 @@ export const meta = {
   ogDescription:
     'Tools that run your process, systems that stay in sync, and reports and documents that build themselves. Clear pricing before any work begins.',
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const intro = {

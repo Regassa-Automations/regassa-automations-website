@@ -15,8 +15,7 @@ export const meta = {
   ogDescription:
     'A Python cleanup with a scored duplicates report, and a generated Word reference organized by author.',
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 const franklin: PaperEntry = {

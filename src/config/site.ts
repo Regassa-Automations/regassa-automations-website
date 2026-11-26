@@ -47,7 +47,7 @@ export const footerSiteLinks = [
 
 /** Footer copy from _handoff/content/home.md (Footer). */
 export const footerCopy = {
-  tagline: 'Workflow automation for complex, everyday operations. Based in Portland, Maine.',
+  tagline: 'Practical automation for small teams. Based in Portland, Maine.',
   businessName: 'Regassa Automations',
 } as const;
 

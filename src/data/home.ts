@@ -20,8 +20,7 @@ export const meta = {
     'Workflow automation for small teams: tools that run your process, systems that stay in sync, and reports and documents that build themselves.',
   // Generated in Phase 6 (og-default.png).
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const hero = {
@@ -299,11 +298,11 @@ export const founder = {
   eyebrowMobile: 'Who you work with',
   h2: "I'm Ayantu Regassa",
   body: [
-    "I'm an engineer and software developer. Before automation, I worked in patent drafting and prosecution at a law firm, where accuracy, deadlines and document standards aren't optional. I bring the same care to your operations: I learn the process, including its exceptions, before I write any code.",
+    "I'm an engineer and software developer. Before automation, I worked in patent preparation and prosecution at a top IP law firm, where accuracy, deadlines and document standards aren't optional. I bring the same care to your operations: I learn the process, including its exceptions, before I write any code.",
     'Regassa Automations is just me. You work with me directly, from the first conversation to the handoff.',
   ],
   bodyMobile:
-    'I am an engineer and software developer who previously worked in patent drafting and prosecution at a law firm. I learn your process, including its exceptions, before I write any code. You work with me directly, from first conversation to handoff.',
+    'I am an engineer and software developer who previously worked in patent preparation and prosecution at a top IP law firm. I learn your process, including its exceptions, before I write any code. You work with me directly, from first conversation to handoff.',
   link: { label: 'More about my background and approach', href: '/about/' },
   linkMobile: 'More about my background',
 };

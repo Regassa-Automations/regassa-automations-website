@@ -28,9 +28,9 @@ export const hero = {
   tags: ['Data cleanup', 'Document generation', 'Python'],
   tagsMobile: ['Data cleanup', 'Document generation'],
   h1: 'From a cluttered workbook to a 400-page reference',
-  lede: 'A Python workflow that cleaned a quotations collection spread across Excel worksheets, removed true duplicates while keeping every category a quote belonged to, and generated a formatted, navigable Word document.',
+  lede: "A client's quotations collection had become a cluttered Excel workbook full of repeats, and cleaning it by hand would have taken days. In three days, I removed true duplicates without losing any categories and generated a formatted, navigable 400-page Word reference.",
   ledeMobile:
-    'A Python workflow that cleaned a quotations collection spread across Excel worksheets, removed true duplicates while keeping every category, and generated a formatted Word document.',
+    'A cluttered quotations workbook, cleaned without losing any categories and turned into a 400-page Word reference in three days.',
   secondary: { label: 'See the before and after', href: '#transform' },
   paperLabel:
     'Illustration of a page from the generated Word document: author headings sorted by last name, each quotation in italics, and the categories it belongs to listed beneath it.',

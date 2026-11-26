@@ -21,9 +21,9 @@ export const hero = {
   tags: ['Data pipeline', 'Reporting and AI-assisted workflow'],
   tagsMobile: ['Data pipeline', 'AI-assisted reporting'],
   h1: 'GridBloom: electricity data you can check',
-  lede: "GridBloom is a data pipeline, dashboard and weekly report built on public U.S. grid data. It checks every figure before showing it, says plainly when the data can't support a number, and adds an AI briefing whose every figure is verified against its sources.",
+  lede: "Reports are only as trustworthy as the data behind them, and real data arrives late, with gaps and bad values. GridBloom shows how I handle that, using public U.S. electricity data: it builds a dashboard and weekly report automatically, says plainly when the data can't support a number, and checks every figure in its AI summary.",
   ledeMobile:
-    "GridBloom is a data pipeline, dashboard and weekly report on public U.S. grid data. It checks every figure, says plainly when the data can't support a number, and verifies every figure in its AI briefing.",
+    "Real data arrives late, with gaps and bad values. GridBloom builds a weekly report that says plainly when the data can't support a number, and checks every figure in its AI summary.",
   secondary: { label: 'See how the AI is checked', href: '#ai' },
   figure: {
     alt: 'GridBloom dashboard for PJM, September 23 to October 22, 2026: renewable share of reported net generation 9.0%, average demand 86,645 MW, reported net generation 62,989 GWh, a daily demand chart and an hourly generation-by-fuel chart.',

@@ -22,9 +22,9 @@ export const hero = {
   tags: ['Integration and data sync', 'Google Apps Script', 'Google Sheets'],
   tagsMobile: ['Integration and data sync', 'Google Apps Script'],
   h1: 'One master pipeline, thirty client trackers',
-  lede: "A Google Apps Script automation for a PR agency that publishes each opportunity from the team's master pipeline to the right client's tracker, and keeps it up to date from first pitch to secured coverage.",
+  lede: "Staff at a PR agency were copying every opportunity from their master pipeline into about 30 client trackers by hand. I built an automation that publishes each one to the right client's tracker and keeps it up to date from first pitch to secured coverage.",
   ledeMobile:
-    "An automation for a PR agency that publishes each opportunity from the team's master pipeline to the right client's tracker, and keeps it up to date until coverage is secured.",
+    "A PR agency's staff were copying every opportunity into about 30 client trackers by hand. Now each one is published and kept up to date automatically.",
   secondary: { label: 'Follow one opportunity', href: '#journey' },
   caption: 'The agency edits one spreadsheet. Each client sees only their own work.',
   facts: [

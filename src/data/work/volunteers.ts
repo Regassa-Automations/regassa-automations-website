@@ -23,9 +23,9 @@ export const hero = {
   tags: ['Integration and data sync', 'API integration', 'Google Apps Script'],
   tagsMobile: ['Integration and data sync', 'API integration'],
   h1: 'Two sign-up tools, one clean roster per location',
-  lede: "An automation for a volunteer program in four locations that brings registrations from Google Forms and SignUpGenius into each location's roster, recognizing returning volunteers and never overwriting what coordinators already know.",
+  lede: "Sign-ups for a four-location volunteer program arrived through two different tools, and coordinators had to piece them into each location's roster by hand. I built an automation that does it for them: each registration lands in the right roster, returning volunteers are recognized, and coordinators' own notes are never overwritten.",
   ledeMobile:
-    "An automation for a four-location volunteer program that brings Google Forms and SignUpGenius registrations into each location's roster, recognizing returning volunteers and never overwriting what coordinators already know.",
+    'Coordinators were piecing sign-ups from two tools into four rosters by hand. Now every registration lands in the right roster automatically, without overwriting their notes.',
   secondary: { label: 'See how records merge', href: '#merge' },
   caption: 'Two intake paths, shared rules, a separate roster for each location.',
   captionMobile: 'Two intake paths, a separate roster for each location.',

@@ -74,9 +74,9 @@ export const selectedWork = {
     gridbloom: {
       alt: 'GridBloom dashboard with headline electricity figures above demand and generation charts.',
       summary:
-        'A weekly report and dashboard build themselves from public data, leave out figures the data cannot support, and include an AI-drafted briefing whose numbers are checked.',
+        "A weekly report that builds itself from messy data and refuses to show numbers the data can't support, including in its AI-written summary.",
       summaryMobile:
-        'A weekly report and dashboard build themselves, with an AI briefing whose numbers are checked.',
+        "A self-building weekly report that won't show numbers the data can't support.",
       tagMobile: 'Reporting and AI-assisted',
     },
   } as Record<

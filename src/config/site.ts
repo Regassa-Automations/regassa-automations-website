@@ -32,7 +32,7 @@ export const primaryNav: NavItem[] = [
 
 /** Site-wide primary CTA. */
 export const primaryCta = {
-  label: 'Discuss your workflow',
+  label: 'Get a free consultation',
   href: '/#inquiry',
   homeHref: '#inquiry',
 } as const;

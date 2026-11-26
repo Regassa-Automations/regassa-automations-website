@@ -29,12 +29,12 @@ export const hero = {
   lede: 'I build practical tools for small teams that run on spreadsheets, email and a few key people. They take over repetitive office work: retyping information between systems, assembling documents by copy and paste, and rebuilding the same report every week.',
   ledeMobile:
     'I build practical tools that take over repetitive office work, so your team stops retyping, copying and rebuilding the same things every week.',
-  primary: { label: 'Discuss your workflow', href: '#inquiry' },
+  primary: { label: 'Get a free consultation', href: '#inquiry' },
   secondary: { label: 'See examples', href: '#work' },
   proof:
-    "I've built systems for logistics companies, PR agencies and nonprofit programs. Every project starts with a free consultation, and you get a written quote before any build begins.",
+    "I've built systems for logistics companies, PR agencies and nonprofit programs. You get a written quote before any build begins.",
   proofMobile:
-    'Every project starts with a free consultation, and you get a written quote before any build begins.',
+    'You get a written quote before any build begins.',
   hexList: [
     'Tools that run your process',
     'Systems that stay in sync',
@@ -308,13 +308,13 @@ export const founder = {
 };
 
 export const inquiry = {
-  eyebrow: 'Discuss your workflow',
+  eyebrow: 'Free consultation',
   h2: "Tell me about a process that takes too much of your team's time.",
   intro: 'A few sentences is enough. You do not need to know what the solution looks like.',
   introMobile:
     'A few sentences is enough. I read every inquiry myself and reply if it looks like a fit, or tell you if it is not.',
-  bookingPrefix: 'Prefer to pick a time?',
-  bookingLink: 'Book a free consultation',
+  bookingPrefix: 'Prefer a call?',
+  bookingLink: 'Pick a time on my calendar',
   nextH3: 'What happens next',
   next: [
     'I read every inquiry myself.',

@@ -201,6 +201,6 @@ export const next = {
   h2: 'Not sure where to start?',
   body: "Describe the process in a few sentences, or book a free consultation. I'll suggest the smallest useful first step.",
   bodyMobile: "Describe the process, or book a free consultation. I'll suggest where to start.",
-  ghostLabel: 'Discuss your workflow',
+  ghostLabel: 'Get a free consultation',
   otherLinkMobile: 'See the work',
 };

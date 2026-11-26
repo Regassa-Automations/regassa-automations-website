@@ -90,5 +90,5 @@ export const cta = {
   h2: 'Recognize your own process in one of these?',
   body: 'Describe it in a few sentences and I will tell you honestly whether it is a fit.',
   bodyMobile: "Describe it in a few sentences and I'll tell you honestly whether it is a fit.",
-  button: { label: 'Discuss your workflow', href: '/#inquiry' },
+  button: { label: 'Get a free consultation', href: '/#inquiry' },
 };

@@ -21,7 +21,7 @@ export const intro = {
   lede: "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: there is no account manager or handoff to a junior team. The person who asks about your process is the person who builds and documents the system.",
   ledeMobile:
     "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: the person who asks about your process is the person who builds and documents the system.",
-  primary: { label: 'Discuss your workflow', href: '/#inquiry' },
+  primary: { label: 'Get a free consultation', href: '/#inquiry' },
   secondary: { label: 'See the work', href: '/work/' },
   // portrait-about.jpg (cardigan photo, OI-07 resolved)
   portraitAlt: 'Ayantu Regassa',
@@ -113,6 +113,6 @@ export const tools = {
 export const cta = {
   h2: 'Start with a short description',
   body: "Tell me what the process is and what is frustrating about it. I'll reply personally.",
-  primary: { label: 'Discuss your workflow', href: '/#inquiry' },
+  primary: { label: 'Get a free consultation', href: '/#inquiry' },
   secondaryMobile: { label: 'See the work', href: '/work/' },
 };

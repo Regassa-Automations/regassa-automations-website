@@ -45,8 +45,9 @@ export const cards: Record<string, CardExtra> = {
     alt: 'Client Route Manager table for a fictional customer listing FCL and LCL routes with container sizes, carrier and match status.',
     caption: 'Fictional routes and sample rates.',
     problemMobile:
-      'Customer price lists built by matching routes and applying pricing rules by hand.',
-    builtMobile: 'Matching, pricing, exception review and PDF generation with a report.',
+      'Every couple of weeks, each customer price list was updated by hand as freight costs changed.',
+    builtMobile:
+      'A custom web application: costs are updated once, and branded price lists are generated with one click.',
   },
   gridbloom: {
     alt: 'GridBloom dashboard for PJM with renewable share, average demand and net generation figures above daily demand and hourly generation charts.',

@@ -62,9 +62,9 @@ export const selectedWork = {
       // OI-18: sample PDF page 1 placement approved by Ayu, 2026-11-20.
       alt: 'First page of a generated rate sheet for a fictional customer, with validity dates and container prices.',
       summary:
-        "A freight forwarder's customer price lists are now built from route and cost data, with the pricing rules applied automatically. A person approves every flagged route before the PDF is created.",
+        "When freight costs or available lanes change every couple of weeks, the team updates them once. Every customer's routes are rematched and repriced automatically, and branded, up-to-date price lists are generated with one click. A person approves any route the rules can't settle.",
       summaryMobile:
-        'Customer price lists are built with the pricing rules applied automatically, and a person approves every exception.',
+        "Freight costs are updated once, and every customer's branded price list is regenerated with one click.",
     },
     'pr-pipeline-sync': {
       summary:

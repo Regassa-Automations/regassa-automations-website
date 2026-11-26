@@ -6,7 +6,7 @@ projects:
   - slug: freight-rate-sheet-generator
     title: Automated Customer Pricing System
     homeCardTitle: Customer pricing system
-    portfolioCardTitle: Customer pricing system (web application)
+    portfolioCardTitle: Customer pricing system
     footerLabel: Customer pricing system
     moreLabel: Customer Pricing System # label in "More case studies"
     order: 1
@@ -15,9 +15,9 @@ projects:
     featured: true
     tags: [Operational application]
     ownProject: false
-    cardSummary: Matches requested routes to cost data, applies pricing rules, holds exceptions for review, and generates each customer's price list as a PDF.
-    problem: Building each customer's price list (a freight rate sheet) meant matching routes to cost data and applying pricing rules by hand, with exceptions handled case by case.
-    built: An application that matches routes, applies pricing rules, holds exceptions for a person to review, and generates a price-list PDF with a generation report.
+    cardSummary: The team updates freight costs once, and every customer's routes are repriced automatically, ready for branded price lists generated with one click.
+    problem: Every couple of weeks, as freight costs and available shipping lanes changed, each customer's price list (a freight rate sheet) had to be updated by hand, rematching their routes, reapplying their pricing rules and handling exceptions case by case.
+    built: A custom web application where the team updates freight costs and lanes once. Every customer's routes are rematched and repriced automatically, a person reviews any exceptions, and up-to-date branded price lists are generated with one click.
 
   - slug: gridbloom
     title: 'GridBloom: electricity data you can check'

@@ -49,7 +49,7 @@ export const sections: PrivacySection[] = [
     h2: 'Booking a consultation',
     paragraphs: [
       [
-        'The calendar booking links open a booking page run by Google Calendar appointment schedules, part of Google Workspace. When you book, Google collects your name, email address and anything you write in the booking question, and sends you a confirmation and reminders. Google\'s handling of that information is described in the ',
+        "The calendar booking links open a booking page run by Google Calendar appointment schedules, part of Google Workspace. When you book, Google collects your name, email address and anything you write in the booking question, and sends you a confirmation and reminders. Google's handling of that information is described in the ",
         { text: 'Google Privacy Policy', href: 'https://policies.google.com/privacy' },
         '.',
       ],

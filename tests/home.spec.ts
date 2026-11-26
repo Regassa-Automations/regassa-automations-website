@@ -60,7 +60,7 @@ const mobileStrings = [
   'Client · Lead intake dashboards',
   'Client, verified Upwork review · Volunteer rosters',
   'Sync · PR pipeline example',
-  'Documents · Rate-sheet example',
+  'Documents · Price-list example',
 ];
 
 /** Desktop-only content that the phone design drops. */

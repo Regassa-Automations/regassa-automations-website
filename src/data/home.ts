@@ -33,8 +33,7 @@ export const hero = {
   secondary: { label: 'See examples', href: '#work' },
   proof:
     "I've built systems for logistics companies, PR agencies and nonprofit programs. You get a written quote before any build begins.",
-  proofMobile:
-    'You get a written quote before any build begins.',
+  proofMobile: 'You get a written quote before any build begins.',
   hexList: [
     'Tools that run your process',
     'Systems that stay in sync',
@@ -45,8 +44,8 @@ export const hero = {
     alt: 'Client Route Manager table for a fictional customer listing six FCL and LCL routes with origin, destination, routing, container sizes, carrier and match status, including one unmatched route.',
     tag: 'Fictional demo data',
     caption:
-      'Route review screen from the logistics rate-sheet application. Routes, carriers and rates are invented.',
-    captionMobile: 'Logistics rate-sheet demo.',
+      'Route review screen from the customer pricing system. Routes, carriers and rates are invented.',
+    captionMobile: 'Customer pricing system demo.',
   },
 };
 
@@ -54,7 +53,7 @@ export const selectedWork = {
   eyebrow: 'Selected work',
   h2: 'Different industries, the same kinds of problems',
   intro:
-    'The rate-sheet project is a good example of a pattern that shows up in many offices: complicated rules, a person checking the exceptions, and a client-ready document at the end. Fee schedules, quotes and engagement letters follow the same pattern.',
+    'The customer pricing project is a good example of a pattern that shows up in many offices: complicated rules, a person checking the exceptions, and a client-ready document at the end. Fee schedules, quotes and engagement letters follow the same pattern.',
   allLink: { label: 'See all five projects', href: '/work/' },
   cardLinkLine: 'Read the case study',
   /** Per-card media and phone copy; titles, tags and desktop summaries come from projects.yaml. */
@@ -63,9 +62,9 @@ export const selectedWork = {
       // OI-18: sample PDF page 1 placement approved by Ayu, 2026-11-20.
       alt: 'First page of a generated rate sheet for a fictional customer, with validity dates and container prices.',
       summary:
-        "A freight forwarder's client rate sheets are now built from route and cost data, with the pricing rules applied automatically. A person approves every flagged route before the PDF is created.",
+        "A freight forwarder's customer price lists are now built from route and cost data, with the pricing rules applied automatically. A person approves every flagged route before the PDF is created.",
       summaryMobile:
-        'Client rate sheets are built with the pricing rules applied automatically, and a person approves every exception.',
+        'Customer price lists are built with the pricing rules applied automatically, and a person approves every exception.',
     },
     'pr-pipeline-sync': {
       summary:
@@ -123,10 +122,10 @@ export const problems = {
       detail: 'Every version is a chance for a stale number to slip through.',
       links: [
         { label: 'Reports and documents that build themselves', href: '#services' },
-        { label: 'Rate-sheet PDF example', href: '/work/freight-rate-sheet-generator/#sample' },
+        { label: 'Price-list PDF example', href: '/work/freight-rate-sheet-generator/#sample' },
         { label: 'Word reference example', href: '/work/quotes-library/' },
       ],
-      linksMobile: ['Documents', 'Rate-sheet example', null],
+      linksMobile: ['Documents', 'Price-list example', null],
     },
     {
       title: "The weekly report takes most of someone's day.",
@@ -195,7 +194,7 @@ export const services = {
         'Work that stops when one person is out',
         'Exceptions handled from memory',
       ],
-      related: [{ label: 'Logistics rate sheets', href: '/work/freight-rate-sheet-generator/' }],
+      related: [{ label: 'Customer pricing system', href: '/work/freight-rate-sheet-generator/' }],
       rule: 'navy',
     },
     {
@@ -262,8 +261,8 @@ export const approach = {
     {
       num: '04',
       title: 'Document and hand off',
-      text: 'You get written documentation of how it works and how to change it.',
-      textMobile: 'You get written documentation of how to run and change it.',
+      text: 'You get detailed documentation of how it works and how to change it, and a live walkthrough with your team.',
+      textMobile: 'You get detailed documentation and a live walkthrough with your team.',
     },
   ],
   note: 'Scope, deliverables and any ongoing support are agreed in writing for each engagement before work begins.',

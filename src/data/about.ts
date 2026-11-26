@@ -76,8 +76,8 @@ export const approach = {
     {
       label: '04 · Handoff',
       title: 'Document and hand off',
-      text: 'Documentation your team can follow, and support terms agreed for the engagement.',
-      textMobile: 'Documentation your team can follow; support terms agreed.',
+      text: 'Detailed documentation, a live walkthrough with your team, and support terms agreed for the engagement.',
+      textMobile: 'Detailed documentation, a live walkthrough and agreed support terms.',
     },
   ],
 };

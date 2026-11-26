@@ -7,24 +7,24 @@
 import type { Pair, Segment } from '../types';
 
 export const meta = {
-  title: 'Freight Rate Sheet Automation | Regassa Automations',
+  title: 'Automated Customer Pricing System | Regassa Automations',
   description:
-    'See how Regassa Automations built a custom freight application for route matching, customer pricing and PDF rate sheets using Google Sheets and Cloud Run.',
-  ogTitle: 'Automated Freight Rate Sheet Generator',
+    'See how Regassa Automations built a custom pricing application for a freight forwarder: route matching, customer pricing and PDF price lists using Google Sheets and Cloud Run.',
+  ogTitle: 'Automated Customer Pricing System',
   ogDescription:
     'A custom freight workflow connecting spreadsheet data, customer routes, pricing exceptions and PDF generation. Explore the anonymized case study.',
   ogImage: '/og/og-freight.png',
-  ogImageAlt: 'Automated Freight Rate Sheet Generator portfolio project by Regassa Automations',
+  ogImageAlt: 'Automated Customer Pricing System portfolio project by Regassa Automations',
 };
 
 export const hero = {
-  crumb: 'Freight Rate Sheet Generator',
+  crumb: 'Customer Pricing System',
   tags: ['Workflow automation', 'Custom web application', 'Document generation'],
   tagsMobile: ['Workflow automation', 'Document generation'],
-  h1: 'Automated Freight Rate Sheet Generator',
-  lede: "A custom web application that turns spreadsheet rate data, customer routes and pricing rules into branded, customer-ready rate sheets, with a person reviewing every case the rules can't settle.",
+  h1: 'Automated Customer Pricing System',
+  lede: "A custom web application for a freight forwarder that turns spreadsheet rate data, customer routes and pricing rules into branded rate sheets (each customer's price list for their shipping routes), with a person reviewing every case the rules can't settle.",
   ledeMobile:
-    "A custom web application that turns spreadsheet rate data, customer routes and pricing rules into branded rate sheets, with a person reviewing every case the rules can't settle.",
+    "A custom web application for a freight forwarder that turns rate data, customer routes and pricing rules into each customer's price list, with a person reviewing every case the rules can't settle.",
   secondary: {
     label: 'Download a sample rate sheet',
     suffix: 'PDF',
@@ -95,7 +95,7 @@ export const walkthrough = {
   src: '/video/freight-walkthrough.mp4',
   captions: '/video/freight-walkthrough-captions.vtt',
   ariaLabel:
-    'Walkthrough video: Automated Freight Rate Sheet Generator, 2 minutes 42 seconds, with captions',
+    'Walkthrough video: Automated Customer Pricing System, 2 minutes 42 seconds, with captions',
   ariaLabelMobile: 'Walkthrough video, 2 minutes 42 seconds, with captions',
   monoLabel: 'Walkthrough',
   monoLabelMobile: 'Walkthrough · 2:42',

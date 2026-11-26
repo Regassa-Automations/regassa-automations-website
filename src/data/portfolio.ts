@@ -7,7 +7,7 @@
 export const meta = {
   title: 'Portfolio | Regassa Automations',
   description:
-    'Five workflow automation projects by Regassa Automations: freight rate sheets, a checked electricity data dashboard, PR pipeline sync, a quotes library and volunteer rosters.',
+    'Five workflow automation projects by Regassa Automations: a customer pricing system, a checked electricity data dashboard, PR pipeline sync, a quotes library and volunteer rosters.',
   ogTitle: 'Portfolio: Regassa Automations',
   ogDescription: 'Five workflows, from messy inputs to dependable outputs.',
   ogImage: '/og/og-default.png',
@@ -44,7 +44,8 @@ export const cards: Record<string, CardExtra> = {
     // OI-18: route-table screenshot placement approved by Ayu, 2026-11-20.
     alt: 'Client Route Manager table for a fictional customer listing FCL and LCL routes with container sizes, carrier and match status.',
     caption: 'Fictional routes and sample rates.',
-    problemMobile: 'Rate sheets built by matching routes and applying pricing rules by hand.',
+    problemMobile:
+      'Customer price lists built by matching routes and applying pricing rules by hand.',
     builtMobile: 'Matching, pricing, exception review and PDF generation with a report.',
   },
   gridbloom: {

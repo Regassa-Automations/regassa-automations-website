@@ -8,7 +8,7 @@ import type { Pair, Segment } from '../types';
 export const meta = {
   title: 'GridBloom: Electricity Data You Can Check | Regassa Automations',
   description:
-    "An independent demo on public U.S. electricity data: a weekly report that builds itself, refuses to show numbers the data can't support, and checks its AI summary.",
+    "An independent demo on public U.S. electricity data: a self-building weekly report that refuses to show numbers the data can't support.",
   ogTitle: 'GridBloom: electricity data you can check',
   ogDescription:
     'Real data arrives late, with gaps and bad values. This self-building weekly report says so plainly, and checks every figure in its AI summary.',

@@ -9,7 +9,7 @@ import type { SheetColumn, SheetRow } from '../../components/work/shared/sheet-t
 export const meta = {
   title: 'PR Pipeline and Client Tracker Sync | Regassa Automations',
   description:
-    "A PR agency was copying about 850 opportunities a month into 30 client trackers by hand. Now one update in the master pipeline reaches the right client's tracker.",
+    'A PR agency copied about 850 opportunities a month into 30 client trackers by hand. Now one update in the master pipeline reaches the right client.',
   ogTitle: 'One master pipeline, thirty client trackers',
   ogDescription:
     "One update in a PR agency's master pipeline now reaches about 30 client trackers, instead of being copied into each one by hand.",

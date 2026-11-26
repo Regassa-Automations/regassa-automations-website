@@ -9,7 +9,7 @@ import type { Pair, Segment } from '../types';
 export const meta = {
   title: 'Automated Customer Pricing System | Regassa Automations',
   description:
-    "A freight forwarder updated every customer's price list by hand every couple of weeks. Now costs are updated once and branded price lists are generated with one click.",
+    "A freight forwarder updated each customer's price list by hand every couple of weeks. Now costs are updated once and price lists are generated in one click.",
   ogTitle: 'Automated Customer Pricing System',
   ogDescription:
     "Freight costs are updated once, every customer's routes are repriced automatically, and branded price lists are generated with one click.",

@@ -10,7 +10,7 @@ import type { SheetColumn, SheetRow } from '../../components/work/shared/sheet-t
 export const meta = {
   title: 'Volunteer Registration and Rosters | Regassa Automations',
   description:
-    'Coordinators pieced sign-ups from two tools into four location rosters by hand. Now each sign-up lands in the right roster automatically, without overwriting their notes.',
+    'Coordinators pieced sign-ups from two tools into four rosters by hand. Now each sign-up lands in the right roster automatically, without overwriting their notes.',
   ogTitle: 'Two sign-up tools, one clean roster per location',
   ogDescription:
     "Two sign-up tools, four rosters, no manual copying: returning volunteers are recognized, and coordinators' notes are never overwritten.",

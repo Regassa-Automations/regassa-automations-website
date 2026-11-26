@@ -10,10 +10,10 @@ import type { PaperEntry } from '../../components/work/specific/paper-types';
 export const meta = {
   title: 'Quotes Library: Excel to Word Automation | Regassa Automations',
   description:
-    'How Regassa Automations cleaned a quotations workbook with Python, removed true duplicates while keeping every category, and generated a 400-page Word reference.',
+    'A cluttered quotations workbook would have taken days to clean by hand. In three days it became a deduplicated 400-page Word reference organized by author.',
   ogTitle: 'From a cluttered workbook to a 400-page reference',
   ogDescription:
-    'A Python cleanup with a scored duplicates report, and a generated Word reference organized by author.',
+    'A messy Excel collection, cleaned without losing any categories and turned into a navigable 400-page Word reference in three days.',
   ogImage: '/og/og-default.png',
   ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };

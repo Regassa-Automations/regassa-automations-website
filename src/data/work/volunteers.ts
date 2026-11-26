@@ -10,10 +10,10 @@ import type { SheetColumn, SheetRow } from '../../components/work/shared/sheet-t
 export const meta = {
   title: 'Volunteer Registration and Rosters | Regassa Automations',
   description:
-    "How Regassa Automations connected Google Forms and SignUpGenius to four location rosters, merging returning volunteers without overwriting coordinators' details.",
+    'Coordinators pieced sign-ups from two tools into four location rosters by hand. Now each sign-up lands in the right roster automatically, without overwriting their notes.',
   ogTitle: 'Two sign-up tools, one clean roster per location',
   ogDescription:
-    "An Apps Script and SignUpGenius API integration that routes each sign-up to its location's roster and merges returning volunteers.",
+    "Two sign-up tools, four rosters, no manual copying: returning volunteers are recognized, and coordinators' notes are never overwritten.",
   ogImage: '/og/og-default.png',
   ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };

@@ -8,10 +8,10 @@ import type { Pair, Segment } from '../types';
 export const meta = {
   title: 'GridBloom: Electricity Data You Can Check | Regassa Automations',
   description:
-    'An independent Regassa Automations project: a data pipeline, dashboard and weekly report on public U.S. grid data, with an AI briefing whose every figure is checked.',
+    "An independent demo on public U.S. electricity data: a weekly report that builds itself, refuses to show numbers the data can't support, and checks its AI summary.",
   ogTitle: 'GridBloom: electricity data you can check',
   ogDescription:
-    "A data pipeline, dashboard and weekly report that withhold figures the data can't support, with an AI briefing whose every number is checked.",
+    'Real data arrives late, with gaps and bad values. This self-building weekly report says so plainly, and checks every figure in its AI summary.',
   ogImage: '/og/og-gridbloom.png',
   ogImageAlt: 'GridBloom independent project by Regassa Automations',
 };

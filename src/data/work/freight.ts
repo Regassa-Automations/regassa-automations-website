@@ -9,10 +9,10 @@ import type { Pair, Segment } from '../types';
 export const meta = {
   title: 'Automated Customer Pricing System | Regassa Automations',
   description:
-    'See how Regassa Automations built a custom pricing application for a freight forwarder: route matching, customer pricing and PDF price lists using Google Sheets and Cloud Run.',
+    "A freight forwarder updated every customer's price list by hand every couple of weeks. Now costs are updated once and branded price lists are generated with one click.",
   ogTitle: 'Automated Customer Pricing System',
   ogDescription:
-    'A custom freight workflow connecting spreadsheet data, customer routes, pricing exceptions and PDF generation. Explore the anonymized case study.',
+    "Freight costs are updated once, every customer's routes are repriced automatically, and branded price lists are generated with one click.",
   ogImage: '/og/og-freight.png',
   ogImageAlt: 'Automated Customer Pricing System portfolio project by Regassa Automations',
 };

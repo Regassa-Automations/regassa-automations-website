@@ -9,10 +9,10 @@ import type { SheetColumn, SheetRow } from '../../components/work/shared/sheet-t
 export const meta = {
   title: 'PR Pipeline and Client Tracker Sync | Regassa Automations',
   description:
-    "How Regassa Automations replaced a failing Make.com workflow with Google Apps Script that publishes a PR agency's opportunities from one master pipeline to about 30 client trackers.",
+    "A PR agency was copying about 850 opportunities a month into 30 client trackers by hand. Now one update in the master pipeline reaches the right client's tracker.",
   ogTitle: 'One master pipeline, thirty client trackers',
   ogDescription:
-    "A Google Apps Script sync that publishes each opportunity to the right client's tracker and follows it from Pipeline to Secured.",
+    "One update in a PR agency's master pipeline now reaches about 30 client trackers, instead of being copied into each one by hand.",
   ogImage: '/og/og-default.png',
   ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };

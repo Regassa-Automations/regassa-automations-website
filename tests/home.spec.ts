@@ -37,7 +37,7 @@ const desktopStrings = [
   ...home.founder.body,
   home.inquiry.h2,
   home.inquiry.intro,
-  'Prefer to pick a time? Book a free consultation',
+  'Prefer a call? Pick a time on my calendar',
   ...home.inquiry.next,
   'I use these details only to reply to your inquiry. See the Privacy page for how submissions are handled and how to ask for one to be removed.',
 ];
@@ -60,7 +60,7 @@ const mobileStrings = [
   'Client · Lead intake dashboards',
   'Client, verified Upwork review · Volunteer rosters',
   'Sync · PR pipeline example',
-  'Documents · Rate-sheet example',
+  'Documents · Price-list example',
 ];
 
 /** Desktop-only content that the phone design drops. */

@@ -32,7 +32,7 @@ export const primaryNav: NavItem[] = [
 
 /** Site-wide primary CTA. */
 export const primaryCta = {
-  label: 'Discuss your workflow',
+  label: 'Get a free consultation',
   href: '/#inquiry',
   homeHref: '#inquiry',
 } as const;
@@ -47,7 +47,7 @@ export const footerSiteLinks = [
 
 /** Footer copy from _handoff/content/home.md (Footer). */
 export const footerCopy = {
-  tagline: 'Workflow automation for complex, everyday operations. Based in Portland, Maine.',
+  tagline: 'Practical automation for small teams. Based in Portland, Maine.',
   businessName: 'Regassa Automations',
 } as const;
 

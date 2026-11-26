@@ -14,8 +14,7 @@ export const meta = {
   ogDescription:
     'Tools that run your process, systems that stay in sync, and reports and documents that build themselves. Clear pricing before any work begins.',
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const intro = {
@@ -62,8 +61,9 @@ export const howItWorks = {
     {
       label: '04 · Included',
       title: 'Handoff',
-      text: 'Written documentation of how the system works and how to change it. Ongoing support is optional and agreed in writing.',
-      textMobile: 'Documentation your team can follow. Support is optional.',
+      text: 'Detailed documentation of how the system works and how to change it, and a live walkthrough with your team. For complex systems, I can also record video walkthroughs to keep on file. Ongoing support is optional.',
+      textMobile:
+        'Detailed documentation and a live walkthrough with your team. Support is optional.',
     },
   ],
 };
@@ -139,7 +139,7 @@ export const pricing = {
       'How many rules and exceptions the process has',
       'How clean and consistent your existing data is',
       'Whether documents or reports need precise formatting',
-      'How much documentation your team needs',
+      'How much documentation and training your team needs',
     ],
   },
   support: {
@@ -189,7 +189,7 @@ export const faq = {
     },
     {
       q: 'Will my team be able to run it without you?',
-      a: 'Yes. Every project ends with written documentation of how the system works and how to change it.',
+      a: "Yes. Every project ends with detailed documentation and a live walkthrough with the people who will use it, so your team isn't depending on me to run it. For complex systems, I can also record video walkthroughs your team can rewatch.",
     },
     {
       q: 'Where does AI fit in?',
@@ -202,6 +202,6 @@ export const next = {
   h2: 'Not sure where to start?',
   body: "Describe the process in a few sentences, or book a free consultation. I'll suggest the smallest useful first step.",
   bodyMobile: "Describe the process, or book a free consultation. I'll suggest where to start.",
-  ghostLabel: 'Discuss your workflow',
+  ghostLabel: 'Get a free consultation',
   otherLinkMobile: 'See the work',
 };

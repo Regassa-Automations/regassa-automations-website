@@ -12,8 +12,7 @@ export const meta = {
   ogTitle: 'About: Regassa Automations',
   ogDescription: 'You work directly with me, start to finish.',
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const intro = {
@@ -22,7 +21,7 @@ export const intro = {
   lede: "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: there is no account manager or handoff to a junior team. The person who asks about your process is the person who builds and documents the system.",
   ledeMobile:
     "I'm Ayantu Regassa, an engineer and software developer. Regassa Automations is my independent practice: the person who asks about your process is the person who builds and documents the system.",
-  primary: { label: 'Discuss your workflow', href: '/#inquiry' },
+  primary: { label: 'Get a free consultation', href: '/#inquiry' },
   secondary: { label: 'See the work', href: '/work/' },
   // portrait-about.jpg (cardigan photo, OI-07 resolved)
   portraitAlt: 'Ayantu Regassa',
@@ -45,9 +44,9 @@ export const background = {
     },
     {
       title: 'Patent technical work',
-      text: 'As a patent technical specialist at a law firm, I read dense technical material and described exactly what a system does and does not do, under strict accuracy and deadline standards. I apply the same precision to your business rules and their exceptions.',
+      text: 'As a patent technical specialist at a top IP law firm, I read dense technical material and described exactly what a system does and does not do, under strict accuracy and deadline standards. I apply the same precision to your business rules and their exceptions.',
       textMobile:
-        'As a patent technical specialist, I described exactly what a system does and does not do. I apply the same precision to your rules and exceptions.',
+        'As a patent technical specialist at a top IP law firm, I described exactly what a system does and does not do. I apply the same precision to your rules and exceptions.',
     },
   ],
 };
@@ -77,8 +76,8 @@ export const approach = {
     {
       label: '04 · Handoff',
       title: 'Document and hand off',
-      text: 'Documentation your team can follow, and support terms agreed for the engagement.',
-      textMobile: 'Documentation your team can follow; support terms agreed.',
+      text: 'Detailed documentation, a live walkthrough with your team, and support terms agreed for the engagement.',
+      textMobile: 'Detailed documentation, a live walkthrough and agreed support terms.',
     },
   ],
 };
@@ -114,6 +113,6 @@ export const tools = {
 export const cta = {
   h2: 'Start with a short description',
   body: "Tell me what the process is and what is frustrating about it. I'll reply personally.",
-  primary: { label: 'Discuss your workflow', href: '/#inquiry' },
+  primary: { label: 'Get a free consultation', href: '/#inquiry' },
   secondaryMobile: { label: 'See the work', href: '/work/' },
 };

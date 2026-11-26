@@ -4,20 +4,20 @@
 
 projects:
   - slug: freight-rate-sheet-generator
-    title: Automated Freight Rate Sheet Generator
-    homeCardTitle: Logistics rate sheets
-    portfolioCardTitle: Logistics rate-sheet application
-    footerLabel: Logistics rate sheets
-    moreLabel: Freight Rate Sheet Generator # label in "More case studies"
+    title: Automated Customer Pricing System
+    homeCardTitle: Customer pricing system
+    portfolioCardTitle: Customer pricing system
+    footerLabel: Customer pricing system
+    moreLabel: Customer Pricing System # label in "More case studies"
     order: 1
     homeCard: 1
     portfolioLayout: wide
     featured: true
     tags: [Operational application]
     ownProject: false
-    cardSummary: Matches requested routes to cost data, applies pricing rules, holds exceptions for review, and generates a client-ready PDF.
-    problem: Building a client rate sheet meant matching routes to cost data and applying pricing rules by hand, with exceptions handled case by case.
-    built: An application that matches routes, applies pricing rules, holds exceptions for a person to review, and generates a rate-sheet PDF with a generation report.
+    cardSummary: The team updates freight costs once, and every customer's routes are repriced automatically, ready for branded price lists generated with one click.
+    problem: Every couple of weeks, as freight costs and available shipping lanes changed, each customer's price list (a freight rate sheet) had to be updated by hand, rematching their routes, reapplying their pricing rules and handling exceptions case by case.
+    built: A custom web application where the team updates freight costs and lanes once. Every customer's routes are rematched and repriced automatically, a person reviews any exceptions, and up-to-date branded price lists are generated with one click.
 
   - slug: gridbloom
     title: 'GridBloom: electricity data you can check'
@@ -31,9 +31,9 @@ projects:
     featured: false
     tags: [Reporting and AI-assisted workflow]
     ownProject: true # renders the "Independent project" tag
-    cardSummary: A data pipeline, dashboard and weekly report that withhold figures the data can't support, with an AI briefing whose every number is checked.
-    problem: Public hourly grid data has gaps, timing quirks and implausible values. Summing it naively, or letting AI summarize it unchecked, produces confident numbers that are wrong.
-    built: A data pipeline, dashboard and weekly email report that withhold figures the data can't support, with an AI briefing whose every number is checked against its sources.
+    cardSummary: "A weekly report that builds itself from messy data and refuses to show numbers the data can't support, including in its AI-written summary."
+    problem: 'Reports built from several data sources often hide gaps, late updates and bad values. Added up blindly, or summarized by AI without checks, they show confident numbers that are wrong. This demo uses public electricity data to show how to prevent that.'
+    built: "A pipeline that imports and checks the data, then produces a dashboard and weekly email report that leave out figures the data can't support, with an AI summary whose every number is checked against its sources."
 
   - slug: pr-pipeline-sync
     title: One master pipeline, thirty client trackers
@@ -46,9 +46,9 @@ projects:
     portfolioLayout: grid
     tags: [Integration and data sync]
     ownProject: false
-    cardSummary: Publishes a PR agency's opportunities from one master pipeline to about 30 client trackers, and keeps each one current until coverage is secured.
-    problem: A PR agency's staff copied opportunities from their master pipeline into about 30 client trackers by hand.
-    built: An Apps Script sync that publishes each record to the right client, updates it in place and follows it from Pipeline to Secured.
+    cardSummary: "One update in a PR agency's master pipeline now reaches about 30 client trackers, instead of being copied into each one by hand."
+    problem: "A PR agency's staff were copying roughly 850 new opportunities a month, plus every later update, from their master pipeline into about 30 client trackers by hand, because the automation meant to do it wasn't working well."
+    built: "An automation inside the agency's own Google Workspace that publishes each opportunity to the right client's tracker with one checkbox, then keeps it up to date from first pitch to secured coverage."
 
   - slug: quotes-library
     title: From a cluttered workbook to a 400-page reference
@@ -62,8 +62,8 @@ projects:
     tags: [Data cleanup and document generation]
     ownProject: false
     cardSummary: null
-    problem: A quotations collection spread across worksheets, with copies, near-copies and quotes filed under several categories.
-    built: A Python cleanup with a scored duplicates report, and a generated 400-page Word reference organized by author.
+    problem: "A client's large quotations collection had grown messy across many Excel worksheets, full of repeats and near-copies, with no readable way to browse it. Cleaning and formatting it by hand would have taken days."
+    built: 'A cleanup that removed true duplicates without losing any categories, a report of near-copies for the client to review, and a generated 400-page Word reference organized by author, delivered in three days.'
 
   - slug: volunteer-rosters
     title: Two sign-up tools, one clean roster per location
@@ -77,8 +77,8 @@ projects:
     tags: [Integration and data sync]
     ownProject: false
     cardSummary: null
-    problem: A four-location volunteer program collected sign-ups through Google Forms and SignUpGenius, with returning volunteers and several roles each.
-    built: An API integration that routes each sign-up to its location's roster, merges returning volunteers and never overwrites coordinators' details.
+    problem: "A four-location volunteer program took sign-ups through two different tools. Coordinators had to download reports and piece them into each location's roster by hand, without duplicating returning volunteers or losing notes they had added."
+    built: "An integration that brings every sign-up into the right location's roster automatically, recognizes returning volunteers, and never overwrites what coordinators have added."
 
 # Upwork reviews (rendered on Home and on two case studies). Quote exactly; attribute only as shown.
 reviews:

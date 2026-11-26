@@ -20,8 +20,7 @@ export const meta = {
     'Workflow automation for small teams: tools that run your process, systems that stay in sync, and reports and documents that build themselves.',
   // Generated in Phase 6 (og-default.png).
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const hero = {
@@ -30,12 +29,11 @@ export const hero = {
   lede: 'I build practical tools for small teams that run on spreadsheets, email and a few key people. They take over repetitive office work: retyping information between systems, assembling documents by copy and paste, and rebuilding the same report every week.',
   ledeMobile:
     'I build practical tools that take over repetitive office work, so your team stops retyping, copying and rebuilding the same things every week.',
-  primary: { label: 'Discuss your workflow', href: '#inquiry' },
+  primary: { label: 'Get a free consultation', href: '#inquiry' },
   secondary: { label: 'See examples', href: '#work' },
   proof:
-    "I've built systems for logistics companies, PR agencies and nonprofit programs. Every project starts with a free consultation, and you get a written quote before any build begins.",
-  proofMobile:
-    'Every project starts with a free consultation, and you get a written quote before any build begins.',
+    "I've built systems for logistics companies, PR agencies and nonprofit programs. You get a written quote before any build begins.",
+  proofMobile: 'You get a written quote before any build begins.',
   hexList: [
     'Tools that run your process',
     'Systems that stay in sync',
@@ -46,8 +44,8 @@ export const hero = {
     alt: 'Client Route Manager table for a fictional customer listing six FCL and LCL routes with origin, destination, routing, container sizes, carrier and match status, including one unmatched route.',
     tag: 'Fictional demo data',
     caption:
-      'Route review screen from the logistics rate-sheet application. Routes, carriers and rates are invented.',
-    captionMobile: 'Logistics rate-sheet demo.',
+      'Route review screen from the customer pricing system. Routes, carriers and rates are invented.',
+    captionMobile: 'Customer pricing system demo.',
   },
 };
 
@@ -55,7 +53,7 @@ export const selectedWork = {
   eyebrow: 'Selected work',
   h2: 'Different industries, the same kinds of problems',
   intro:
-    'The rate-sheet project is a good example of a pattern that shows up in many offices: complicated rules, a person checking the exceptions, and a client-ready document at the end. Fee schedules, quotes and engagement letters follow the same pattern.',
+    'The customer pricing project is a good example of a pattern that shows up in many offices: complicated rules, a person checking the exceptions, and a client-ready document at the end. Fee schedules, quotes and engagement letters follow the same pattern.',
   allLink: { label: 'See all five projects', href: '/work/' },
   cardLinkLine: 'Read the case study',
   /** Per-card media and phone copy; titles, tags and desktop summaries come from projects.yaml. */
@@ -64,9 +62,9 @@ export const selectedWork = {
       // OI-18: sample PDF page 1 placement approved by Ayu, 2026-11-20.
       alt: 'First page of a generated rate sheet for a fictional customer, with validity dates and container prices.',
       summary:
-        "A freight forwarder's client rate sheets are now built from route and cost data, with the pricing rules applied automatically. A person approves every flagged route before the PDF is created.",
+        "When freight costs or available lanes change every couple of weeks, the team updates them once. Every customer's routes are rematched and repriced automatically, and branded, up-to-date price lists are generated with one click. A person approves any route the rules can't settle.",
       summaryMobile:
-        'Client rate sheets are built with the pricing rules applied automatically, and a person approves every exception.',
+        "Freight costs are updated once, and every customer's branded price list is regenerated with one click.",
     },
     'pr-pipeline-sync': {
       summary:
@@ -76,9 +74,9 @@ export const selectedWork = {
     gridbloom: {
       alt: 'GridBloom dashboard with headline electricity figures above demand and generation charts.',
       summary:
-        'A weekly report and dashboard build themselves from public data, leave out figures the data cannot support, and include an AI-drafted briefing whose numbers are checked.',
+        "A weekly report that builds itself from messy data and refuses to show numbers the data can't support, including in its AI-written summary.",
       summaryMobile:
-        'A weekly report and dashboard build themselves, with an AI briefing whose numbers are checked.',
+        "A self-building weekly report that won't show numbers the data can't support.",
       tagMobile: 'Reporting and AI-assisted',
     },
   } as Record<
@@ -124,10 +122,10 @@ export const problems = {
       detail: 'Every version is a chance for a stale number to slip through.',
       links: [
         { label: 'Reports and documents that build themselves', href: '#services' },
-        { label: 'Rate-sheet PDF example', href: '/work/freight-rate-sheet-generator/#sample' },
+        { label: 'Price-list PDF example', href: '/work/freight-rate-sheet-generator/#sample' },
         { label: 'Word reference example', href: '/work/quotes-library/' },
       ],
-      linksMobile: ['Documents', 'Rate-sheet example', null],
+      linksMobile: ['Documents', 'Price-list example', null],
     },
     {
       title: "The weekly report takes most of someone's day.",
@@ -196,7 +194,7 @@ export const services = {
         'Work that stops when one person is out',
         'Exceptions handled from memory',
       ],
-      related: [{ label: 'Logistics rate sheets', href: '/work/freight-rate-sheet-generator/' }],
+      related: [{ label: 'Customer pricing system', href: '/work/freight-rate-sheet-generator/' }],
       rule: 'navy',
     },
     {
@@ -263,8 +261,8 @@ export const approach = {
     {
       num: '04',
       title: 'Document and hand off',
-      text: 'You get written documentation of how it works and how to change it.',
-      textMobile: 'You get written documentation of how to run and change it.',
+      text: 'You get detailed documentation of how it works and how to change it, and a live walkthrough with your team.',
+      textMobile: 'You get detailed documentation and a live walkthrough with your team.',
     },
   ],
   note: 'Scope, deliverables and any ongoing support are agreed in writing for each engagement before work begins.',
@@ -299,23 +297,23 @@ export const founder = {
   eyebrowMobile: 'Who you work with',
   h2: "I'm Ayantu Regassa",
   body: [
-    "I'm an engineer and software developer. Before automation, I worked in patent drafting and prosecution at a law firm, where accuracy, deadlines and document standards aren't optional. I bring the same care to your operations: I learn the process, including its exceptions, before I write any code.",
+    "I'm an engineer and software developer. Before automation, I worked in patent preparation and prosecution at a top IP law firm, where accuracy, deadlines and document standards aren't optional. I bring the same care to your operations: I learn the process, including its exceptions, before I write any code.",
     'Regassa Automations is just me. You work with me directly, from the first conversation to the handoff.',
   ],
   bodyMobile:
-    'I am an engineer and software developer who previously worked in patent drafting and prosecution at a law firm. I learn your process, including its exceptions, before I write any code. You work with me directly, from first conversation to handoff.',
+    'I am an engineer and software developer who previously worked in patent preparation and prosecution at a top IP law firm. I learn your process, including its exceptions, before I write any code. You work with me directly, from first conversation to handoff.',
   link: { label: 'More about my background and approach', href: '/about/' },
   linkMobile: 'More about my background',
 };
 
 export const inquiry = {
-  eyebrow: 'Discuss your workflow',
+  eyebrow: 'Free consultation',
   h2: "Tell me about a process that takes too much of your team's time.",
   intro: 'A few sentences is enough. You do not need to know what the solution looks like.',
   introMobile:
     'A few sentences is enough. I read every inquiry myself and reply if it looks like a fit, or tell you if it is not.',
-  bookingPrefix: 'Prefer to pick a time?',
-  bookingLink: 'Book a free consultation',
+  bookingPrefix: 'Prefer a call?',
+  bookingLink: 'Pick a time on my calendar',
   nextH3: 'What happens next',
   next: [
     'I read every inquiry myself.',

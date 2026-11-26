@@ -18,7 +18,7 @@ test.describe('desktop nav', () => {
     await expect(details(page)).toBeHidden();
     await expect(nav.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
     await expect(nav.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '/services/');
-    await expect(nav.getByRole('link', { name: 'Discuss your workflow' })).toHaveAttribute(
+    await expect(nav.getByRole('link', { name: 'Get a free consultation' })).toHaveAttribute(
       'href',
       '#inquiry',
     );
@@ -66,7 +66,10 @@ test.describe('mobile menu', () => {
   test('activating a link closes the menu (same-page hash link)', async ({ page }) => {
     await page.goto('/');
     await summary(page).click();
-    await page.locator('.menu__panel').getByRole('link', { name: 'Discuss your workflow' }).click();
+    await page
+      .locator('.menu__panel')
+      .getByRole('link', { name: 'Get a free consultation' })
+      .click();
     await expect(details(page)).not.toHaveAttribute('open', '');
     await expect(page).toHaveURL(/#inquiry$/);
   });

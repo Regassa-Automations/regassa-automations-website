@@ -55,7 +55,7 @@ const canonicalUrl = new URL(canonical ?? Astro.url.pathname, Astro.site);
 // Pages without their own share image use the default one (content files give it for most pages).
 const DEFAULT_OG = {
   src: '/og/og-default.png',
-  alt: 'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  alt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 const ogImageUrl = new URL(ogImage ?? DEFAULT_OG.src, Astro.site).href;
 const ogAlt = ogImage ? ogImageAlt : DEFAULT_OG.alt;

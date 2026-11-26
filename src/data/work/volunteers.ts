@@ -10,13 +10,12 @@ import type { SheetColumn, SheetRow } from '../../components/work/shared/sheet-t
 export const meta = {
   title: 'Volunteer Registration and Rosters | Regassa Automations',
   description:
-    "How Regassa Automations connected Google Forms and SignUpGenius to four location rosters, merging returning volunteers without overwriting coordinators' details.",
+    'Coordinators pieced sign-ups from two tools into four rosters by hand. Now each sign-up lands in the right roster automatically, without overwriting their notes.',
   ogTitle: 'Two sign-up tools, one clean roster per location',
   ogDescription:
-    "An Apps Script and SignUpGenius API integration that routes each sign-up to its location's roster and merges returning volunteers.",
+    "Two sign-up tools, four rosters, no manual copying: returning volunteers are recognized, and coordinators' notes are never overwritten.",
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const hero = {
@@ -24,9 +23,9 @@ export const hero = {
   tags: ['Integration and data sync', 'API integration', 'Google Apps Script'],
   tagsMobile: ['Integration and data sync', 'API integration'],
   h1: 'Two sign-up tools, one clean roster per location',
-  lede: "An automation for a volunteer program in four locations that brings registrations from Google Forms and SignUpGenius into each location's roster, recognizing returning volunteers and never overwriting what coordinators already know.",
+  lede: "Sign-ups for a four-location volunteer program arrived through two different tools, and coordinators had to piece them into each location's roster by hand. I built an automation that does it for them: each registration lands in the right roster, returning volunteers are recognized, and coordinators' own notes are never overwritten.",
   ledeMobile:
-    "An automation for a four-location volunteer program that brings Google Forms and SignUpGenius registrations into each location's roster, recognizing returning volunteers and never overwriting what coordinators already know.",
+    'Coordinators were piecing sign-ups from two tools into four rosters by hand. Now every registration lands in the right roster automatically, without overwriting their notes.',
   secondary: { label: 'See how records merge', href: '#merge' },
   caption: 'Two intake paths, shared rules, a separate roster for each location.',
   captionMobile: 'Two intake paths, a separate roster for each location.',

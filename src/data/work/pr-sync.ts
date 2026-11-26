@@ -9,13 +9,12 @@ import type { SheetColumn, SheetRow } from '../../components/work/shared/sheet-t
 export const meta = {
   title: 'PR Pipeline and Client Tracker Sync | Regassa Automations',
   description:
-    "How Regassa Automations replaced a failing Make.com workflow with Google Apps Script that publishes a PR agency's opportunities from one master pipeline to about 30 client trackers.",
+    'A PR agency copied about 850 opportunities a month into 30 client trackers by hand. Now one update in the master pipeline reaches the right client.',
   ogTitle: 'One master pipeline, thirty client trackers',
   ogDescription:
-    "A Google Apps Script sync that publishes each opportunity to the right client's tracker and follows it from Pipeline to Secured.",
+    "One update in a PR agency's master pipeline now reaches about 30 client trackers, instead of being copied into each one by hand.",
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const hero = {
@@ -23,9 +22,9 @@ export const hero = {
   tags: ['Integration and data sync', 'Google Apps Script', 'Google Sheets'],
   tagsMobile: ['Integration and data sync', 'Google Apps Script'],
   h1: 'One master pipeline, thirty client trackers',
-  lede: "A Google Apps Script automation for a PR agency that publishes each opportunity from the team's master pipeline to the right client's tracker, and keeps it up to date from first pitch to secured coverage.",
+  lede: "Staff at a PR agency were copying every opportunity from their master pipeline into about 30 client trackers by hand. I built an automation that publishes each one to the right client's tracker and keeps it up to date from first pitch to secured coverage.",
   ledeMobile:
-    "An automation for a PR agency that publishes each opportunity from the team's master pipeline to the right client's tracker, and keeps it up to date until coverage is secured.",
+    "A PR agency's staff were copying every opportunity into about 30 client trackers by hand. Now each one is published and kept up to date automatically.",
   secondary: { label: 'Follow one opportunity', href: '#journey' },
   caption: 'The agency edits one spreadsheet. Each client sees only their own work.',
   facts: [

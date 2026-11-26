@@ -7,24 +7,24 @@
 import type { Pair, Segment } from '../types';
 
 export const meta = {
-  title: 'Freight Rate Sheet Automation | Regassa Automations',
+  title: 'Automated Customer Pricing System | Regassa Automations',
   description:
-    'See how Regassa Automations built a custom freight application for route matching, customer pricing and PDF rate sheets using Google Sheets and Cloud Run.',
-  ogTitle: 'Automated Freight Rate Sheet Generator',
+    "A freight forwarder updated each customer's price list by hand every couple of weeks. Now costs are updated once and price lists are generated in one click.",
+  ogTitle: 'Automated Customer Pricing System',
   ogDescription:
-    'A custom freight workflow connecting spreadsheet data, customer routes, pricing exceptions and PDF generation. Explore the anonymized case study.',
+    "Freight costs are updated once, every customer's routes are repriced automatically, and branded price lists are generated with one click.",
   ogImage: '/og/og-freight.png',
-  ogImageAlt: 'Automated Freight Rate Sheet Generator portfolio project by Regassa Automations',
+  ogImageAlt: 'Automated Customer Pricing System portfolio project by Regassa Automations',
 };
 
 export const hero = {
-  crumb: 'Freight Rate Sheet Generator',
+  crumb: 'Customer Pricing System',
   tags: ['Workflow automation', 'Custom web application', 'Document generation'],
   tagsMobile: ['Workflow automation', 'Document generation'],
-  h1: 'Automated Freight Rate Sheet Generator',
-  lede: "A custom web application that turns spreadsheet rate data, customer routes and pricing rules into branded, customer-ready rate sheets, with a person reviewing every case the rules can't settle.",
+  h1: 'Automated Customer Pricing System',
+  lede: "A custom web application for a freight forwarder that turns spreadsheet rate data, customer routes and pricing rules into branded rate sheets (each customer's price list for their shipping routes), with a person reviewing every case the rules can't settle.",
   ledeMobile:
-    "A custom web application that turns spreadsheet rate data, customer routes and pricing rules into branded rate sheets, with a person reviewing every case the rules can't settle.",
+    "A custom web application for a freight forwarder that turns rate data, customer routes and pricing rules into each customer's price list, with a person reviewing every case the rules can't settle.",
   secondary: {
     label: 'Download a sample rate sheet',
     suffix: 'PDF',
@@ -95,7 +95,7 @@ export const walkthrough = {
   src: '/video/freight-walkthrough.mp4',
   captions: '/video/freight-walkthrough-captions.vtt',
   ariaLabel:
-    'Walkthrough video: Automated Freight Rate Sheet Generator, 2 minutes 42 seconds, with captions',
+    'Walkthrough video: Automated Customer Pricing System, 2 minutes 42 seconds, with captions',
   ariaLabelMobile: 'Walkthrough video, 2 minutes 42 seconds, with captions',
   monoLabel: 'Walkthrough',
   monoLabelMobile: 'Walkthrough · 2:42',
@@ -502,8 +502,8 @@ export const technical = {
     columns: ['Service', 'Inherited', 'Change', 'Result'],
     rows: [
       ['FCL 20FT', '$2,350', '+$125', '$2,475'],
-      ['FCL 40HC', '$3,270', '+$175', '$3,445'],
-      ['FCL 45FT', '$4,140', '+$225', '$4,365'],
+      ['FCL 40HQ', '$3,270', '+$175', '$3,445'],
+      ['FCL 45HQ', '$4,140', '+$225', '$4,365'],
       ['LCL Door, per CBM', '$135.00', '+$7.50', '$142.50'],
     ],
   },
@@ -543,11 +543,11 @@ export const technical = {
         { text: '$2,350', mono: true },
         ' to ',
         { text: '$2,475', mono: true },
-        '; 40HC ',
+        '; 40HQ ',
         { text: '$3,270', mono: true },
         ' to ',
         { text: '$3,445', mono: true },
-        '; 45FT ',
+        '; 45HQ ',
         { text: '$4,140', mono: true },
         ' to ',
         { text: '$4,365', mono: true },

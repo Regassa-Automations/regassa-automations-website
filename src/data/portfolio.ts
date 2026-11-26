@@ -7,12 +7,11 @@
 export const meta = {
   title: 'Portfolio | Regassa Automations',
   description:
-    'Five workflow automation projects by Regassa Automations: freight rate sheets, a checked electricity data dashboard, PR pipeline sync, a quotes library and volunteer rosters.',
+    'Five workflow automation projects by Regassa Automations: a customer pricing system, a checked electricity data dashboard, PR pipeline sync, a quotes library and volunteer rosters.',
   ogTitle: 'Portfolio: Regassa Automations',
   ogDescription: 'Five workflows, from messy inputs to dependable outputs.',
   ogImage: '/og/og-default.png',
-  ogImageAlt:
-    'Regassa Automations logo with the line: Workflow automation for complex, everyday operations.',
+  ogImageAlt: 'Regassa Automations logo with the line: Practical automation for small teams.',
 };
 
 export const intro = {
@@ -45,8 +44,10 @@ export const cards: Record<string, CardExtra> = {
     // OI-18: route-table screenshot placement approved by Ayu, 2026-11-20.
     alt: 'Client Route Manager table for a fictional customer listing FCL and LCL routes with container sizes, carrier and match status.',
     caption: 'Fictional routes and sample rates.',
-    problemMobile: 'Rate sheets built by matching routes and applying pricing rules by hand.',
-    builtMobile: 'Matching, pricing, exception review and PDF generation with a report.',
+    problemMobile:
+      'Every couple of weeks, each customer price list was updated by hand as freight costs changed.',
+    builtMobile:
+      'A custom web application: costs are updated once, and branded price lists are generated with one click.',
   },
   gridbloom: {
     alt: 'GridBloom dashboard for PJM with renewable share, average demand and net generation figures above daily demand and hourly generation charts.',
@@ -55,27 +56,25 @@ export const cards: Record<string, CardExtra> = {
     caption: 'Public EIA grid data, historical, not live.',
     tagMobile: 'Reporting and AI-assisted',
     problemMobile:
-      'Public grid data with gaps and quirks produces confident numbers that are wrong.',
+      'Data with gaps and bad values produces confident report numbers that are wrong.',
     builtMobile:
-      'A pipeline, dashboard and weekly report that withhold unsupported figures, with a checked AI briefing.',
+      'A self-building weekly report that leaves out unsupported figures, with a checked AI summary.',
   },
   'pr-pipeline-sync': {
-    problemMobile:
-      'Opportunities copied by hand from a master pipeline into about 30 client trackers.',
+    problemMobile: 'Staff copied about 850 opportunities a month into 30 client trackers by hand.',
     builtMobile:
-      'An Apps Script sync that publishes, updates and moves each record to the right client.',
+      'One checkbox publishes each opportunity to the right client and keeps it up to date.',
   },
   'quotes-library': {
     tagMobile: 'Data cleanup and documents',
-    problemMobile:
-      'Quotations across worksheets, with copies, near-copies and multiple categories.',
-    builtMobile: 'A Python cleanup and a generated 400-page Word reference organized by author.',
+    problemMobile: 'A messy, repetitive quotations workbook that would take days to clean by hand.',
+    builtMobile:
+      'A cleanup and a 400-page Word reference organized by author, delivered in three days.',
   },
   'volunteer-rosters': {
-    problemMobile:
-      'Sign-ups from Google Forms and SignUpGenius across four locations, with returning volunteers.',
+    problemMobile: 'Coordinators pieced sign-ups from two tools into four rosters by hand.',
     builtMobile:
-      "Routing, matching and merge rules that keep each location's roster current without overwriting it.",
+      "Every sign-up lands in the right roster automatically, without overwriting coordinators' notes.",
   },
 };
 
@@ -91,5 +90,5 @@ export const cta = {
   h2: 'Recognize your own process in one of these?',
   body: 'Describe it in a few sentences and I will tell you honestly whether it is a fit.',
   bodyMobile: "Describe it in a few sentences and I'll tell you honestly whether it is a fit.",
-  button: { label: 'Discuss your workflow', href: '/#inquiry' },
+  button: { label: 'Get a free consultation', href: '/#inquiry' },
 };
